@@ -88,7 +88,7 @@ Los cruces visuales entre cables no invalidan la solución.
 - **Inicio:** «Reconecte los tres enlaces del switch. Cada puerto tiene una pareja identificada.
   Prioridad: CRÍTICA. Como corresponde».
 - **Conexión incorrecta:** «Identificadores incompatibles. Revise los extremos».
-- **Éxito:** «Enlaces verificados: 3/3. Switch operativo. La oficina vuelve a tener red.
+- **Éxito:** «Enlaces verificados: 3/3. Switch operativo. Enlace local restablecido.
   Personal disponible: pendiente».
 
 El mensaje de éxito describe la recuperación local del switch, no el cierre de toda la red del acto.

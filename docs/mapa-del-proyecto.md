@@ -7,7 +7,7 @@
 
 1. ⛔ **Responder el [cuestionario](cuestionario.md)** (Lead, rama `docs/cuestionario`). Narrativa, Arte y Música dependen de esas respuestas.
 2. ⛔ **Aprobar las specs 001 y 002**, y generar su `plan.md` y `tasks.md` (Lead y Desarrollo).
-3. Catálogo de tickets del acto 1 (Narrativa). Sin él no se puede diseñar el puzzle de la spec 005.
+3. Catálogo del acto 1 documentado como borrador. Pendientes aprobación de balance y catálogo concreto de actos 2–3 (Narrativa y Lead).
 4. Paleta y fuente confirmadas (Arte). Todo el arte depende de eso.
 
 ---
@@ -43,10 +43,10 @@
 | `00-plan.md` | Etapas, entregables, hitos y hoja de ruta de specs | Lead | ✅ | Mantenerlo al día |
 | `cuestionario.md` | Decisiones abiertas del proyecto | Lead | 📝 | **Responder las 24 preguntas** |
 | `mapa-del-proyecto.md` | Este archivo | Lead | ✅ | Marcar avances |
-| `01-lore/lore.md` | Mundo, personajes, actos, mecánicas con justificación, tono y glosario | Narrativa | 📝 | Validar nombres (🔸), descripción física de cada personaje (para Arte), los 3 epílogos según el porcentaje rescatado |
-| `01-lore/pantallas.md` | Las 15 pantallas: propósito, controles, música, flujo y wireframes | Narrativa y Arte | 📝 | Wireframes de P02, P03, P09, P12, P14 y P15; layout de zonas de cada acto |
-| `01-lore/catalogo-tickets.md` | Por acto, 4–5 tickets con id, título, tipo de puzzle, plazo, dificultad y concepto que enseña | Narrativa | ⬜ | **Crearlo** (empezar por el acto 1) |
-| `01-lore/guion.md` | Textos de la intro (P05), diálogos de PATO por acto, post-its de Marga (10 o más), frases de hologramas, mensajes de CRON y epílogos | Narrativa | ⬜ | Crearlo |
+| `01-lore/lore.md` | Mundo, personajes, actos, mecánicas con justificación, tono y glosario | Narrativa | 📝 | Validar nombres (🔸), propuestas de personaje para Arte y condiciones de epílogo; continuidad temporal pendiente |
+| `01-lore/pantallas.md` | Las 15 pantallas: propósito, controles, música, flujo y wireframes | Narrativa y Arte | 📝 | 15 fichas con wireframes y layouts narrativos propuestos; validar legibilidad, rutas abiertas y geometría con Arte |
+| `01-lore/catalogo-tickets.md` | Por acto, 4–5 tickets con id, título, tipo de puzzle, plazo, dificultad y concepto que enseña | Narrativa | 📝 | Acto 1 documentado; actos 2–3 y balance pendientes |
+| `01-lore/guion.md` | Textos de la intro (P05), diálogos de PATO por acto, post-its de Marga (10 o más), frases de hologramas, mensajes de CRON y epílogos | Narrativa | 📝 | 90 eventos y diez post-its; propuestas de actos 2–3 y epílogos pendientes del Lead |
 | `02-musica/musica.md` | Dirección, lista de pistas, efectos de sonido, herramientas, exportación y licencias | Música | 📝 | Confirmar la herramienta; asignar responsable por pista |
 | `03-arte/guia-arte.md` | Resolución, paleta, estilo, sombras, texturas, componentes, layouts y pipeline | Arte | 📝 | Confirmar paleta y fuente; agregar la hoja de personaje de Dev |
 | `04-arquitectura/arquitectura.md` | Escenas, carpetas, modelo de datos, terminal y testing | Desarrollo | ✅ | Ajustar al implementar |

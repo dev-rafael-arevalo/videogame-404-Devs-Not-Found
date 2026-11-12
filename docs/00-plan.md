@@ -30,6 +30,17 @@ usa placeholders hasta que lleguen los assets finales.
 
 ## Etapa 1: Lore y pantallas
 
+**Estado documental (2026-11-12): en revisión, no cerrada definitivamente.**
+Guion con 90 eventos (55 conservados y 35 propuestas nuevas), diez post-its y fichas P01–P15
+con wireframes. Se sincronizaron el inicio tras reiniciar el rack y el mensaje de enlace local.
+Actos 2–3 y tres variantes de epílogo están propuestos, sin condiciones numéricas aprobadas.
+Pendientes del Lead: identidad, balance, comandos y configuración, continuidad temporal y finales.
+El catálogo concreto de actos 2–3 sigue pendiente; no se inventan tickets o soluciones para
+cumplir una cantidad. Los tres tipos existentes del acto 2 no resuelven el pipeline mencionado
+ni la meta provisional de 4–5 tickets por acto. Narrativa mantiene textos; Arte revisa layouts
+y legibilidad; Desarrollo especifica contratos y valida comportamiento después de aprobar specs.
+
+
 Entregables:
 - [lore.md](01-lore/lore.md) cerrado: personajes, actos, finales y tono
 - [pantallas.md](01-lore/pantallas.md) cerrado: cada pantalla con sus elementos, controles y transiciones

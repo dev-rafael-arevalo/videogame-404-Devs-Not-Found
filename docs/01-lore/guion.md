@@ -1,7 +1,7 @@
 # Guion de SYS://RESTORE
 
 > Estado: **borrador parcial del guion**, aprobado para documentación de trabajo.
-> Cubre el primer slice vertical y la continuación narrativa de los cuatro tickets del acto 1.
+> Cubre el acto 1 aprobado como borrador y propuestas documentales para los actos 2–3 y epílogos.
 > No acredita implementación, pruebas visuales ni aprobación de las decisiones reservadas al Lead.
 
 ## Alcance y convenciones
@@ -606,20 +606,13 @@ Los 23 eventos originales se conservan; los 32 nuevos pertenecen al contenido po
 
 ## 10. Coherencia, sincronización y decisiones pendientes
 
-### Ajustes documentales por sincronizar
+### Sincronización realizada y continuidad pendiente
 
-- **Éxito del cableado:** este guion usa «Enlace local restablecido» en sustitución de
-  «La oficina vuelve a tener red», todavía presente en `catalogo-tickets.md`.
-  El ajuste evita sugerir la restauración completa de la red. Debe sincronizarse en una tarea
-  posterior autorizada; el catálogo no se modifica en esta tarea. El resto del mensaje se conserva.
-- **Inicio del acto:** `lore.md` aún dice que Dev «despierta en la sala fría», y P05 se describe
-  con ese término en `pantallas.md`. Aquí se aplica la corrección aprobada: Dev termina de reiniciar
-  el rack y descubre la ausencia de personas, sin perder la conciencia. La redacción de esos
-  documentos queda pendiente de armonización en una tarea posterior autorizada.
-
-Estas diferencias de redacción quedan registradas, no se presentan como sincronización ya realizada.
-Se conserva el cierre del acto con red restaurada y primeros hologramas; el primer cableado
-solo recupera un enlace local. No se anticipan acontecimientos del acto 2 ni del final.
+El catálogo ya utiliza «Enlace local restablecido» y el inicio de lore y pantallas describe
+el final del reinicio del rack, sin desmayo. Se preserva el texto aprobado del acto 1.
+Las propuestas de los actos 2–3 no amplían el slice 001–006; corresponden al alcance futuro
+008–010, y P15 al 011. No hay aprobación de código ni contratos de datos nuevos.
+La continuidad temporal del epílogo permanece pendiente del Lead.
 
 ### Decisiones reservadas al Lead
 
@@ -631,12 +624,12 @@ solo recupera un enlace local. No se anticipan acontecimientos del acto 2 ni del
 - Relación entre conciencias, uptime y porcentajes de rescate, y resultados del modo sin presión.
 - Finales, variantes de epílogo, umbrales y continuidad temporal del desenlace.
 
-### Contenido todavía pendiente
+### Estado de cobertura
 
-- Revisión del guion del acto 1 ampliado: sus cuatro tickets y cierre quedan documentados como borrador.
-- Diálogos de los actos 2 y 3.
-- Post-its restantes: se documentan tres iniciales, no se completa el mínimo de diez previsto.
-- Frases adicionales de hologramas y epílogos; se incorpora únicamente la primera aparición del acto 1.
+Acto 1: borrador aprobado, con sus 55 eventos conservados. Actos 2–3, post-its adicionales y
+variantes de epílogo: propuestas documentadas para revisión. Quedan por aprobar los textos nuevos,
+el catálogo concreto de tickets de actos 2–3, sus datos y soluciones, el contrato de configuración
+simulada y las condiciones de epílogo. La Etapa 1 no se declara definitiva por tener estos borradores.
 
 ### Límites de implementación y validación
 
@@ -649,3 +642,468 @@ P05 se mantiene como pantalla prevista, sin reasignar su implementación a una s
 Según SDD, cualquier implementación requiere spec aprobada, plan y tareas. La legibilidad a
 320×180, el ritmo y la integración de los textos deberán comprobarse después en el juego.
 Este borrador parcial no declara completada la Etapa 1.
+
+## 11. Propuestas narrativas para actos 2–3 y desenlace
+
+**Todo el contenido nuevo de esta sección es propuesta para revisión del Lead**, no ratificación.
+Se conserva el acto 1 aprobado. No se crean tickets concretos de actos 2–3 ni soluciones inexistentes:
+las referencias por tipo requieren catálogo y specs 008–010. El pipeline mencionado en el lore
+no tiene tipo ni alcance definido: se conserva como referencia pendiente y no se añade un puzzle.
+Las escenas posteriores se presentan en el orden narrativo; los siete post-its nuevos se leen
+cuando se interactúa con ellos, no obligatoriamente después del final.
+
+Vencimiento y reintento: se reutilizan los textos de P14 y P09 del acto 1 con el ticket activo.
+No se añaden penalizaciones ni se decide qué estado se reinicia. En modo sin presión no hay
+vencimientos. El reloj durante tutoriales, pausa y diálogo sigue pendiente de aprobación.
+
+### De Kernel & Co. a Puerto Cero
+
+**Evento:** `act2_city_entry` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| Dev | «Desde la ventana parecía una ciudad dormida.» |
+| PATO | «Las luces siguen cambiando. No hay nadie cruzando.» |
+| CRON | «Servicios exteriores degradados. Se requiere intervención.» |
+
+### Exploración del metro
+
+**Evento:** `act2_metro` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| Dev | «El tren quedó esperando pasajeros.» |
+| PATO | «Dentro de ARCA también están esperando.» |
+| CRON | «La estabilidad de los sectores depende de estos servicios.» |
+
+### Introducción a ordenar código
+
+**Evento:** `act2_blocks` · **Pantalla:** P09 / P10 · **Referencia:** bloques.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Ordene las líneas de la función según su secuencia lógica.» |
+| Dev | «Primero entender qué hace. Después ordenar.» |
+| PATO | «Leé cada paso. ¿Qué necesita haber ocurrido antes?» |
+
+Tipo existente; no se inventa una función ni una solución concreta. El ticket y sus datos deben especificarse antes de implementar.
+
+### Resultado de secuencia
+
+**Evento:** `act2_blocks_done` · **Pantalla:** P12 · **Referencia:** bloques.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Secuencia verificada.» |
+| PATO | «Cada paso ya tiene su lugar.» |
+
+Solo cuando el futuro validador del ticket confirme su solución; no se anticipa la restauración completa de la ciudad.
+
+### Central eléctrica
+
+**Evento:** `act2_power` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| Dev | «Todavía hay tazas sobre los escritorios.» |
+| PATO | «Y gente esperando volver a esos escritorios.» |
+| CRON | «Siguiente diagnóstico disponible.» |
+
+### Introducción a depuración
+
+**Evento:** `act2_bug` · **Pantalla:** P09 / P10 · **Referencia:** bug.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Identifique la línea que impide el comportamiento esperado.» |
+| Dev | «Que una línea parezca rara no significa que esté mal.» |
+| PATO | «Compará lo que debería pasar con lo que dice el código.» |
+
+No se agrega un error concreto sin ticket y solución aprobados. Selección por línea numerada, no por color.
+
+### Resultado de diagnóstico
+
+**Evento:** `act2_bug_done` · **Pantalla:** P12 · **Referencia:** bug.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Línea identificada correctamente.» |
+| Dev | «Encontrar el problema también cuenta como avanzar.» |
+
+### Voz de una conciencia
+
+**Evento:** `act2_consciousness` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| Holograma | «¿Todavía está la ciudad afuera?» |
+| Dev | «Sí. Está vacía, pero sigue acá.» |
+| PATO | «Cada servicio que recuperamos sostiene un sector.» |
+
+Propuesta de frase de holograma genérico, sin identidad o personaje nuevo.
+
+### Antena y preparación
+
+**Evento:** `act2_antenna` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Se requiere revisar la estructura del código Python.» |
+| Dev | «Hasta los espacios tienen trabajo.» |
+| PATO | «Sí. Nos dicen qué instrucciones van juntas.» |
+
+### Introducción a sangría
+
+**Evento:** `act2_indentation` · **Pantalla:** P09 / P10 · **Referencia:** indentacion.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Ajuste la sangría para representar los bloques indicados.» |
+| PATO | «Mirá qué líneas pertenecen al mismo bloque.» |
+| Dev | «No es decoración. Es parte de la instrucción.» |
+
+Se reutiliza el tipo existente. Bloque concreto y solución pendientes del catálogo, sin prometer ejecución real.
+
+### Resultado de sangría
+
+**Evento:** `act2_indentation_done` · **Pantalla:** P12 · **Referencia:** indentacion.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Estructura de bloques verificada.» |
+| PATO | «Ahora el código muestra cómo se organiza.» |
+
+### Log al llegar al datacenter
+
+**Evento:** `act2_marga_log` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga, log | «La app de retorno se llama puente.py. Todavía no se desplegó.» |
+| Dev | «Marga dejó una salida.» |
+| PATO | «Dejó trabajo para que podamos intentarlo.» |
+
+Mensaje grabado de Marga, no conversación en directo. Se descubre la app solo al cierre del acto 2.
+
+### Entrada al núcleo
+
+**Evento:** `act2_core_transition` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2 → 3.
+
+| Voz / página | Texto visible |
+|---|---|
+| Dev | «Ya no alcanza con encontrar el problema.» |
+| PATO | «Ahora toca preparar la app.» |
+| CRON | «Acceso al núcleo. Tareas de despliegue pendientes.» |
+
+### Llegada al núcleo
+
+**Evento:** `act3_core_entry` · **Pantalla:** P06 + P08 · **Referencia:** Acto 3.
+
+| Voz / página | Texto visible |
+|---|---|
+| Dev | «Todo esto sigue sosteniendo a la gente.» |
+| PATO | «Sí. Vamos paso a paso.» |
+| CRON | «Entorno de despliegue disponible.» |
+
+### Terminal simulada
+
+**Evento:** `act3_terminal_intro` · **Pantalla:** P11 · **Referencia:** terminal.
+
+| Voz / página | Texto visible |
+|---|---|
+| PATO | «Acá escribís una instrucción y pulsás Enter.» |
+| PATO | «La salida cuenta qué entendió el sistema.» |
+| Dev | «Una instrucción por vez. Eso puedo hacerlo.» |
+
+Terminal completamente simulada. Sin Python real ni comandos del sistema anfitrión. ↑ recupera historial y Tab autocompleta, según P11.
+
+### Navegar y leer
+
+**Evento:** `act3_navigation` · **Pantalla:** P11 · **Referencia:** terminal.
+
+| Voz / página | Texto visible |
+|---|---|
+| PATO | «ls muestra qué hay en la carpeta.» |
+| PATO | «cd cambia de carpeta. cat permite leer un archivo.» |
+| Dev | «Antes de tocar nada, leo las instrucciones.» |
+
+Solo comandos ya propuestos. Rutas y archivos concretos deben proceder del futuro sistema de archivos virtual, no se fijan aquí.
+
+### Preparar el entorno
+
+**Evento:** `act3_venv` · **Pantalla:** P11 · **Referencia:** terminal.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Prepare el entorno virtual de la aplicación.» |
+| PATO | «python -m venv .venv prepara un entorno separado.» |
+| Dev | «Un lugar para las dependencias de esta app.» |
+
+Se conserva el comando mostrado en P11; sus efectos son estado simulado. No se añade un comando de activación.
+
+### Dependencias
+
+**Evento:** `act3_dependencies` · **Pantalla:** P11 · **Referencia:** terminal.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Instalación de dependencias pendiente.» |
+| PATO | «pip install instala lo que necesita la app.» |
+| Dev | «Primero reviso qué pide el proyecto.» |
+
+Argumentos y dependencias pendientes del ticket aprobado. No se simula red real ni se inventan paquetes.
+
+### Configuración
+
+**Evento:** `act3_configuration` · **Pantalla:** P11 · **Referencia:** terminal.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Compruebe la configuración requerida para el retorno.» |
+| Dev | «No voy a adivinar valores.» |
+| PATO | «Leé la referencia del sistema antes de continuar.» |
+
+El lore exige corregir configuración, pero no define cómo. No se agrega editor, comando ni puzzle: interacción bloqueada para implementación hasta especificación aprobada.
+
+### Antes del retorno
+
+**Evento:** `act3_consciousness` · **Pantalla:** P06 + P08 · **Referencia:** Acto 3.
+
+| Voz / página | Texto visible |
+|---|---|
+| Holograma | «¿Se puede volver?» |
+| Dev | «Encontramos la app. Estamos preparándola.» |
+| PATO | «Todavía falta comprobar que esté lista.» |
+
+### Ejecución narrativa
+
+**Evento:** `act3_restore` · **Pantalla:** P11 · **Referencia:** terminal.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Compruebe los requisitos de despliegue.» |
+| PATO | «Cuando estén completos, ejecutá la app.» |
+| Dev | «python puente.py --restore all» |
+
+La última línea es entrada de terminal, no un diálogo que ejecute código. Solo se acepta con los prerrequisitos definidos en futuras specs; --restore all conserva el lore, no promete un porcentaje final.
+
+### Prerrequisitos incompletos
+
+**Evento:** `act3_restore_error` · **Pantalla:** P11 · **Referencia:** terminal.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Preparación incompleta. Revise los requisitos pendientes.» |
+| PATO | «Leé la salida. Nos indica qué falta.» |
+
+No se inventan errores técnicos concretos, pérdidas o castigos. Corrección según el futuro contrato simulado.
+
+### Confirmación del objetivo final
+
+**Evento:** `act3_restore_done` · **Pantalla:** P12 · **Referencia:** terminal.
+
+| Voz / página | Texto visible |
+|---|---|
+| CRON | «Objetivo de restauración verificado.» |
+| Dev | «¿Podemos salir a verlos?» |
+| PATO | «Vamos.» |
+
+Solo después del éxito verificado del objetivo final. No afirma que todas las conciencias regresen: alcance pendiente del Lead.
+
+### Reencuentro común propuesto
+
+**Evento:** `ending_reunion` · **Pantalla:** P15 · **Referencia:** Desenlace.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga | «¿Así que vos sos la persona nueva? Bienvenida al equipo. ¿Qué tal tu primer día?» |
+| Dev | «Tengo algunas preguntas para el próximo onboarding.» |
+
+Se conserva literalmente la frase existente de Marga, incluido su tratamiento, sin ratificar la identidad de Dev. Reencuentro previsto en el lore; la cronología del retorno sigue pendiente.
+
+### Variante propuesta: regreso
+
+**Evento:** `epilogue_recovered` · **Pantalla:** P15 · **Referencia:** Epílogo A.
+
+| Voz / página | Texto visible |
+|---|---|
+| Dev | «Volvieron las voces a la oficina.» |
+| PATO | «Y alguien volvió a dejar una taza junto al teclado.» |
+
+Selección conceptual: resultado con mayor recuperación, si el Lead ratifica esa categoría. No define totalidad ni umbral.
+
+### Variante propuesta: sillas vacías
+
+**Evento:** `epilogue_waiting` · **Pantalla:** P15 · **Referencia:** Epílogo B.
+
+| Voz / página | Texto visible |
+|---|---|
+| Dev | «Hay voces otra vez. También quedan sillas vacías.» |
+| Marga | «Las personas que siguen en pausa no están olvidadas.» |
+
+Selección conceptual: retorno parcial. No establece castigos ni nueva misión jugable.
+
+### Variante propuesta: seguir recordando
+
+**Evento:** `epilogue_silence` · **Pantalla:** P15 · **Referencia:** Epílogo C.
+
+| Voz / página | Texto visible |
+|---|---|
+| Dev | «Todavía queda demasiado silencio.» |
+| PATO | «Sabemos a quiénes estamos esperando.» |
+
+Selección conceptual: menor recuperación. Nadie muere; no fija irreversibilidad ni un final alternativo con game over.
+
+### Créditos
+
+**Evento:** `ending_credits` · **Pantalla:** P15 · **Referencia:** Créditos.
+
+| Voz / página | Texto visible |
+|---|---|
+| Interfaz | «SYS://RESTORE» |
+| Interfaz | «Equipo · Narrativa · Arte · Música · Desarrollo» |
+| Interfaz | «Recursos y licencias» |
+| Interfaz | «Gracias por jugar.» |
+
+Nombres, autorías y licencias deben salir de créditos reales verificados; los rótulos no inventan atribuciones. Enter acelera el desplazamiento según P15.
+
+### Post-it: Junto al tablero de paquetes
+
+**Evento:** `marga_note_04` · **Pantalla:** P06 + P08 · **Referencia:** Acto 1.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga, nota | «Los números de secuencia están para algo. Incluso cuando el café llega antes que el paquete. —Marga» |
+
+Ubicación propuesta: Junto al tablero de paquetes. Propósito: Ordenar sin depender del texto. Nota previa al despliegue, no comunicación en directo; lectura opcional sin recompensa añadida.
+
+### Post-it: Junto al panel de compuertas
+
+**Evento:** `marga_note_05` · **Pantalla:** P06 + P08 · **Referencia:** Acto 1.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga, nota | «AND pide las dos condiciones. OR acepta al menos una. NOT trabaja con una sola entrada. —Marga» |
+
+Ubicación propuesta: Junto al panel de compuertas. Propósito: Recordar operadores y aridad. Nota previa al despliegue, no comunicación en directo; lectura opcional sin recompensa añadida.
+
+### Post-it: Acceso del metro
+
+**Evento:** `marga_note_06` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga, nota | «Si un paso necesita el resultado de otro, no puede ir primero. —Marga» |
+
+Ubicación propuesta: Acceso del metro. Propósito: Secuencia de código. Nota previa al despliegue, no comunicación en directo; lectura opcional sin recompensa añadida.
+
+### Post-it: Central eléctrica
+
+**Evento:** `marga_note_07` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga, nota | «Antes de culpar a una línea, compará el resultado esperado con el que obtenés. —Marga» |
+
+Ubicación propuesta: Central eléctrica. Propósito: Depuración razonada. Nota previa al despliegue, no comunicación en directo; lectura opcional sin recompensa añadida.
+
+### Post-it: Zona de la antena
+
+**Evento:** `marga_note_08` · **Pantalla:** P06 + P08 · **Referencia:** Acto 2.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga, nota | «En Python, la sangría cuenta qué instrucciones van juntas. Los espacios también trabajan. —Marga» |
+
+Ubicación propuesta: Zona de la antena. Propósito: Estructura de bloques. Nota previa al despliegue, no comunicación en directo; lectura opcional sin recompensa añadida.
+
+### Post-it: Puesto de terminal del núcleo
+
+**Evento:** `marga_note_09` · **Pantalla:** P06 + P08 · **Referencia:** Acto 3.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga, nota | «Leé antes de ejecutar. El comando más corto no siempre es el siguiente paso. —Marga» |
+
+Ubicación propuesta: Puesto de terminal del núcleo. Propósito: Lectura y preparación. Nota previa al despliegue, no comunicación en directo; lectura opcional sin recompensa añadida.
+
+### Post-it: Cerca del puesto de despliegue
+
+**Evento:** `marga_note_10` · **Pantalla:** P06 + P08 · **Referencia:** Acto 3.
+
+| Voz / página | Texto visible |
+|---|---|
+| Marga, nota | «Si llegaste hasta acá con dudas, seguí preguntando. Así también se aprende. —Marga» |
+
+Ubicación propuesta: Cerca del puesto de despliegue. Propósito: Acompañar el arco de Dev. Nota previa al despliegue, no comunicación en directo; lectura opcional sin recompensa añadida.
+
+### Activación de final y variantes: contrato pendiente
+
+P15 se alcanza tras verificar el objetivo del último ticket del acto 3, no al finalizar un acto
+intermedio. Se propone un desenlace principal con reencuentro y tres epílogos excluyentes,
+seleccionados a partir del resultado de conciencias restauradas. Las categorías A/B/C son
+editoriales: no son puntuaciones, umbrales ni condiciones ejecutables. El Lead debe definir
+la relación entre --restore all, conciencias en pausa, el reencuentro de Marga y la cronología.
+Hasta entonces ninguna variante puede asignarse automáticamente ni presentarse como final aprobado.
+
+Las variantes no describen muertes ni una nueva mecánica de rescate posterior. Los créditos
+siguen al epílogo seleccionado. La entrada desde «Créditos» del menú, si se adopta, debe mostrar
+solo las atribuciones sin revelar epílogos; retorno al menú propuesto pendiente de spec 011.
+
+### Registro de los diez post-its
+
+Todos se leen mediante la interacción existente de P06 y se presentan en P08. Los tres primeros
+se conservan literalmente en su sección original; los siete nuevos son propuestas.
+
+| Identificador | Acto | Ubicación propuesta | Propósito | Pantalla |
+|---|---|---|---|---|
+| `marga_note_01` | 1 | Escritorio de Marga, cerca de PATO | Pedir ayuda y presentar a Marga | P06 + P08 |
+| `marga_note_02` | 1 | Cerca del switch | Identificación por etiquetas | P06 + P08 |
+| `marga_note_03` | 1 | Panel del nodo | Suma binaria | P06 + P08 |
+| `marga_note_04` | 1 | Junto al tablero de paquetes | Ordenar sin depender del texto. | P06 + P08 |
+| `marga_note_05` | 1 | Junto al panel de compuertas | Recordar operadores y aridad. | P06 + P08 |
+| `marga_note_06` | 2 | Acceso del metro | Secuencia de código. | P06 + P08 |
+| `marga_note_07` | 2 | Central eléctrica | Depuración razonada. | P06 + P08 |
+| `marga_note_08` | 2 | Zona de la antena | Estructura de bloques. | P06 + P08 |
+| `marga_note_09` | 3 | Puesto de terminal del núcleo | Lectura y preparación. | P06 + P08 |
+| `marga_note_10` | 3 | Cerca del puesto de despliegue | Acompañar el arco de Dev. | P06 + P08 |
+
+### Trazabilidad de los eventos nuevos (propuestas)
+
+| Evento | Pantalla | Referencia | Función |
+|---|---|---|---|
+| `act2_city_entry` | P06 + P08 | Acto 2 | De Kernel & Co. a Puerto Cero |
+| `act2_metro` | P06 + P08 | Acto 2 | Exploración del metro |
+| `act2_blocks` | P09 / P10 | bloques | Introducción a ordenar código |
+| `act2_blocks_done` | P12 | bloques | Resultado de secuencia |
+| `act2_power` | P06 + P08 | Acto 2 | Central eléctrica |
+| `act2_bug` | P09 / P10 | bug | Introducción a depuración |
+| `act2_bug_done` | P12 | bug | Resultado de diagnóstico |
+| `act2_consciousness` | P06 + P08 | Acto 2 | Voz de una conciencia |
+| `act2_antenna` | P06 + P08 | Acto 2 | Antena y preparación |
+| `act2_indentation` | P09 / P10 | indentacion | Introducción a sangría |
+| `act2_indentation_done` | P12 | indentacion | Resultado de sangría |
+| `act2_marga_log` | P06 + P08 | Acto 2 | Log al llegar al datacenter |
+| `act2_core_transition` | P06 + P08 | Acto 2 → 3 | Entrada al núcleo |
+| `act3_core_entry` | P06 + P08 | Acto 3 | Llegada al núcleo |
+| `act3_terminal_intro` | P11 | terminal | Terminal simulada |
+| `act3_navigation` | P11 | terminal | Navegar y leer |
+| `act3_venv` | P11 | terminal | Preparar el entorno |
+| `act3_dependencies` | P11 | terminal | Dependencias |
+| `act3_configuration` | P11 | terminal | Configuración |
+| `act3_consciousness` | P06 + P08 | Acto 3 | Antes del retorno |
+| `act3_restore` | P11 | terminal | Ejecución narrativa |
+| `act3_restore_error` | P11 | terminal | Prerrequisitos incompletos |
+| `act3_restore_done` | P12 | terminal | Confirmación del objetivo final |
+| `ending_reunion` | P15 | Desenlace | Reencuentro común propuesto |
+| `epilogue_recovered` | P15 | Epílogo A | Variante propuesta: regreso |
+| `epilogue_waiting` | P15 | Epílogo B | Variante propuesta: sillas vacías |
+| `epilogue_silence` | P15 | Epílogo C | Variante propuesta: seguir recordando |
+| `ending_credits` | P15 | Créditos | Créditos |
+| `marga_note_04` | P06 + P08 | Acto 1 | Post-it: Junto al tablero de paquetes |
+| `marga_note_05` | P06 + P08 | Acto 1 | Post-it: Junto al panel de compuertas |
+| `marga_note_06` | P06 + P08 | Acto 2 | Post-it: Acceso del metro |
+| `marga_note_07` | P06 + P08 | Acto 2 | Post-it: Central eléctrica |
+| `marga_note_08` | P06 + P08 | Acto 2 | Post-it: Zona de la antena |
+| `marga_note_09` | P06 + P08 | Acto 3 | Post-it: Puesto de terminal del núcleo |
+| `marga_note_10` | P06 + P08 | Acto 3 | Post-it: Cerca del puesto de despliegue |

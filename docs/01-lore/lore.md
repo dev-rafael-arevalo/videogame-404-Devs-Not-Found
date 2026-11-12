@@ -51,7 +51,7 @@ dentro de él mientras se degrada. Cada servicio que Dev restaura afuera estabil
 La dificultad crece con la interfaz: **mouse → mouse con lógica → teclado**.
 
 ### Acto 1 · Onboarding (oficinas de Kernel & Co.)
-- Dev despierta en la sala fría, encuentra a PATO y recibe el primer ticket de CRON.
+- Dev termina de reiniciar el rack en la sala fría, descubre la ausencia de personas, encuentra a PATO y recibe el primer ticket de CRON.
 - **Puzzles con el mouse, simples:** cableado de red, interruptores binarios, ordenar paquetes, compuertas lógicas.
 - **Cierre:** se restaura la red del edificio, aparecen los primeros hologramas y CRON revela la escala: *"Conciencias en línea: 0,0000001%"*.
 
@@ -91,3 +91,29 @@ goma) sobre un fondo melancólico. Nunca cruel: nadie muere, a lo sumo queda "en
 - **Sector:** zona de ARCA que se estabiliza al completar tickets.
 - **Rollback:** reinicio del sector cuando vence el plazo.
 - **Uptime:** porcentaje global del sistema en línea.
+
+
+## Cierre documental y decisiones de revisión
+
+El guion de los tres actos y los diez post-its se desarrollan en [guion.md](guion.md).
+Los textos del acto 1 son el borrador aprobado; los actos 2–3 y epílogos son propuestas para el Lead.
+La restauración del primer switch es local; la red del edificio y los primeros hologramas llegan
+al cerrar los cuatro tickets del acto 1. La intro no supone desmayo ni pérdida de memoria.
+
+**Pendientes del Lead:** identidad y nombres marcados, balance, penalizaciones, comandos exactos,
+variantes y condiciones de epílogo. La frase del epílogo «en el mismo instante en que se fueron»
+se conserva como referencia existente, pero no aprueba un viaje temporal: su relación con los días
+transcurridos requiere decisión explícita. Las variantes del guion no resuelven esa continuidad.
+El porcentaje ilustrativo del cierre del acto 1 no se utiliza como umbral ni regla de puntuación.
+
+### Referencias de personaje para Arte (propuestas)
+
+| Personaje | Rasgos derivados de la historia | Detalle todavía por aprobar |
+|---|---|---|
+| Dev | Persona junior de guardia; silueta legible en vista cenital | Apariencia, vestimenta y tratamiento definitivo |
+| PATO | Pato de goma con parlante; asistente del escritorio de Marga | Colores y expresión visual |
+| CRON | Sistema que comunica mediante ventanas monoespaciadas | No requiere inventar un cuerpo físico |
+| El Recolector | Glitch con forma de escoba | Intensidad del glitch y animación accesible |
+| Marga | Mentora ausente, vinculada a post-its y reencuentro | Retrato y apariencia |
+| Hologramas | Figuras humanas translúcidas | Variantes de silueta sin identidades nuevas |
+| Segfault | Gato de oficina que quedó afuera del respaldo | Diseño y participación opcional |

@@ -7,13 +7,13 @@
 Videojuego 2D retro de puzzles y exploración con temática de programación · pixel art · chiptune 8-bit
 
 ![Estado](https://img.shields.io/badge/estado-pre--producción-orange)
-![Etapa](https://img.shields.io/badge/etapa-0%20fundaciones-blue)
+![Etapa](https://img.shields.io/badge/etapa-1%20revision%20documental-blue)
 ![Motor](https://img.shields.io/badge/motor-Phaser-8a2be2)
 ![Lenguaje](https://img.shields.io/badge/TypeScript-3178c6)
 ![Docker](https://img.shields.io/badge/deploy-Docker-2496ed)
 ![Licencia](https://img.shields.io/badge/licencia-por%20definir-lightgrey)
 
-_Título provisional · Última actualización: **2026-11-10**_
+_Título provisional · Última actualización: **2026-11-12**_
 
 </div>
 
@@ -44,7 +44,7 @@ que cumplía su primer turno de guardia dentro de la sala fría blindada del dat
 Guiada por **PATO**, un pato de goma asistente, Dev recorre una ciudad vacía y acepta los *tickets*
 que emite **CRON**, el planificador de ARCA. Cada ticket se resuelve en primer plano y contra reloj,
 antes de que **El Recolector** haga rollback del sector. La dificultad crece con la interfaz: de
-puzzles con el mouse a escribir comandos reales de terminal para desplegar `puente.py`, la app que
+puzzles con el mouse a escribir comandos en una terminal simulada para desplegar `puente.py`, la app que
 traerá a todos de vuelta.
 
 > Lore completo en [docs/01-lore/lore.md](docs/01-lore/lore.md)
@@ -64,7 +64,7 @@ traerá a todos de vuelta.
 | Etapa | Descripción | Progreso | Estado |
 |---|---|---|---|
 | 0 · Fundaciones | AGENTS.md, skills, SDD, plan y cuestionario | `██████████` 100% | ✅ Completa |
-| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `████░░░░░░` 40% | 📝 Borrador v1, a validar |
+| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | Cobertura documental en revisión; porcentaje de cierre pendiente | 📝 Tres actos propuestos, diez post-its y 15 wireframes; aprobación del Lead pendiente |
 | 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `█░░░░░░░░░` 10% | 📝 Dirección definida |
 | 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `█░░░░░░░░░` 10% | 📝 Guía definida |
 | 4 · Implementación | Juego en Phaser y deploy en Docker | `█░░░░░░░░░` 10% | 📝 Arquitectura y specs 001–002 |
@@ -74,6 +74,10 @@ traerá a todos de vuelta.
 **Siguiente paso:** responder el [cuestionario](docs/cuestionario.md) e implementar la spec 001.
 
 ## Hoja de ruta
+
+Etapa 1: guion de tres actos documentado (actos 2–3 y epílogos como propuestas), diez post-its
+y fichas P01–P15 con wireframes. Catálogo de actos 2–3 y decisiones del Lead pendientes;
+no se declara cierre definitivo ni implementación.
 
 <details open>
 <summary><b>Slice vertical</b> (0/6)</summary>
@@ -189,6 +193,13 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-12: Etapa 1, revisión documental
+
+- Guion ampliado a tres actos con 90 eventos documentales y diez post-its; contenido nuevo sujeto al Lead.
+- Quince fichas de pantalla con wireframes, estados, navegación y accesibilidad.
+- Inicio tras reiniciar el rack y mensaje de enlace local sincronizados.
+- Epílogos y condiciones abiertas registrados sin umbrales ni nuevas mecánicas.
 
 ### 2026-11-10: Etapa 0, fundaciones
 - Estructura inicial del repositorio y documentación de las 4 etapas
