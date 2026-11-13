@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { PALETTE } from './art/palette';
 import { GAME_HEIGHT, GAME_WIDTH } from './logic/scale';
 import { BootScene } from './scenes/BootScene';
+import { DialogScene } from './scenes/DialogScene';
 import { TitleScene } from './scenes/TitleScene';
 import { WorldScene } from './scenes/WorldScene';
 
@@ -28,5 +29,5 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
     default: 'arcade',
     arcade: { gravity: { x: 0, y: 0 }, debug: false },
   },
-  scene: [BootScene, TitleScene, WorldScene],
+  scene: [BootScene, TitleScene, WorldScene, DialogScene],
 };

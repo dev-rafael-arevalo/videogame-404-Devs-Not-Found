@@ -20,8 +20,8 @@ levantar una app en Python.
 
 Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) creó el esqueleto
 (Phaser 4.2.1 + Vite 8 + TypeScript, Vitest, Playwright y Docker) con las pantallas Boot y Título, y la
-[002-movimiento-personaje](specs/002-movimiento-personaje/spec.md) agregó el mundo del acto 1 con SaraDev.
-Siguientes: 003 (interacción y diálogos) y 013 (arte procedural completo). Mantén la sección
+[002-movimiento-personaje](specs/002-movimiento-personaje/spec.md) agregó el mundo del acto 1 con SaraDev; la [003](specs/003-interaccion-dialogos/spec.md), PATO, post-its y diálogos.
+Siguientes: 004 (tickets, plazos y HUD) y 013 (arte procedural completo). Mantén la sección
 **Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))
@@ -57,7 +57,8 @@ tests/e2e/       Tests de Playwright (smoke y mundo)
 - **Nada de sobreingeniería.** Nada de backend, bases de datos, gestores de estado ni frameworks extra sin una spec que lo justifique.
 - **La terminal del juego es simulada.** Nunca ejecuta comandos ni código reales (ver [docs/04-arquitectura/seguridad.md](docs/04-arquitectura/seguridad.md)).
 - **La lógica pura va separada de las escenas de Phaser** (`src/logic/`, `src/terminal/`), para poder testearla con Vitest sin canvas.
-- **Los tests e2e leen `<html data-scene>` y `window.__debug`** (solo en desarrollo, ver `src/debug.ts`); no leen el canvas. Cada escena llama a `markScene(this)` en `create()`.
+- **Los tests e2e leen `<html data-scene>` y `window.__debug`** (solo en desarrollo, ver `src/debug.ts`); no leen el canvas. Cada escena de pantalla completa llama a `markScene(this)` en `create()`. Helpers comunes en `tests/e2e/helpers.ts`.
+- **Teclas de acción (E, Espacio, Enter) por eventos `keydown-X`, no con `JustDown`:** Phaser anula `JustDown` si la tecla se suelta en el mismo cuadro, y Playwright `press` hace justo eso.
 - **El contenido va en datos:** actos, tickets, diálogos y textos viven en JSON dentro de `src/data/`.
 - **Idioma:** identificadores de código en inglés; textos del juego y documentación en español.
 - **Pixel-perfect:** 320×180, `pixelArt: true` y escalado entero.

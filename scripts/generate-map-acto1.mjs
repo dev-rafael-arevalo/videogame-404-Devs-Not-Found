@@ -7,6 +7,8 @@
  *   ~  alfombra              =  puerta (piso)         D  escritorio
  *   T  escritorio con PC     c  silla                 S  rack de servidores (ocupa 2 tiles de alto: el
  *   P  planta                                            de arriba va en la capa `encima`)
+ *   Q  PATO (pato de goma, bloquea el paso; objeto interactuable)
+ * Los post-its de Marga se colocan sobre escritorios con la lista POSTITS (coordenadas de tile).
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -44,7 +46,7 @@ const PLAN = [
   '#,,,,,,,,,=...................=~~~~~#..#',
   '#,,,,,,,,,#...................#~~~~~#..#',
   '#,S,S,S,S,#....Dc.....Dc......#######..#',
-  '#,,,,,,,,,#....Tc.....Tc...............#',
+  '#,,,Q,,,,,#....Tc.....Tc...............#',
   '#,,,,,,,,,#....Dc.....Dc......P........#',
   '###=#######............................#',
   '#...........................P..........#',
@@ -58,6 +60,13 @@ const PLAN = [
   '#...........S.S.S.S....................#',
   '#......................................#',
   '########################################',
+];
+
+/** Post-its de Marga: [x, y, id del diálogo]. Van sobre escritorios. */
+const POSTITS = [
+  [15, 3, 'postit_1'],
+  [22, 10, 'postit_2'],
+  [31, 14, 'postit_3'],
 ];
 
 const WIDTH = PLAN[0].length;
@@ -74,6 +83,28 @@ const suelo = [];
 const objetos = [];
 const colision = [];
 const encima = [];
+const interactables = [];
+let nextObjectId = 2;
+
+function prop(name, value) {
+  return { name, type: 'string', value };
+}
+
+function addInteractable(tx, ty, tipo, dialogo) {
+  interactables.push({
+    id: nextObjectId++,
+    name: `${tipo}_${tx}_${ty}`,
+    type: tipo,
+    point: true,
+    x: tx * 16 + 8,
+    y: ty * 16 + 8,
+    width: 0,
+    height: 0,
+    rotation: 0,
+    visible: true,
+    properties: [prop('tipo', tipo), prop('dialogo', dialogo)],
+  });
+}
 
 for (let y = 0; y < HEIGHT; y += 1) {
   const row = PLAN[y];
@@ -108,6 +139,12 @@ for (let y = 0; y < HEIGHT; y += 1) {
       case 'T':
         object = TILE.deskPc;
         solid = true;
+        addInteractable(x, y, 'terminal', 'terminal_apagada');
+        break;
+      case 'Q':
+        floor = TILE.coldFloor;
+        solid = true;
+        addInteractable(x, y, 'pato', 'pato_intro');
         break;
       case 'c':
         object = TILE.chair;
@@ -138,6 +175,11 @@ for (let y = 0; y < HEIGHT; y += 1) {
   }
 }
 
+for (const [tx, ty, dialogo] of POSTITS) {
+  if (objetos[ty * WIDTH + tx] !== TILE.desk) throw new Error(`El post-it (${tx}, ${ty}) no está sobre un escritorio`);
+  addInteractable(tx, ty, 'postit', dialogo);
+}
+
 // La pared superior de cada muro muestra su "canto" (wallTop) cuando tiene piso debajo.
 for (let y = 0; y < HEIGHT - 1; y += 1) {
   for (let x = 0; x < WIDTH; x += 1) {
@@ -164,8 +206,8 @@ const map = {
   tilewidth: 16,
   tileheight: 16,
   compressionlevel: -1,
-  nextlayerid: 6,
-  nextobjectid: 2,
+  nextlayerid: 7,
+  nextobjectid: nextObjectId,
 
   tilesets: [
     {
@@ -197,6 +239,17 @@ const map = {
       y: 0,
       draworder: 'topdown',
       objects: [{ id: 1, name: 'player', type: 'spawn', point: true, x: 5 * 16 + 8, y: 6 * 16 + 16, width: 0, height: 0, rotation: 0, visible: true }],
+    },
+    {
+      id: 6,
+      name: 'interactables',
+      type: 'objectgroup',
+      visible: true,
+      opacity: 1,
+      x: 0,
+      y: 0,
+      draworder: 'topdown',
+      objects: interactables,
     },
   ],
 };

@@ -70,7 +70,7 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 |---|---|---|
 | 001 | Base del proyecto (Vite, TS, Phaser 4, Vitest, Docker) | ✅ **terminada** 2026-11-12 |
 | 002 | Movimiento del personaje en el mundo | ✅ **terminada** 2026-11-12 |
-| 003 | Interacción y diálogos (PATO, post-its) | Slice vertical |
+| 003 | Interacción y diálogos (PATO, post-its) | ✅ **terminada** 2026-11-12 |
 | 004 | Sistema de tickets, plazos y HUD | Slice vertical |
 | 005 | Primer puzzle: cableado | Slice vertical |
 | 006 | Audio: música, efectos de sonido y volumen | Slice vertical |

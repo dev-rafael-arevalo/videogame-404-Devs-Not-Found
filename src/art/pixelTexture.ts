@@ -13,6 +13,14 @@ export interface PixelFrame {
 
 const TRANSPARENT = new Set(['.', ' ']);
 
+/** Amplía una matriz por un factor entero (cada píxel pasa a ser un bloque de `factor`×`factor`). */
+export function scaleRows(rows: PixelRows, factor: number): PixelRows {
+  return rows.flatMap((row) => {
+    const scaled = [...row].map((ch) => ch.repeat(factor)).join('');
+    return Array.from({ length: factor }, () => scaled);
+  });
+}
+
 /** Pinta una matriz en un contexto 2D, píxel a píxel, con el origen en (ox, oy). */
 export function paintRows(
   ctx: CanvasRenderingContext2D,

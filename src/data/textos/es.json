@@ -15,5 +15,42 @@
     "subtitulo": "Es tu primer dia. No queda nadie mas.",
     "start": "PRESIONA START",
     "version": "v0.1.0 · slice vertical en construccion"
+  },
+  "ui": {
+    "usar": "[E] usar",
+    "continuar": "E / Espacio"
+  },
+  "nombres": {
+    "saradev": "SaraDev",
+    "pato": "PATO",
+    "marga": "Post-it de Marga",
+    "cron": "CRON"
+  },
+  "dialogos": {
+    "despertar": [
+      { "quien": "saradev", "texto": "...¿Hola? ¿Alguien? El rack 7 ya está reiniciado, pueden dejar de ignorarme." },
+      { "quien": "saradev", "texto": "Qué silencio. Ni el aire acondicionado hace ruido... y era lo único que funcionaba acá." },
+      { "quien": "saradev", "texto": "Mejor busco a Marga. Dijo que si pasaba algo raro, le preguntara al pato. Al pato." }
+    ],
+    "pato_intro": [
+      { "quien": "pato", "texto": "¡Cuac! Bienvenida al primer día del resto de tu vida, SaraDev. Literalmente." },
+      { "quien": "pato", "texto": "Soy PATO, asistente de depuración de Marga. Modelo de goma, firmware 1.0, cero paciencia." },
+      { "quien": "pato", "texto": "Resumen: a las 06:00 un despliegue sin revisar activó ARCA y respaldó a toda la humanidad. Toda. Menos a vos: la jaula de Faraday de esta sala te salvó." },
+      { "quien": "pato", "texto": "La buena noticia: existe un sistema de restauración, SYS://RESTORE. La mala: hay que levantarlo ticket por ticket, y CRON no se destaca por su paciencia." },
+      { "quien": "pato", "texto": "Cuando te trabes, ya sabés qué hacer: ¿ya probaste explicármelo en voz alta?" }
+    ],
+    "postit_1": [
+      { "quien": "marga", "texto": "\"Si el servidor no responde, primero fijate si está enchufado. En serio. Firmado: yo, tres veces.\"" }
+    ],
+    "postit_2": [
+      { "quien": "marga", "texto": "\"Nunca hagas deploy un viernes. Ni un martes a las 06:00. Ni... bueno, ya vas a entender.\"" }
+    ],
+    "postit_3": [
+      { "quien": "marga", "texto": "\"El pato no es decorativo. Hablale. Y no, no estoy loca.\"" }
+    ],
+    "terminal_apagada": [
+      { "quien": "saradev", "texto": "La terminal está en espera. CRON todavía no emitió ningún ticket." },
+      { "quien": "saradev", "texto": "Mejor hablo primero con PATO. Qué frase para decir en el primer día." }
+    ]
   }
 }

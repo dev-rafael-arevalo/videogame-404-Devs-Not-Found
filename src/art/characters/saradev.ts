@@ -14,7 +14,7 @@ export const SARADEV_SIZE = 24;
 
 export type View = 'down' | 'up' | 'right';
 
-const P: CharPalette = {
+export const SARADEV_PALETTE: CharPalette = {
   o: PALETTE.black, // contorno
   h: PALETTE.ink, // pelo
   H: PALETTE.slate, // brillo del pelo
@@ -162,7 +162,12 @@ export function buildSaraDevFrames(): PixelFrame[] {
   ]);
 }
 
+/** Cabeza de frente y el cuello de la sudadera (14×13), base del retrato de 32×32. */
+export function saraDevPortraitRows(): PixelRows {
+  return [...HEAD.down, ...BODY.down.slice(0, 2)];
+}
+
 /** Genera la hoja `spr_saradev` (12 cuadros de 24×24). */
 export function createSaraDevSheet(scene: Phaser.Scene): void {
-  createPixelSheet(scene, SARADEV_KEY, buildSaraDevFrames(), SARADEV_SIZE, SARADEV_SIZE, P, 4);
+  createPixelSheet(scene, SARADEV_KEY, buildSaraDevFrames(), SARADEV_SIZE, SARADEV_SIZE, SARADEV_PALETTE, 4);
 }

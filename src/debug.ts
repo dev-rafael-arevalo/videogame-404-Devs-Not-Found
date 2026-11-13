@@ -1,4 +1,5 @@
 import type Phaser from 'phaser';
+import type { DialogScene, DialogSnapshot } from './scenes/DialogScene';
 import type { WorldScene } from './scenes/WorldScene';
 
 export interface PlayerSnapshot {
@@ -12,6 +13,10 @@ export interface DebugApi {
   game: Phaser.Game;
   /** Posición y animación de SaraDev, o `null` si el mundo no está activo. */
   player(): PlayerSnapshot | null;
+  /** Estado del diálogo abierto, o `null` si no hay ninguno. */
+  dialog(): DialogSnapshot | null;
+  /** Si el aviso "[E] usar" está visible. */
+  prompt(): boolean;
 }
 
 declare global {
@@ -38,6 +43,14 @@ export function installDebugApi(game: Phaser.Game): void {
         facing: player.facing,
         anim: player.anims.currentAnim?.key ?? null,
       };
+    },
+    dialog() {
+      if (!game.scene.isActive('Dialog')) return null;
+      return (game.scene.getScene('Dialog') as DialogScene).snapshot();
+    },
+    prompt() {
+      const world = game.scene.getScene('World') as WorldScene | null;
+      return game.scene.isActive('World') && world !== null && world.isPromptVisible();
     },
   };
 }

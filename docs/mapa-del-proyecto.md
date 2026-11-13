@@ -6,7 +6,7 @@
 ## Resumen: lo que bloquea al proyecto hoy
 
 1. ✅ Cuestionario respondido (2026-11-12). Quedan abiertas la 7 (personajes secundarios), la 13 (comandos) y la 22 (equipo).
-2. ✅ Specs 001 y 002 terminadas. ⛔ **Siguiente:** spec 003 (interacción y diálogos) y spec 013 (arte procedural completo de SaraDev).
+2. ✅ Specs 001–003 terminadas. ⛔ **Siguiente:** spec 004 (tickets, plazos y HUD); después 005 (cableado) y 013 (arte procedural completo).
 3. Catálogo de tickets del acto 1 (Narrativa). Sin él no se puede diseñar el puzzle de la spec 005.
 4. ✅ Paleta confirmada (Sweetie 16 + verde terminal, en `src/art/palette.ts`). Falta la fuente pixel (se genera por código en la 013).
 
@@ -46,7 +46,7 @@
 | `01-lore/lore.md` | Mundo, personajes, actos, mecánicas con justificación, tono y glosario | Narrativa | 📝 | Validar nombres (🔸), descripción física de cada personaje (para Arte), los 3 epílogos según el porcentaje rescatado |
 | `01-lore/pantallas.md` | Las 15 pantallas: propósito, controles, música, flujo y wireframes | Narrativa y Arte | 📝 | Wireframes de P02, P03, P09, P12, P14 y P15; layout de zonas de cada acto |
 | `01-lore/catalogo-tickets.md` | Por acto, 4–5 tickets con id, título, tipo de puzzle, plazo, dificultad y concepto que enseña | Narrativa | ⬜ | **Crearlo** (empezar por el acto 1) |
-| `01-lore/guion.md` | Textos de la intro (P05), diálogos de PATO por acto, post-its de Marga (10 o más), frases de hologramas, mensajes de CRON y epílogos | Narrativa | ⬜ | Crearlo |
+| `01-lore/guion.md` | Textos de la intro (P05), diálogos de PATO por acto, post-its de Marga (10 o más), frases de hologramas, mensajes de CRON y epílogos | Narrativa | 📝 | Los primeros diálogos ya viven en `src/data/textos/es.json`; falta el resto |
 | `02-musica/musica.md` | Dirección, lista de pistas, efectos de sonido y decisión de síntesis en código | Música | 📝 | Partituras JSON por pista (spec 014) |
 | `03-arte/guia-arte.md` | Resolución, paleta, estilo, sombras, texturas, componentes, layouts y decisión de arte procedural | Arte | 📝 | Hoja de personaje de SaraDev en la spec 013 |
 | `04-arquitectura/arquitectura.md` | Escenas, carpetas, modelo de datos, terminal y testing | Desarrollo | ✅ | Ajustar al implementar |
@@ -62,7 +62,8 @@
 | `_plantillas/` | Plantillas de spec, plan y tareas | — | 🔒 | — |
 | `001-base-proyecto/` | Esqueleto de Vite, Phaser 4, tests y Docker | Desarrollo | ✅ | Terminada 2026-11-12 |
 | `002-movimiento-personaje/` | Movimiento de SaraDev, colisiones y cámara | Desarrollo | ✅ | Terminada 2026-11-12 |
-| `003` … `014` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
+| `003-interaccion-dialogos/` | PATO, post-its, terminales y la caja de diálogo | Desarrollo | ✅ | Terminada 2026-11-12 |
+| `004` … `014` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
 
 ## `assets-src/`: fuentes editables (no las carga el juego)
 
@@ -81,15 +82,15 @@
 
 | Ruta | Qué debe llevar | Rol | Spec |
 |---|---|---|---|
-| `src/scenes/` | Una escena de Phaser por pantalla (✅ `BootScene`, `TitleScene`, `WorldScene`, `markScene`) | Desarrollo | 001 → 011 |
+| `src/scenes/` | Una escena de Phaser por pantalla (✅ `BootScene`, `TitleScene`, `WorldScene`, `DialogScene`, `markScene`) | Desarrollo | 001 → 011 |
 | `src/entities/` | Entidades del mundo (✅ `Player`) | Desarrollo | 002+ |
 | `scripts/` | Generadores (✅ mapa del acto 1) | Desarrollo | 002+ |
-| `src/logic/` | Lógica pura con tests (✅ `scale.ts`, `movement.ts`; luego plazos, progreso, guardado, validadores) | Desarrollo | 001 → 007 |
-| `src/art/` | Paleta, `pixelTexture`, tileset del acto 1 y SaraDev mínima (✅); resto de sprites y UI | Desarrollo y Arte | 001, 002, 013 |
+| `src/logic/` | Lógica pura con tests (✅ `scale`, `movement`, `dialog`, `interaction`; luego plazos, progreso, guardado, validadores) | Desarrollo | 001 → 007 |
+| `src/art/` | Paleta, `pixelTexture`, tileset del acto 1, SaraDev mínima, PATO, post-it y retratos (✅); resto de sprites y UI | Desarrollo y Arte | 001–003, 013 |
 | `src/audio/` | `AudioManager` y motor chiptune | Desarrollo y Música | 006, 014 |
 | `src/puzzles/` | La vista de cada tipo de puzzle | Desarrollo | 005, 007, 008 |
 | `src/terminal/` | Parser, sistema de archivos virtual y comandos simulados | Desarrollo | 009 |
 | `src/data/tickets/*.json` | Un JSON por ticket | Narrativa (con `/nueva-actividad`) | 004+ |
-| `src/data/textos/es.json` | Todos los textos visibles del juego (✅ boot y título) | Narrativa | 001+ |
+| `src/data/textos/es.json` | Todos los textos visibles del juego (✅ boot, título, UI y diálogos del acto 1) | Narrativa | 001+ |
 | `public/assets/sprites/` · `maps/` · `audio/` · `fonts/` | Exportaciones finales | Arte y Música | 001+ |
-| `tests/e2e/` | Tests de Playwright (✅ `smoke.spec.ts`, `world.spec.ts`) | Desarrollo | 001+ |
+| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog` y `helpers.ts`) | Desarrollo | 001+ |

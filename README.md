@@ -64,23 +64,23 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 | Etapa | Descripción | Progreso | Estado |
 |---|---|---|---|
 | 0 · Fundaciones | AGENTS.md, skills, SDD, plan y cuestionario | `██████████` 100% | ✅ Completa |
-| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `█████░░░░░` 50% | 📝 Cuestionario respondido; falta el catálogo de tickets y el guion |
+| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `██████░░░░` 55% | 📝 Primeros diálogos de PATO y post-its en el juego; falta el catálogo de tickets |
 | 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `█░░░░░░░░░` 10% | 📝 Dirección definida; se sintetizará en código (spec 014) |
 | 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `███░░░░░░░` 25% | 🚧 Tileset del acto 1 y SaraDev mínima generados por código; referencias visuales fijadas |
-| 4 · Implementación | Juego en Phaser y deploy en Docker | `███░░░░░░░` 30% | 🚧 Specs 001 y 002: esqueleto, Boot, Título y mundo del acto 1 con SaraDev caminando |
+| 4 · Implementación | Juego en Phaser y deploy en Docker | `████░░░░░░` 40% | 🚧 Specs 001–003: esqueleto, Boot, Título, mundo del acto 1, PATO, post-its y diálogos |
 
 **Próximo hito:** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker (specs 001–006).
 
-**Siguiente paso:** spec 003 (interacción y diálogos con PATO) y spec 013 (arte procedural completo de SaraDev).
+**Siguiente paso:** spec 004 (tickets, plazos y HUD) y spec 013 (arte procedural completo de SaraDev).
 
 ## Hoja de ruta
 
 <details open>
-<summary><b>Slice vertical</b> (2/6)</summary>
+<summary><b>Slice vertical</b> (3/6)</summary>
 
 - [x] 001 · Base del proyecto (Vite, TypeScript, Phaser 4, tests y Docker) · 2026-11-12
 - [x] 002 · Movimiento del personaje · 2026-11-12
-- [ ] 003 · Interacción y diálogos
+- [x] 003 · Interacción y diálogos · 2026-11-12
 - [ ] 004 · Sistema de tickets, plazos y HUD
 - [ ] 005 · Primer puzzle: cableado
 - [ ] 006 · Audio: música, efectos de sonido y volumen
@@ -198,6 +198,12 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-12: Spec 003, interacción y diálogos
+- PATO espera en la sala fría y los post-its de Marga están sobre tres escritorios; al acercarse aparece "[E] usar"
+- Caja de diálogo con retrato, nombre y texto que se escribe letra a letra; E o Espacio revela, pasa de página y cierra
+- Diálogo inicial de SaraDev al despertar, presentación de PATO y respuesta de las terminales (todavía sin tickets)
+- Retratos de SaraDev, PATO y el post-it generados por código a partir del arte del mundo
 
 ### 2026-11-12: Spec 002, movimiento del personaje
 - SaraDev camina por la oficina del acto 1 con WASD o flechas, en 8 direcciones y con la diagonal normalizada
