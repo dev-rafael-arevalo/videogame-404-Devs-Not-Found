@@ -6,7 +6,7 @@
 ## Resumen: lo que bloquea al proyecto hoy
 
 1. ✅ Cuestionario respondido (2026-11-12). Quedan abiertas la 7 (personajes secundarios), la 13 (comandos) y la 22 (equipo).
-2. ✅ Specs 001–005 terminadas. ⛔ **Siguiente:** spec 006 (audio) con la 014 (motor chiptune); después 013 (arte procedural completo) y 007.
+2. ✅ **Slice vertical alcanzado** (specs 001–006 y 014). ⛔ **Siguiente:** spec 013 (arte procedural completo) y 007 (resto de puzzles del acto 1 y guardado).
 3. Catálogo de tickets del acto 1 (Narrativa): hay 2 de 4–5 en `src/data/tickets/`; faltan `paquetes` y `compuertas`.
 4. ✅ Paleta confirmada (Sweetie 16 + verde terminal, en `src/art/palette.ts`). Falta la fuente pixel (se genera por código en la 013).
 
@@ -65,7 +65,9 @@
 | `003-interaccion-dialogos/` | PATO, post-its, terminales y la caja de diálogo | Desarrollo | ✅ | Terminada 2026-11-12 |
 | `004-tickets-plazos-hud/` | Briefing, ventana de puzzle con plazo, resultado, rollback y HUD | Desarrollo | ✅ | Terminada 2026-11-12 |
 | `005-puzzle-cableado/` | Puzzle `cables` con el mouse y pista de PATO | Desarrollo | ✅ | Terminada 2026-11-12 |
-| `006` … `014` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
+| `006-audio/` | AudioManager, volúmenes e integración en escenas | Desarrollo | ✅ | Terminada 2026-11-12 (escucha humana pendiente) |
+| `014-motor-chiptune/` | Motor NES de 4 canales, notación, partituras y SFX | Desarrollo y Música | ✅ | Terminada 2026-11-12; faltan M02, M04, M05, M08, M09 |
+| `007` … `013` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
 
 ## `assets-src/`: fuentes editables (no las carga el juego)
 
@@ -75,9 +77,9 @@
 | `arte/*.aseprite` | Archivos fuente de sprites, tiles y UI | Arte | ⬜ | Todo |
 | `arte/CREDITOS.md` | Autor y licencia de cada asset de terceros | Arte | ✅ | Completarlo cuando se use algo de terceros |
 | `mapas/*.tmx` | Mapas de Tiled por acto (capas `suelo`, `objetos`, `colision` y `encima`) | Arte y Narrativa | 📝 | El acto 1 se genera con `scripts/generate-map-acto1.mjs` (plano ASCII → Tiled JSON); los actos 2 y 3 faltan |
-| `musica/briefs/*.md` | Un brief por pista (skill `/musica-8bit`) | Música (o el agente) | ⬜ | M01–M09, J01 y J02 |
-| `musica/*.fms` | Proyectos de FamiStudio | Música | ⬜ | Todas las pistas |
-| `musica/sfx/*.json` | Parámetros de jsfxr de cada efecto de sonido | Música | ⬜ | Los efectos de sonido de [musica.md](02-musica/musica.md) |
+| `musica/briefs/*.md` | Un brief por pista (skill `/musica-8bit`) | Música (o el agente) | ⬜ | Ya no hacen falta: las pistas se escriben directo como JSON en `src/data/musica/` |
+| `musica/*.fms` | Proyectos de FamiStudio | Música | ⬜ | Opcional: las pistas viven como JSON en `src/data/musica/` |
+| `musica/sfx/*.json` | Parámetros de jsfxr de cada efecto de sonido | Música | ⬜ | Reemplazado por `src/data/musica/sfx.json` |
 | `musica/CREDITOS.md` | Autor y licencia de terceros | Música | ✅ | Ídem |
 
 ## Lo que se crea con el código (desde la spec 001)
@@ -90,10 +92,10 @@
 | `scripts/` | Generadores (✅ mapa del acto 1) | Desarrollo | 002+ |
 | `src/logic/` | Lógica pura con tests (✅ `scale`, `movement`, `dialog`, `interaction`, `deadline`, `progress`, `tickets`, `puzzles/cables`; luego guardado y más validadores) | Desarrollo | 001 → 007 |
 | `src/art/` | Paleta, `pixelTexture`, tileset del acto 1, SaraDev mínima, PATO, post-it y retratos (✅); resto de sprites y UI | Desarrollo y Arte | 001–003, 013 |
-| `src/audio/` | `AudioManager` y motor chiptune | Desarrollo y Música | 006, 014 |
+| `src/audio/` | `AudioManager`, notación, canciones, sintetizador y SFX (✅) | Desarrollo y Música | 006, 014 |
 | `src/puzzles/` | La vista de cada tipo de puzzle (✅ interfaz `PuzzleView`, registro, placeholder y `CablesPuzzle`) | Desarrollo | 004, 005, 007, 008 |
 | `src/terminal/` | Parser, sistema de archivos virtual y comandos simulados | Desarrollo | 009 |
 | `src/data/tickets/*.json` | Un JSON por ticket (✅ `a1-01-cables`, `a1-02-binario`; validados por `tickets.test.ts`) y `actos.json` con el orden | Narrativa (con `/nueva-actividad`) | 004+ |
 | `src/data/textos/es.json` | Todos los textos visibles del juego (✅ boot, título, UI y diálogos del acto 1) | Narrativa | 001+ |
 | `public/assets/sprites/` · `maps/` · `audio/` · `fonts/` | Exportaciones finales | Arte y Música | 001+ |
-| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables` y `helpers.ts`) | Desarrollo | 001+ |
+| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio` y `helpers.ts`) | Desarrollo | 001+ |

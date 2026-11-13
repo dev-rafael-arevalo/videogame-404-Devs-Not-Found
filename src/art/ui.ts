@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { audio } from '../audio/AudioManager';
 import { PALETTE, css } from './palette';
 
 /** Kit de UI mínimo (spec 004): ventana y botón. La spec 013 lo reemplaza por el 9-slice definitivo. */
@@ -55,9 +56,13 @@ export function makeButton(
     .setInteractive({ useHandCursor: true });
   text.on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => text.setStyle(hover));
   text.on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => text.setStyle(idle));
-  text.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, onPress);
+  const press = (): void => {
+    audio.playSfx('click_ui');
+    onPress();
+  };
+  text.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, press);
   if (options.key) {
-    scene.input.keyboard?.on(`keydown-${options.key}`, onPress);
+    scene.input.keyboard?.on(`keydown-${options.key}`, press);
   }
   return text;
 }

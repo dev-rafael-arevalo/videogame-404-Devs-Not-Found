@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
+import { audio } from '../audio/AudioManager';
 import textos from '../data/textos/es.json';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
 import { markScene } from './markScene';
@@ -23,6 +24,7 @@ export class TitleScene extends Phaser.Scene {
 
   create(): void {
     markScene(this);
+    audio.playMusic('titulo');
     this.createRain();
 
     const centerX = GAME_WIDTH / 2;
@@ -70,6 +72,7 @@ export class TitleScene extends Phaser.Scene {
     const onStart = (): void => {
       if (started) return;
       started = true;
+      audio.playSfx('click_ui');
       this.cameras.main.fadeOut(200, 0x1a, 0x1c, 0x2c);
       this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => this.scene.start('World'));
     };

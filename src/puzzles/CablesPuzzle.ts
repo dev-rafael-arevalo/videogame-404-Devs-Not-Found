@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
+import { audio } from '../audio/AudioManager';
 import { FONT } from '../art/ui';
 import {
   canConnect,
@@ -129,7 +130,9 @@ export class CablesPuzzle implements PuzzleView {
     if (right !== null) {
       if (canConnect(this.data, this.connections, left, right)) {
         this.connections = connect(this.connections, left, right);
+        audio.playSfx('cable_conectar');
       } else {
+        audio.playSfx('cable_error');
         this.flashError(right);
       }
     }

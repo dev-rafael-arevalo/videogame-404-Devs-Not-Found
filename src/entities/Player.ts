@@ -2,12 +2,14 @@ import Phaser from 'phaser';
 import { saraDevAnimKey } from '../art/animations';
 import { SARADEV_KEY, SARADEV_SIZE } from '../art/characters/saradev';
 import { PALETTE } from '../art/palette';
+import { audio } from '../audio/AudioManager';
 import { createPixelTexture } from '../art/pixelTexture';
 import { WALK_SPEED, computeVelocity, facingFrom, type Direction, type MoveInput } from '../logic/movement';
 
 const SHADOW_KEY = 'fx_shadow';
 const BODY_WIDTH = 10;
 const BODY_HEIGHT = 6;
+const STEP_INTERVAL_MS = 280;
 
 export const DEPTH = { floor: 0, objects: 1, shadow: 4, player: 5, above: 10 } as const;
 
@@ -15,6 +17,7 @@ export const DEPTH = { floor: 0, objects: 1, shadow: 4, player: 5, above: 10 } a
 export class Player extends Phaser.Physics.Arcade.Sprite {
   facing: Direction = 'down';
   private readonly shadow: Phaser.GameObjects.Image;
+  private nextStepAt = 0;
 
   /** `x`, `y` = centro de los pies. */
   constructor(scene: Phaser.Scene, x: number, y: number) {
@@ -43,6 +46,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.setFlipX(this.facing === 'left');
     const moving = velocity.vx !== 0 || velocity.vy !== 0;
     this.play(saraDevAnimKey(moving ? 'walk' : 'idle', this.facing), true);
+    if (moving && this.scene.time.now >= this.nextStepAt) {
+      this.nextStepAt = this.scene.time.now + STEP_INTERVAL_MS;
+      audio.playSfx('paso');
+    }
   }
 
   override preUpdate(time: number, delta: number): void {

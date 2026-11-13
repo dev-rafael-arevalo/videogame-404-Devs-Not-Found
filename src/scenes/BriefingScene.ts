@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
 import { FONT, drawWindow, formatNumber, makeButton } from '../art/ui';
+import { audio } from '../audio/AudioManager';
 import textos from '../data/textos/es.json';
 import { getTicket } from '../data/tickets/index';
 import { EV, type TicketIdPayload } from '../game/events';
@@ -25,6 +26,7 @@ export class BriefingScene extends Phaser.Scene {
 
   create(): void {
     const t = this.ticket;
+    audio.playSfx('ticket_nuevo');
     drawWindow(this, WIN.x, WIN.y, WIN.width, WIN.height, 'cron');
     const left = WIN.x + 8;
 

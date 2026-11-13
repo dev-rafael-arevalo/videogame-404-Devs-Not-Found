@@ -65,25 +65,27 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 |---|---|---|---|
 | 0 · Fundaciones | AGENTS.md, skills, SDD, plan y cuestionario | `██████████` 100% | ✅ Completa |
 | 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `██████░░░░` 55% | 📝 Primeros diálogos de PATO y post-its en el juego; falta el catálogo de tickets |
-| 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `█░░░░░░░░░` 10% | 📝 Dirección definida; se sintetizará en código (spec 014) |
+| 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `█████░░░░░` 50% | 🚧 Motor chiptune propio; 6 de 11 pistas y 14 efectos sintetizados |
 | 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `███░░░░░░░` 25% | 🚧 Tileset del acto 1 y SaraDev mínima generados por código; referencias visuales fijadas |
-| 4 · Implementación | Juego en Phaser y deploy en Docker | `██████░░░░` 60% | 🚧 Specs 001–005: mundo, diálogos, bucle de tickets y el primer puzzle jugable (cableado) |
+| 4 · Implementación | Juego en Phaser y deploy en Docker | `███████░░░` 65% | 🎯 **Slice vertical completo** (specs 001–006 + 014): acto 1 jugable con música y efectos |
 
-**Próximo hito:** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker (specs 001–006).
+**Hito alcanzado (2026-11-12):** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker.
 
-**Siguiente paso:** spec 006 (audio) junto con la 014 (motor chiptune), y la 013 (arte procedural completo de SaraDev).
+**Próximo hito:** acto 1 completo (specs 007 y 013: resto de puzzles, guardado y arte definitivo de SaraDev).
+
+**Siguiente paso:** spec 013 (arte procedural completo de SaraDev, PATO y kit de UI) y spec 007 (resto de puzzles del acto 1 y guardado).
 
 ## Hoja de ruta
 
 <details open>
-<summary><b>Slice vertical</b> (5/6)</summary>
+<summary><b>Slice vertical</b> (6/6) ✅</summary>
 
 - [x] 001 · Base del proyecto (Vite, TypeScript, Phaser 4, tests y Docker) · 2026-11-12
 - [x] 002 · Movimiento del personaje · 2026-11-12
 - [x] 003 · Interacción y diálogos · 2026-11-12
 - [x] 004 · Sistema de tickets, plazos y HUD · 2026-11-12
 - [x] 005 · Primer puzzle: cableado · 2026-11-12
-- [ ] 006 · Audio: música, efectos de sonido y volumen
+- [x] 006 · Audio: música, efectos de sonido y volumen · 2026-11-12
 
 </details>
 
@@ -100,10 +102,10 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 </details>
 
 <details>
-<summary><b>Arte y audio generados por código</b> (0/2)</summary>
+<summary><b>Arte y audio generados por código</b> (1/2)</summary>
 
 - [ ] 013 · Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO y kit de UI
-- [ ] 014 · Motor chiptune de 4 canales y efectos sintetizados (pistas M01–M09, J01–J02 y SFX)
+- [x] 014 · Motor chiptune de 4 canales y efectos sintetizados · 2026-11-12 (pistas M01, M03, M06, M07, J01, J02; faltan M02, M04, M05, M08 y M09)
 
 </details>
 
@@ -198,6 +200,12 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-12: Specs 006 y 014, el juego suena
+- Motor chiptune propio al estilo NES (2 pulsos, triángulo y ruido) sintetizado en el navegador; las partituras son JSON editables en `src/data/musica/`
+- Música por pantalla: tema de Título, tema de la oficina, tema de puzzle que se acelera cuando queda menos del 20% del plazo, jingles de ticket cerrado y de rollback
+- 14 efectos tipo sfxr: beeps del BIOS, clicks, pasos, letras del diálogo, cables, alarma de plazo y el cuac de PATO
+- Volúmenes separados de música y efectos, guardados en el navegador; nada suena antes de la primera tecla o click
 
 ### 2026-11-12: Spec 005, primer puzzle: cableado
 - El ticket #0007 ya se juega: arrastrar cada cable desde su puerto hasta el par del mismo color; los puertos llevan número además de color

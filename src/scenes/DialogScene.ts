@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
+import { audio } from '../audio/AudioManager';
 import { PORTRAITS_KEY, PORTRAIT_SIZE, createPortraits, type PortraitName } from '../art/portraits';
 import textos from '../data/textos/es.json';
 import { INITIAL_CURSOR, confirm, paginate, visibleChars, wrapText, type DialogCursor } from '../logic/dialog';
@@ -116,6 +117,9 @@ export class DialogScene extends Phaser.Scene {
     this.elapsed += delta;
     const page = this.currentPage();
     const shown = visibleChars(this.elapsed, CHARS_PER_SECOND, page.length);
+    if (shown !== this.bodyText.text.length && shown % 2 === 0 && page.charAt(shown - 1) !== ' ') {
+      audio.playSfx('dialogo_letra');
+    }
     this.bodyText.setText(page.slice(0, shown));
     if (shown >= page.length) {
       this.cursor = { ...this.cursor, revealed: true };

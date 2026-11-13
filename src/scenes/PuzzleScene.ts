@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
 import { FONT, drawWindow, makeButton } from '../art/ui';
+import { audio } from '../audio/AudioManager';
 import textos from '../data/textos/es.json';
 import { getTicket } from '../data/tickets/index';
 import { EV, type TicketDonePayload, type TicketIdPayload } from '../game/events';
@@ -30,6 +31,7 @@ export class PuzzleScene extends Phaser.Scene {
   private lastShownSeconds = -1;
   private hintsUsed = 0;
   private hintText!: Phaser.GameObjects.Text;
+  private alarmed = false;
 
   constructor() {
     super('Puzzle');
@@ -42,6 +44,7 @@ export class PuzzleScene extends Phaser.Scene {
     this.finished = false;
     this.lastShownSeconds = -1;
     this.hintsUsed = 0;
+    this.alarmed = false;
   }
 
   create(): void {
@@ -77,6 +80,7 @@ export class PuzzleScene extends Phaser.Scene {
       setActiveTicket(this.registry, null);
     });
 
+    audio.playMusic('puzzle');
     this.publishRemaining();
     this.drawBar();
   }
@@ -87,7 +91,14 @@ export class PuzzleScene extends Phaser.Scene {
     this.deadline = tick(this.deadline, delta);
     this.publishRemaining();
     this.drawBar();
-    if (status(this.deadline) === 'expired') {
+    const current = status(this.deadline);
+    if (current === 'warning' && !this.alarmed) {
+      // El Recolector acecha: alarma y la misma melodía, más rápida (M07).
+      this.alarmed = true;
+      audio.playSfx('alarma_plazo');
+      audio.playMusic('puzzle_urgente');
+    }
+    if (current === 'expired') {
       this.fail();
     }
   }
@@ -141,6 +152,7 @@ export class PuzzleScene extends Phaser.Scene {
   private solve(): void {
     if (this.finished) return;
     this.finished = true;
+    audio.playSfx('puzzle_ok');
     const payload: TicketDonePayload = { ticketId: this.ticket.id, elapsedMs: this.elapsedMs, pistas: this.hintsUsed };
     this.game.events.emit(EV.ticketDone, payload);
     this.scene.stop();

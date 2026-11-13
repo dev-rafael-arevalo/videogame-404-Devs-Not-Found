@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { registerSaraDevAnimations } from '../art/animations';
 import { PATO_IDLE_ANIM, PATO_KEY, createPatoSheet } from '../art/characters/pato';
 import { createSaraDevSheet } from '../art/characters/saradev';
+import { audio } from '../audio/AudioManager';
 import { PALETTE, css } from '../art/palette';
 import { createPixelTexture } from '../art/pixelTexture';
 import { POSTIT_KEY, createProps } from '../art/props';
@@ -136,6 +137,7 @@ export class WorldScene extends Phaser.Scene {
     if (!this.scene.isActive('Hud')) {
       this.scene.launch('Hud');
     }
+    audio.playMusic('acto1_oficina');
 
     if (!WorldScene.introShown) {
       WorldScene.introShown = true;
@@ -211,9 +213,11 @@ export class WorldScene extends Phaser.Scene {
     if (!target) return;
 
     if (target.tipo !== 'terminal') {
+      audio.playSfx(target.tipo === 'pato' ? 'pato_quack' : 'interactuar');
       this.openDialog(target.dialogo);
       return;
     }
+    audio.playSfx('interactuar');
 
     const pending = this.pendingTicketId();
     if (pending === null) {

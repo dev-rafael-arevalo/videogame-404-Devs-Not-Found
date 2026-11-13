@@ -43,8 +43,8 @@ Terminado cuando: cada ticket del catálogo tiene un tipo de puzzle definido y c
 > **Decisión 2026-11-12:** no habrá fuentes externas. La música y los efectos se **sintetizan en el navegador** con un motor chiptune de 4 canales propio (spec 014); las partituras viven en JSON. Ver [musica.md](02-musica/musica.md).
 
 Entregables (ver [musica.md](02-musica/musica.md)):
-- 11 pistas (9 temas y 2 jingles) y unos 20 efectos de sonido, exportados en OGG y MP3 a `public/assets/audio/`
-- Fuentes editables en `assets-src/musica/`
+- 11 pistas (9 temas y 2 jingles) y unos 20 efectos de sonido como partituras y parámetros JSON en `src/data/musica/` (✅ motor, M01, M03, M06, M07, J01, J02 y 14 efectos)
+- Exportación a OGG/MP3 solo si hiciera falta para otros usos
 
 Terminado cuando: cada pantalla tiene su pista asignada y cada acción del juego su efecto de sonido.
 
@@ -73,7 +73,7 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 | 003 | Interacción y diálogos (PATO, post-its) | ✅ **terminada** 2026-11-12 |
 | 004 | Sistema de tickets, plazos y HUD | ✅ **terminada** 2026-11-12 |
 | 005 | Primer puzzle: cableado | ✅ **terminada** 2026-11-12 |
-| 006 | Audio: música, efectos de sonido y volumen | Slice vertical |
+| 006 | Audio: música, efectos de sonido y volumen | ✅ **terminada** 2026-11-12 |
 | 007 | Resto de puzzles del acto 1 y guardado (localStorage) | Acto 1 completo |
 | 008 | Puzzles del acto 2 (bloques de código, caza del bug, indentación) | Acto 2 |
 | 009 | Terminal simulada (parser, FS virtual, comandos) | Acto 3 |
@@ -81,6 +81,6 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 | 011 | Menús, pausa, opciones, final y créditos | Juego completo |
 | 012 | CI en GitHub Actions y publicación de la imagen | Release |
 | 013 | Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO, kit de UI y escena de demo | Slice vertical (tras la 002) |
-| 014 | Motor chiptune de 4 canales y SFX sintetizados; pistas M01–M09, J01–J02 | Slice vertical (con la 006) |
+| 014 | Motor chiptune de 4 canales y SFX sintetizados; pistas M01–M09, J01–J02 | ✅ **terminada** 2026-11-12 (motor + 6 pistas; las 5 restantes van con sus pantallas) |
 
-**Slice vertical (001–006 + 013 + 014):** una partida jugable del acto 1 con 1 puzzle, plazo, música y Docker. Es el primer hito que hay que mostrar.
+**Slice vertical (001–006 + 014):** ✅ **alcanzado el 2026-11-12.** Una partida jugable del acto 1 con 1 puzzle, plazo, música y Docker. La 013 (arte definitivo) sigue en el camino al acto 1 completo.

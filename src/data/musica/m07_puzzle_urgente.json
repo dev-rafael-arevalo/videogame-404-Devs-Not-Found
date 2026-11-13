@@ -1,0 +1,7 @@
+{
+  "id": "puzzle_urgente",
+  "nombre": "M07 · Puzzle urgente (M06 a 140 BPM)",
+  "bpm": 140,
+  "loop": true,
+  "igualQue": "puzzle"
+}

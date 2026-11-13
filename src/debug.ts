@@ -1,4 +1,5 @@
 import type Phaser from 'phaser';
+import { audio, type AudioSnapshot } from './audio/AudioManager';
 import { getProgress } from './game/session';
 import type { ProgressState } from './logic/progress';
 import type { DialogScene, DialogSnapshot } from './scenes/DialogScene';
@@ -26,6 +27,8 @@ export interface DebugApi {
   progress(): ProgressState;
   /** Fuerza el vencimiento del plazo del puzzle abierto. */
   expireDeadline(): void;
+  /** Pista actual, estado del contexto y último efecto. */
+  audio(): AudioSnapshot;
 }
 
 export interface TicketSnapshot {
@@ -85,6 +88,9 @@ export function installDebugApi(game: Phaser.Game): void {
     },
     expireDeadline() {
       if (game.scene.isActive('Puzzle')) (game.scene.getScene('Puzzle') as PuzzleScene).expireNow();
+    },
+    audio() {
+      return audio.snapshot();
     },
   };
 }

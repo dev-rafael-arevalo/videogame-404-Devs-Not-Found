@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import './style.css';
+import { audio } from './audio/AudioManager';
 import { gameConfig } from './config';
 import { installDebugApi } from './debug';
 import { GAME_HEIGHT, GAME_WIDTH, integerZoom } from './logic/scale';
@@ -24,5 +25,10 @@ window.addEventListener('resize', () => {
 game.events.once(Phaser.Core.Events.READY, () => {
   document.documentElement.dataset.gameReady = 'true';
 });
+
+// Los navegadores bloquean el audio hasta la primera interacción: se desbloquea con ella.
+const unlockAudio = (): void => audio.unlock();
+window.addEventListener('pointerdown', unlockAudio);
+window.addEventListener('keydown', unlockAudio);
 
 installDebugApi(game);

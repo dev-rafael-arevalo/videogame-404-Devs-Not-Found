@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
 import { FONT, drawWindow, formatNumber, makeButton } from '../art/ui';
+import { audio } from '../audio/AudioManager';
 import textos from '../data/textos/es.json';
 import { getTicket } from '../data/tickets/index';
 import { EV } from '../game/events';
@@ -36,6 +37,7 @@ export class ResultScene extends Phaser.Scene {
 
   create(): void {
     const ticket = getTicket(this.result.ticketId);
+    audio.playMusic('jingle_exito', { next: 'acto1_oficina' });
     drawWindow(this, WIN.x, WIN.y, WIN.width, WIN.height, 'exito');
     const cx = WIN.x + WIN.width / 2;
     this.add

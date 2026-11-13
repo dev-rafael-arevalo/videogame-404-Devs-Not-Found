@@ -21,8 +21,9 @@ levantar una app en Python.
 Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) creó el esqueleto
 (Phaser 4.2.1 + Vite 8 + TypeScript, Vitest, Playwright y Docker) con las pantallas Boot y Título, y la
 [002-movimiento-personaje](specs/002-movimiento-personaje/spec.md) agregó el mundo del acto 1 con SaraDev; la [003](specs/003-interaccion-dialogos/spec.md), PATO, post-its y diálogos; la
-[004](specs/004-tickets-plazos-hud/spec.md), el bucle de tickets (briefing, plazo, resultado, rollback y HUD); la [005](specs/005-puzzle-cableado/spec.md), el puzzle de cableado.
-Siguientes: 006 (audio) con 014 (motor chiptune), y 013 (arte procedural completo). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
+[004](specs/004-tickets-plazos-hud/spec.md), el bucle de tickets (briefing, plazo, resultado, rollback y HUD); la [005](specs/005-puzzle-cableado/spec.md), el puzzle de cableado; la [006](specs/006-audio/spec.md) y la
+[014](specs/014-motor-chiptune/spec.md), música y efectos sintetizados. **Slice vertical alcanzado.**
+Siguientes: 013 (arte procedural completo) y 007 (resto de puzzles del acto 1 y guardado). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
 **Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))
@@ -60,7 +61,8 @@ tests/e2e/       Tests de Playwright (smoke y mundo)
 - **La lógica pura va separada de las escenas de Phaser** (`src/logic/`, `src/terminal/`), para poder testearla con Vitest sin canvas.
 - **Los tests e2e leen `<html data-scene>` y `window.__debug`** (solo en desarrollo, ver `src/debug.ts`); no leen el canvas. Cada escena de pantalla completa llama a `markScene(this)` en `create()`. Helpers comunes en `tests/e2e/helpers.ts`.
 - **Teclas de acción (E, Espacio, Enter) por eventos `keydown-X`, no con `JustDown`:** Phaser anula `JustDown` si la tecla se suelta en el mismo cuadro, y Playwright `press` hace justo eso.
-- **El contenido va en datos:** actos, tickets, diálogos y textos viven en JSON dentro de `src/data/`. Un ticket nuevo es un JSON en `src/data/tickets/` más su id en `actos.json`; `npm test` lo valida.
+- **El contenido va en datos:** actos, tickets, diálogos, textos y partituras viven en JSON dentro de `src/data/`. Un ticket nuevo es un JSON en `src/data/tickets/` más su id en `actos.json`; una pista nueva es un JSON en `src/data/musica/` (notación en `docs/02-musica/musica.md`); `npm test` valida ambos.
+- **Audio solo por `audio` (`src/audio/AudioManager.ts`):** `playMusic(id)` y `playSfx(nombre)`. Nunca Web Audio ni `this.sound` desde las escenas.
 - **Idioma:** identificadores de código en inglés; textos del juego y documentación en español.
 - **Pixel-perfect:** 320×180, `pixelArt: true` y escalado entero.
 - **El README refleja el avance.** Al terminar una spec, o cualquier entregable de las etapas 1–3, actualiza en `README.md` la tabla *Estado del proyecto* (porcentaje y estado), la *Hoja de ruta*, el *Changelog* (entrada arriba de todo, con fecha `AAAA-MM-DD`), la fecha de *Última actualización* y el badge de etapa. Después actualiza `docs/00-plan.md`.

@@ -22,6 +22,19 @@
 | Efectos de sonido | **jsfxr** (sfxr.me) | Genera efectos 8-bit con presets (moneda, salto, explosión) |
 | Edición y loudness | **Audacity** | Recortar, normalizar y convertir formatos |
 
+## Estado (2026-11-12)
+
+Motor en `src/audio/` (`notation.ts`, `songs.ts`, `synth.ts`, `sfx.ts`, `AudioManager.ts`). Pistas listas:
+M01, M03, M06, M07, J01 y J02. Efectos listos: `boot_beep`, `click_ui`, `hover_ui`, `interactuar`,
+`dialogo_letra`, `paso`, `ticket_nuevo`, `cable_conectar`, `cable_error`, `puzzle_ok`, `puzzle_error`,
+`alarma_plazo`, `pato_quack`, `recolector_aparece`.
+
+### Cómo escribir una pista
+Un JSON en `src/data/musica/` con `id`, `bpm`, `loop` y `canales` (`pulso1`, `pulso2`, `triangulo`,
+`ruido`). Cada canal es texto con tokens `NOTA:duración` en semicorcheas: `C4:4 -:2 A#3:2`. En el
+ruido, `K` bombo, `S` caja y `H` hi-hat. Los cuatro canales miden lo mismo y terminan en compás
+completo; `npm test` lo valida. `igualQue` reutiliza los canales de otra pista con otro tempo.
+
 ## Pistas
 
 | ID | Nombre | Uso (pantalla) | Tempo | Carácter | Loop |

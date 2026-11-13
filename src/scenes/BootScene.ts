@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
+import { audio } from '../audio/AudioManager';
 import textos from '../data/textos/es.json';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
 import { markScene } from './markScene';
@@ -51,6 +52,7 @@ export class BootScene extends Phaser.Scene {
         const line = lines[this.lineIndex];
         if (text && line) {
           text.setText(line);
+          audio.playSfx('boot_beep');
         }
         this.lineIndex += 1;
         this.drawBar(this.lineIndex / lines.length);

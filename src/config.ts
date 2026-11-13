@@ -25,6 +25,8 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
   pixelArt: true,
   banner: false,
   disableContextMenu: true,
+  // El audio lo maneja src/audio/AudioManager.ts (motor chiptune propio), no el de Phaser.
+  audio: { noAudio: true },
   scale: {
     mode: Phaser.Scale.NONE,
     autoCenter: Phaser.Scale.CENTER_BOTH,
