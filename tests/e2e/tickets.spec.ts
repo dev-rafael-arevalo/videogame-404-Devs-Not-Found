@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { closeDialog, collectErrors, enterWorld, holdUntil, player, promptVisible } from './helpers';
+import { closeDialog, collectErrors, enterWorld, holdUntil, player, promptVisible, solveFirstCables, walkToFirstTerminal } from './helpers';
 
 interface TicketSnapshot {
   escena: 'Briefing' | 'Puzzle' | 'Result' | 'Rollback';
@@ -16,19 +16,6 @@ interface Progress {
 const ticket = (page: Page): Promise<TicketSnapshot | null> => page.evaluate(() => window.__debug?.ticket() ?? null);
 const progress = (page: Page): Promise<Progress> => page.evaluate(() => window.__debug!.progress());
 const escena = async (page: Page): Promise<string | null> => (await ticket(page))?.escena ?? null;
-
-/** Click en coordenadas del juego (320×180), convertidas al canvas escalado. */
-async function clickGame(page: Page, gx: number, gy: number): Promise<void> {
-  const box = (await page.locator('#game canvas').boundingBox())!;
-  const zoom = box.width / 320;
-  await page.mouse.click(box.x + gx * zoom, box.y + gy * zoom);
-}
-
-/** Va desde la sala fría hasta la terminal del ticket #0007 (tile 15,4), parándose a su izquierda. */
-async function walkToFirstTerminal(page: Page): Promise<void> {
-  await holdUntil(page, 'ArrowRight', async () => ((await player(page))?.x ?? 0) >= 232, 6000);
-  await holdUntil(page, 'ArrowUp', async () => ((await player(page))?.y ?? 999) <= 80, 3000);
-}
 
 test('ticket completo: briefing, plazo, rollback forzado, reintento y resultado con penalidad', async ({ page }) => {
   const errors = collectErrors(page);
@@ -61,8 +48,8 @@ test('ticket completo: briefing, plazo, rollback forzado, reintento y resultado 
   await page.keyboard.press('Enter');
   await expect.poll(() => escena(page)).toBe('Puzzle');
 
-  // El placeholder se resuelve con su botón (centro del tablero).
-  await clickGame(page, 160, 100);
+  // Se resuelve el cableado (spec 005).
+  await solveFirstCables(page);
   await expect.poll(() => escena(page)).toBe('Result');
   const result = (await ticket(page))!.resultado!;
   expect(result.ticketId).toBe('a1-01-cables');

@@ -21,8 +21,8 @@ levantar una app en Python.
 Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) creó el esqueleto
 (Phaser 4.2.1 + Vite 8 + TypeScript, Vitest, Playwright y Docker) con las pantallas Boot y Título, y la
 [002-movimiento-personaje](specs/002-movimiento-personaje/spec.md) agregó el mundo del acto 1 con SaraDev; la [003](specs/003-interaccion-dialogos/spec.md), PATO, post-its y diálogos; la
-[004](specs/004-tickets-plazos-hud/spec.md), el bucle de tickets (briefing, plazo, resultado, rollback y HUD).
-Siguientes: 005 (puzzle de cableado, registrándolo en `src/puzzles/registry.ts`) y 013 (arte procedural completo). Mantén la sección
+[004](specs/004-tickets-plazos-hud/spec.md), el bucle de tickets (briefing, plazo, resultado, rollback y HUD); la [005](specs/005-puzzle-cableado/spec.md), el puzzle de cableado.
+Siguientes: 006 (audio) con 014 (motor chiptune), y 013 (arte procedural completo). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
 **Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))

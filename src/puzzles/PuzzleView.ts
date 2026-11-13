@@ -16,6 +16,8 @@ export interface PuzzleArea {
 export interface PuzzleView {
   create(scene: Phaser.Scene, area: PuzzleArea, ticket: TicketDef, onSolved: () => void): void;
   destroy(): void;
+  /** Estado para los tests e2e (opcional). */
+  snapshot?(): unknown;
 }
 
 export type PuzzleFactory = () => PuzzleView;

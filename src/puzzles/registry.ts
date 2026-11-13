@@ -1,8 +1,11 @@
+import { CablesPuzzle } from './CablesPuzzle';
 import { PlaceholderPuzzle } from './PlaceholderPuzzle';
 import type { PuzzleFactory, PuzzleView } from './PuzzleView';
 
 /** Tipo de ticket → vista del puzzle. Cada spec de puzzle registra el suyo acá. */
-const PUZZLES: Record<string, PuzzleFactory> = {};
+const PUZZLES: Record<string, PuzzleFactory> = {
+  cables: () => new CablesPuzzle(),
+};
 
 export function registerPuzzle(tipo: string, factory: PuzzleFactory): void {
   PUZZLES[tipo] = factory;

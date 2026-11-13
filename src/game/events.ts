@@ -14,6 +14,8 @@ export const EV = {
 export interface TicketDonePayload {
   ticketId: string;
   elapsedMs: number;
+  /** Pistas de PATO usadas (-10% cada una). */
+  pistas: number;
 }
 
 export interface TicketIdPayload {

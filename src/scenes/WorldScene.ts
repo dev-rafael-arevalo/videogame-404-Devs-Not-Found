@@ -259,9 +259,9 @@ export class WorldScene extends Phaser.Scene {
     });
   }
 
-  private onTicketDone({ ticketId, elapsedMs }: TicketDonePayload): void {
+  private onTicketDone({ ticketId, elapsedMs, pistas }: TicketDonePayload): void {
     const ticket = getTicket(ticketId);
-    const { state, ganadas } = completeTicket(getProgress(this.registry), ticketId, ticket.conciencias);
+    const { state, ganadas } = completeTicket(getProgress(this.registry), ticketId, ticket.conciencias, pistas);
     setProgress(this.registry, state);
     this.placeAlert();
     const result: ResultData = { ticketId, elapsedMs, ganadas, uptime: uptimePercent(state, ticketOrder(ACTO).length) };

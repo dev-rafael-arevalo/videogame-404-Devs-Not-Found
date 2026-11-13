@@ -7,8 +7,9 @@ export interface ProgressState {
   fallos: Record<string, number>;
 }
 
-/** Penalidad por rollback sobre la recompensa del ticket, y su piso. */
+/** Penalidades sobre la recompensa del ticket (rollback y pista de PATO) y su piso. */
 export const ROLLBACK_PENALTY = 0.25;
+export const HINT_PENALTY = 0.1;
 export const MIN_REWARD_FRACTION = 0.25;
 
 export function initialProgress(): ProgressState {
@@ -20,8 +21,8 @@ export function uptimePercent(state: ProgressState, totalTickets: number): numbe
   return Math.round((state.completados.length / totalTickets) * 100);
 }
 
-export function rewardFor(base: number, failures: number): number {
-  const factor = Math.max(MIN_REWARD_FRACTION, 1 - ROLLBACK_PENALTY * failures);
+export function rewardFor(base: number, failures: number, hints = 0): number {
+  const factor = Math.max(MIN_REWARD_FRACTION, 1 - ROLLBACK_PENALTY * failures - HINT_PENALTY * hints);
   return Math.round(base * factor);
 }
 
@@ -29,9 +30,10 @@ export function completeTicket(
   state: ProgressState,
   ticketId: string,
   baseReward: number,
+  hints = 0,
 ): { state: ProgressState; ganadas: number } {
   if (state.completados.includes(ticketId)) return { state, ganadas: 0 };
-  const ganadas = rewardFor(baseReward, state.fallos[ticketId] ?? 0);
+  const ganadas = rewardFor(baseReward, state.fallos[ticketId] ?? 0, hints);
   return {
     state: { ...state, completados: [...state.completados, ticketId], conciencias: state.conciencias + ganadas },
     ganadas,

@@ -38,7 +38,9 @@
     "abandonar": "[Esc] abandonar",
     "sinPresion": "sin presión",
     "placeholder": "Puzzle \"{tipo}\" en construcción.\nPor ahora, este botón lo da por resuelto.",
-    "marcarResuelto": "MARCAR RESUELTO"
+    "marcarResuelto": "MARCAR RESUELTO",
+    "pista": "PATO: PISTA [H] (-10%)",
+    "sinPistas": "PATO: Ya te dije todo lo que sé. ¿Probaste explicármelo en voz alta?"
   },
   "resultado": {
     "titulo": "✔ TICKET CERRADO",

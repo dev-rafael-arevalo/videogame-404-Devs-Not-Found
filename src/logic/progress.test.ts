@@ -33,6 +33,13 @@ describe('progress', () => {
     expect(rewardFor(1200, 9)).toBe(300);
   });
 
+  it('CA1 (005): cada pista resta 10% y se acumula con los rollbacks', () => {
+    expect(rewardFor(1200, 0, 1)).toBe(1080);
+    expect(rewardFor(1200, 1, 1)).toBe(780);
+    expect(rewardFor(1200, 0, 20)).toBe(300);
+    expect(completeTicket(initialProgress(), 'a1-01', 1200, 1).ganadas).toBe(1080);
+  });
+
   it('fallar registra el rollback y la recompensa posterior baja', () => {
     const failed = failTicket(initialProgress(), 'a1-01');
     expect(failed.fallos['a1-01']).toBe(1);

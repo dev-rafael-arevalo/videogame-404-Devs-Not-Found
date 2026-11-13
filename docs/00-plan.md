@@ -72,7 +72,7 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 | 002 | Movimiento del personaje en el mundo | ✅ **terminada** 2026-11-12 |
 | 003 | Interacción y diálogos (PATO, post-its) | ✅ **terminada** 2026-11-12 |
 | 004 | Sistema de tickets, plazos y HUD | ✅ **terminada** 2026-11-12 |
-| 005 | Primer puzzle: cableado | Slice vertical |
+| 005 | Primer puzzle: cableado | ✅ **terminada** 2026-11-12 |
 | 006 | Audio: música, efectos de sonido y volumen | Slice vertical |
 | 007 | Resto de puzzles del acto 1 y guardado (localStorage) | Acto 1 completo |
 | 008 | Puzzles del acto 2 (bloques de código, caza del bug, indentación) | Acto 2 |

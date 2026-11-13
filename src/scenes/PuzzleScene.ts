@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
-import { FONT, drawWindow } from '../art/ui';
+import { FONT, drawWindow, makeButton } from '../art/ui';
 import textos from '../data/textos/es.json';
 import { getTicket } from '../data/tickets/index';
 import { EV, type TicketDonePayload, type TicketIdPayload } from '../game/events';
@@ -8,10 +8,11 @@ import { isSinPresion, setActiveTicket } from '../game/session';
 import { barColor, createDeadline, fraction, remainingSeconds, status, tick, type Deadline } from '../logic/deadline';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
 import { formatTicketNumber, type TicketDef } from '../logic/tickets';
+import { PUZZLE_BOARD_AREA, PUZZLE_WINDOW } from '../puzzles/layout';
 import { createPuzzleView } from '../puzzles/registry';
 import type { PuzzleView } from '../puzzles/PuzzleView';
 
-const WIN = { x: 24, y: 22, width: 272, height: 148 } as const;
+const WIN = PUZZLE_WINDOW;
 const BAR = { x: WIN.x + 8, y: WIN.y + WIN.height - 14, width: WIN.width - 72, height: 6 } as const;
 const BAR_COLORS = { green: PALETTE.green, yellow: PALETTE.yellow, red: PALETTE.red } as const;
 const BLINK_MS = 250;
@@ -27,6 +28,8 @@ export class PuzzleScene extends Phaser.Scene {
   private timeText!: Phaser.GameObjects.Text;
   private blinkOn = true;
   private lastShownSeconds = -1;
+  private hintsUsed = 0;
+  private hintText!: Phaser.GameObjects.Text;
 
   constructor() {
     super('Puzzle');
@@ -38,6 +41,7 @@ export class PuzzleScene extends Phaser.Scene {
     this.elapsedMs = 0;
     this.finished = false;
     this.lastShownSeconds = -1;
+    this.hintsUsed = 0;
   }
 
   create(): void {
@@ -61,13 +65,11 @@ export class PuzzleScene extends Phaser.Scene {
 
     this.time.addEvent({ delay: BLINK_MS, loop: true, callback: () => (this.blinkOn = !this.blinkOn) });
 
+    this.hintText = this.add.text(WIN.x + 8, BAR.y - 24, '', { ...FONT, color: css(PALETTE.yellow), wordWrap: { width: WIN.width - 16 } });
+    makeButton(this, WIN.x + WIN.width - 8, BAR.y - 9, textos.puzzle.pista, () => this.showHint(), { key: 'H', originX: 1 });
+
     this.view = createPuzzleView(this.ticket.tipo);
-    this.view.create(
-      this,
-      { x: WIN.x + 8, y: WIN.y + 18, width: WIN.width - 16, height: WIN.height - 48 },
-      this.ticket,
-      () => this.solve(),
-    );
+    this.view.create(this, { ...PUZZLE_BOARD_AREA }, this.ticket, () => this.solve());
 
     this.input.keyboard?.on('keydown-ESC', () => this.abandon());
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -99,6 +101,22 @@ export class PuzzleScene extends Phaser.Scene {
     return remainingSeconds(this.deadline);
   }
 
+  /** Para los tests e2e. */
+  snapshot(): { pistas: number; tablero: unknown } {
+    return { pistas: this.hintsUsed, tablero: this.view.snapshot?.() ?? null };
+  }
+
+  private showHint(): void {
+    if (this.finished) return;
+    const pista = this.ticket.pistas[this.hintsUsed];
+    if (pista === undefined) {
+      this.hintText.setText(textos.puzzle.sinPistas);
+      return;
+    }
+    this.hintsUsed += 1;
+    this.hintText.setText(`PATO: ${pista}`);
+  }
+
   private drawBar(): void {
     const left = fraction(this.deadline);
     const color = barColor(left);
@@ -123,7 +141,7 @@ export class PuzzleScene extends Phaser.Scene {
   private solve(): void {
     if (this.finished) return;
     this.finished = true;
-    const payload: TicketDonePayload = { ticketId: this.ticket.id, elapsedMs: this.elapsedMs };
+    const payload: TicketDonePayload = { ticketId: this.ticket.id, elapsedMs: this.elapsedMs, pistas: this.hintsUsed };
     this.game.events.emit(EV.ticketDone, payload);
     this.scene.stop();
   }

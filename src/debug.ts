@@ -32,6 +32,7 @@ export interface TicketSnapshot {
   escena: 'Briefing' | 'Puzzle' | 'Result' | 'Rollback';
   restanteS: number | null;
   resultado: ResultData | null;
+  puzzle: { pistas: number; tablero: unknown } | null;
 }
 
 declare global {
@@ -72,7 +73,12 @@ export function installDebugApi(game: Phaser.Game): void {
       if (!escena) return null;
       const puzzle = escena === 'Puzzle' ? (game.scene.getScene('Puzzle') as PuzzleScene) : null;
       const result = escena === 'Result' ? (game.scene.getScene('Result') as ResultScene) : null;
-      return { escena, restanteS: puzzle?.remaining() ?? null, resultado: result?.snapshot() ?? null };
+      return {
+        escena,
+        restanteS: puzzle?.remaining() ?? null,
+        resultado: result?.snapshot() ?? null,
+        puzzle: puzzle?.snapshot() ?? null,
+      };
     },
     progress() {
       return getProgress(game.registry);
