@@ -6,8 +6,8 @@
 ## Resumen: lo que bloquea al proyecto hoy
 
 1. ✅ Cuestionario respondido (2026-11-12). Quedan abiertas la 7 (personajes secundarios), la 13 (comandos) y la 22 (equipo).
-2. ✅ Specs 001–003 terminadas. ⛔ **Siguiente:** spec 004 (tickets, plazos y HUD); después 005 (cableado) y 013 (arte procedural completo).
-3. Catálogo de tickets del acto 1 (Narrativa). Sin él no se puede diseñar el puzzle de la spec 005.
+2. ✅ Specs 001–004 terminadas. ⛔ **Siguiente:** spec 005 (puzzle de cableado); después 006 (audio) y 013 (arte procedural completo).
+3. Catálogo de tickets del acto 1 (Narrativa): hay 2 de 4–5 en `src/data/tickets/`; faltan `paquetes` y `compuertas`.
 4. ✅ Paleta confirmada (Sweetie 16 + verde terminal, en `src/art/palette.ts`). Falta la fuente pixel (se genera por código en la 013).
 
 ---
@@ -63,7 +63,8 @@
 | `001-base-proyecto/` | Esqueleto de Vite, Phaser 4, tests y Docker | Desarrollo | ✅ | Terminada 2026-11-12 |
 | `002-movimiento-personaje/` | Movimiento de SaraDev, colisiones y cámara | Desarrollo | ✅ | Terminada 2026-11-12 |
 | `003-interaccion-dialogos/` | PATO, post-its, terminales y la caja de diálogo | Desarrollo | ✅ | Terminada 2026-11-12 |
-| `004` … `014` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
+| `004-tickets-plazos-hud/` | Briefing, ventana de puzzle con plazo, resultado, rollback y HUD | Desarrollo | ✅ | Terminada 2026-11-12 |
+| `005` … `014` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
 
 ## `assets-src/`: fuentes editables (no las carga el juego)
 
@@ -82,15 +83,16 @@
 
 | Ruta | Qué debe llevar | Rol | Spec |
 |---|---|---|---|
-| `src/scenes/` | Una escena de Phaser por pantalla (✅ `BootScene`, `TitleScene`, `WorldScene`, `DialogScene`, `markScene`) | Desarrollo | 001 → 011 |
+| `src/scenes/` | Una escena de Phaser por pantalla (✅ Boot, Title, World, Hud, Briefing, Puzzle, Result, Rollback, Dialog) | Desarrollo | 001 → 011 |
+| `src/game/` | Estado en el registry (`session.ts`) y nombres de eventos (`events.ts`) | Desarrollo | 004+ |
 | `src/entities/` | Entidades del mundo (✅ `Player`) | Desarrollo | 002+ |
 | `scripts/` | Generadores (✅ mapa del acto 1) | Desarrollo | 002+ |
-| `src/logic/` | Lógica pura con tests (✅ `scale`, `movement`, `dialog`, `interaction`; luego plazos, progreso, guardado, validadores) | Desarrollo | 001 → 007 |
+| `src/logic/` | Lógica pura con tests (✅ `scale`, `movement`, `dialog`, `interaction`, `deadline`, `progress`, `tickets`; luego guardado y validadores) | Desarrollo | 001 → 007 |
 | `src/art/` | Paleta, `pixelTexture`, tileset del acto 1, SaraDev mínima, PATO, post-it y retratos (✅); resto de sprites y UI | Desarrollo y Arte | 001–003, 013 |
 | `src/audio/` | `AudioManager` y motor chiptune | Desarrollo y Música | 006, 014 |
-| `src/puzzles/` | La vista de cada tipo de puzzle | Desarrollo | 005, 007, 008 |
+| `src/puzzles/` | La vista de cada tipo de puzzle (✅ interfaz `PuzzleView`, registro y placeholder) | Desarrollo | 004, 005, 007, 008 |
 | `src/terminal/` | Parser, sistema de archivos virtual y comandos simulados | Desarrollo | 009 |
-| `src/data/tickets/*.json` | Un JSON por ticket | Narrativa (con `/nueva-actividad`) | 004+ |
+| `src/data/tickets/*.json` | Un JSON por ticket (✅ `a1-01-cables`, `a1-02-binario`; validados por `tickets.test.ts`) y `actos.json` con el orden | Narrativa (con `/nueva-actividad`) | 004+ |
 | `src/data/textos/es.json` | Todos los textos visibles del juego (✅ boot, título, UI y diálogos del acto 1) | Narrativa | 001+ |
 | `public/assets/sprites/` · `maps/` · `audio/` · `fonts/` | Exportaciones finales | Arte y Música | 001+ |
-| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog` y `helpers.ts`) | Desarrollo | 001+ |
+| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets` y `helpers.ts`) | Desarrollo | 001+ |

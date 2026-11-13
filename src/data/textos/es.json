@@ -20,6 +20,39 @@
     "usar": "[E] usar",
     "continuar": "E / Espacio"
   },
+  "hud": {
+    "uptime": "UPTIME",
+    "conciencias": "CONC.",
+    "sinTicket": "sin ticket"
+  },
+  "briefing": {
+    "cabecera": "CRON · TICKET",
+    "prioridad": "PRIORIDAD: CRÍTICA (todas lo son)",
+    "plazo": "PLAZO",
+    "conciencias": "CONCIENCIAS",
+    "aceptar": "ACEPTAR [Enter]",
+    "volver": "VOLVER [Esc]"
+  },
+  "puzzle": {
+    "plazo": "PLAZO",
+    "abandonar": "[Esc] abandonar",
+    "sinPresion": "sin presión",
+    "placeholder": "Puzzle \"{tipo}\" en construcción.\nPor ahora, este botón lo da por resuelto.",
+    "marcarResuelto": "MARCAR RESUELTO"
+  },
+  "resultado": {
+    "titulo": "✔ TICKET CERRADO",
+    "tiempo": "Tiempo",
+    "conciencias": "Conciencias restauradas",
+    "uptime": "Uptime del sistema",
+    "continuar": "CONTINUAR [Enter]"
+  },
+  "rollback": {
+    "titulo": "PLAZO VENCIDO · ROLLBACK DEL SECTOR",
+    "mensaje": "CRON: El Recolector liberó el sector sin referencias. El próximo intento restaura un 25% menos de conciencias.",
+    "reintentar": "REINTENTAR [Enter]",
+    "volver": "VOLVER [Esc]"
+  },
   "nombres": {
     "saradev": "SaraDev",
     "pato": "PATO",
@@ -37,7 +70,7 @@
       { "quien": "pato", "texto": "Soy PATO, asistente de depuración de Marga. Modelo de goma, firmware 1.0, cero paciencia." },
       { "quien": "pato", "texto": "Resumen: a las 06:00 un despliegue sin revisar activó ARCA y respaldó a toda la humanidad. Toda. Menos a vos: la jaula de Faraday de esta sala te salvó." },
       { "quien": "pato", "texto": "La buena noticia: existe un sistema de restauración, SYS://RESTORE. La mala: hay que levantarlo ticket por ticket, y CRON no se destaca por su paciencia." },
-      { "quien": "pato", "texto": "Cuando te trabes, ya sabés qué hacer: ¿ya probaste explicármelo en voz alta?" }
+      { "quien": "pato", "texto": "Buscá la terminal con el aviso de CRON parpadeando. Y cuando te trabes, ya sabés: ¿ya probaste explicármelo en voz alta?" }
     ],
     "postit_1": [
       { "quien": "marga", "texto": "\"Si el servidor no responde, primero fijate si está enchufado. En serio. Firmado: yo, tres veces.\"" }
@@ -49,8 +82,10 @@
       { "quien": "marga", "texto": "\"El pato no es decorativo. Hablale. Y no, no estoy loca.\"" }
     ],
     "terminal_apagada": [
-      { "quien": "saradev", "texto": "La terminal está en espera. CRON todavía no emitió ningún ticket." },
-      { "quien": "saradev", "texto": "Mejor hablo primero con PATO. Qué frase para decir en el primer día." }
+      { "quien": "saradev", "texto": "Esta terminal está en espera. CRON asignó el ticket a otra: la que tiene el aviso parpadeando." }
+    ],
+    "terminal_sin_tickets": [
+      { "quien": "cron", "texto": "No quedan tickets en este sector. Conciencias en línea: 0,0000001%. Buen trabajo. Es un decir." }
     ]
   }
 }

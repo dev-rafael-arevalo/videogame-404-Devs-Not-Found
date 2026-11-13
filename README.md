@@ -67,21 +67,21 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 | 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `██████░░░░` 55% | 📝 Primeros diálogos de PATO y post-its en el juego; falta el catálogo de tickets |
 | 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `█░░░░░░░░░` 10% | 📝 Dirección definida; se sintetizará en código (spec 014) |
 | 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `███░░░░░░░` 25% | 🚧 Tileset del acto 1 y SaraDev mínima generados por código; referencias visuales fijadas |
-| 4 · Implementación | Juego en Phaser y deploy en Docker | `████░░░░░░` 40% | 🚧 Specs 001–003: esqueleto, Boot, Título, mundo del acto 1, PATO, post-its y diálogos |
+| 4 · Implementación | Juego en Phaser y deploy en Docker | `█████░░░░░` 50% | 🚧 Specs 001–004: mundo, diálogos y el bucle de tickets con plazo, HUD, resultado y rollback |
 
 **Próximo hito:** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker (specs 001–006).
 
-**Siguiente paso:** spec 004 (tickets, plazos y HUD) y spec 013 (arte procedural completo de SaraDev).
+**Siguiente paso:** spec 005 (primer puzzle: cableado) y spec 013 (arte procedural completo de SaraDev).
 
 ## Hoja de ruta
 
 <details open>
-<summary><b>Slice vertical</b> (3/6)</summary>
+<summary><b>Slice vertical</b> (4/6)</summary>
 
 - [x] 001 · Base del proyecto (Vite, TypeScript, Phaser 4, tests y Docker) · 2026-11-12
 - [x] 002 · Movimiento del personaje · 2026-11-12
 - [x] 003 · Interacción y diálogos · 2026-11-12
-- [ ] 004 · Sistema de tickets, plazos y HUD
+- [x] 004 · Sistema de tickets, plazos y HUD · 2026-11-12
 - [ ] 005 · Primer puzzle: cableado
 - [ ] 006 · Audio: música, efectos de sonido y volumen
 
@@ -198,6 +198,13 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-12: Spec 004, tickets, plazos y HUD
+- CRON emite tickets de a uno: la terminal con el aviso parpadeando abre el briefing (#0007 "Reconectar el switch del piso 3")
+- Ventana de puzzle sobre el mundo oscurecido con barra de plazo (verde, amarilla, roja parpadeante); Esc abandona
+- Si el plazo vence: sacudida, destello rojo y rollback del sector; reintentar cuesta un 25% de la recompensa
+- Resultado con tiempo, conciencias y uptime; HUD arriba con uptime, conciencias y plazo del ticket activo
+- Dos tickets del acto 1 en JSON validados por test; los puzzles reales llegan en las specs 005 y 007
 
 ### 2026-11-12: Spec 003, interacción y diálogos
 - PATO espera en la sala fría y los post-its de Marga están sobre tres escritorios; al acercarse aparece "[E] usar"
