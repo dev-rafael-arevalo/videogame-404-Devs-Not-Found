@@ -1,0 +1,19 @@
+{
+  "boot": {
+    "lineas": [
+      "ARCA BIOS v0.3.14 (c) Kernel & Co.",
+      "Comprobando memoria ........ 640K OK",
+      "Detectando conciencias ..... 0 encontradas",
+      "Montando SYS://RESTORE ..... OK",
+      "Buscando a Marga ........... [sin respuesta]",
+      "Iniciando turno de SaraDev ... "
+    ],
+    "saltar": "Cualquier tecla para saltar"
+  },
+  "titulo": {
+    "nombre": "404: DEVS NOT FOUND",
+    "subtitulo": "Es tu primer dia. No queda nadie mas.",
+    "start": "PRESIONA START",
+    "version": "v0.1.0 · slice vertical en construccion"
+  }
+}

@@ -1,5 +1,12 @@
 # Musicalización 8-bit
 
+> **Decisión (2026-11-12): música y efectos sintetizados en el navegador.** No habrá fuentes externas.
+> Un motor chiptune propio (`src/audio/`, spec 014) reproduce **partituras en JSON** (`src/data/musica/`)
+> con la restricción de la NES: 2 canales de pulso (melodía y armonía), triángulo (bajo) y ruido
+> (percusión), vía Web Audio. Los efectos se definen con parámetros tipo sfxr en JSON y se generan al
+> vuelo. Nada se descarga ni se carga de un CDN (respeta la CSP). Las secciones de herramientas y
+> exportación de abajo quedan como opción para quien quiera producir versiones OGG afuera.
+
 ## Dirección
 
 - **Estilo:** chiptune al estilo NES. Restricción de **4 canales**: 2 de pulso (melodía y armonía), triángulo (bajo) y ruido (percusión). La restricción mantiene todo coherente y es fácil de cumplir.
@@ -10,7 +17,7 @@
 
 | Uso | Herramienta | Por qué |
 |---|---|---|
-| Composición | **FamiStudio** | Emula el chip de la NES, exporta WAV/MP3/OGG y es fácil para quien empieza |
+| Composición | **FamiStudio** | Emula el chip de la NES, exporta WAV/MP3/OGG y es fácil para quien empieza | 
 | Bocetos rápidos | **BeepBox** (web) | Sin instalación; las canciones se comparten por URL |
 | Efectos de sonido | **jsfxr** (sfxr.me) | Genera efectos 8-bit con presets (moneda, salto, explosión) |
 | Edición y loudness | **Audacity** | Recortar, normalizar y convertir formatos |

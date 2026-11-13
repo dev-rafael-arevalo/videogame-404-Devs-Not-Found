@@ -1,0 +1,14 @@
+services:
+  game:
+    build: .
+    image: devs-not-found:local
+    ports:
+      - "8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp          # nginx sin privilegios escribe ahí el pid y sus temporales
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped

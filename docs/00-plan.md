@@ -26,7 +26,7 @@ usa placeholders hasta que lleguen los assets finales.
 - [x] [CONTRIBUTING.md](../CONTRIBUTING.md) (roles, ramas, commits, PRs) y [mapa del proyecto](mapa-del-proyecto.md)
 - [x] Repositorio en GitHub con `main`, `develop` y las ramas iniciales de cada etapa
 - [ ] Configurar la protección de ramas en GitHub (ver CONTRIBUTING §7)
-- [ ] **Responder [cuestionario.md](cuestionario.md)** ← siguiente paso
+- [x] Responder [cuestionario.md](cuestionario.md) (2026-11-12; quedan abiertas la 7, 13 y 22)
 
 ## Etapa 1: Lore y pantallas
 
@@ -40,6 +40,8 @@ Terminado cuando: cada ticket del catálogo tiene un tipo de puzzle definido y c
 
 ## Etapa 2: Musicalización 8-bit
 
+> **Decisión 2026-11-12:** no habrá fuentes externas. La música y los efectos se **sintetizan en el navegador** con un motor chiptune de 4 canales propio (spec 014); las partituras viven en JSON. Ver [musica.md](02-musica/musica.md).
+
 Entregables (ver [musica.md](02-musica/musica.md)):
 - 11 pistas (9 temas y 2 jingles) y unos 20 efectos de sonido, exportados en OGG y MP3 a `public/assets/audio/`
 - Fuentes editables en `assets-src/musica/`
@@ -47,6 +49,8 @@ Entregables (ver [musica.md](02-musica/musica.md)):
 Terminado cuando: cada pantalla tiene su pista asignada y cada acción del juego su efecto de sonido.
 
 ## Etapa 3: Diseño gráfico
+
+> **Decisión 2026-11-12:** el arte se **genera por código** (matrices de píxeles → texturas de Phaser), con SaraDev al estilo chibi de humor tecnológico descrito en [guia-arte.md](03-arte/guia-arte.md) (spec 013).
 
 Entregables (ver [guia-arte.md](03-arte/guia-arte.md)):
 - Paleta, tipografía pixel y kit de UI (ventanas 9-slice, botones, cursor, HUD)
@@ -64,8 +68,8 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 
 | # | Spec | Hito |
 |---|---|---|
-| 001 | Base del proyecto (Vite, TS, Phaser, Vitest, Docker) | ✅ spec escrita |
-| 002 | Movimiento del personaje en el mundo | ✅ spec escrita |
+| 001 | Base del proyecto (Vite, TS, Phaser 4, Vitest, Docker) | ✅ **terminada** 2026-11-12 |
+| 002 | Movimiento del personaje en el mundo | ✅ **terminada** 2026-11-12 |
 | 003 | Interacción y diálogos (PATO, post-its) | Slice vertical |
 | 004 | Sistema de tickets, plazos y HUD | Slice vertical |
 | 005 | Primer puzzle: cableado | Slice vertical |
@@ -76,5 +80,7 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 | 010 | Tickets del acto 3: venv, pip y `python puente.py` | Acto 3 |
 | 011 | Menús, pausa, opciones, final y créditos | Juego completo |
 | 012 | CI en GitHub Actions y publicación de la imagen | Release |
+| 013 | Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO, kit de UI y escena de demo | Slice vertical (tras la 002) |
+| 014 | Motor chiptune de 4 canales y SFX sintetizados; pistas M01–M09, J01–J02 | Slice vertical (con la 006) |
 
-**Slice vertical (001–006):** una partida jugable del acto 1 con 1 puzzle, plazo, música y Docker. Es el primer hito que hay que mostrar.
+**Slice vertical (001–006 + 013 + 014):** una partida jugable del acto 1 con 1 puzzle, plazo, música y Docker. Es el primer hito que hay que mostrar.

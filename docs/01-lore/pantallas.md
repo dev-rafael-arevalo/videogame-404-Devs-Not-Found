@@ -43,7 +43,7 @@ P06 ─(Esc)─► P13 Pausa        P06 ─(último ticket)─► P15 Final y cr
 │ UPTIME 12% ▓▓░░░░░░  ☺ 1.204    #0007 ⏱ 64│  ← HUD (16 px de alto)
 │                                          │
 │   ▒▒▒ escritorio   [PC]←terminal brilla  │
-│        ☻ Dev    🦆                        │
+│        ☻ SaraDev    🦆                        │
 │                    ░ holograma           │
 │   ▤ post-it                              │
 │                                 [E] usar │  ← indicador de interacción

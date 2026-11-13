@@ -5,7 +5,7 @@ Guía para agentes de IA (Claude Code u otros) que trabajen en este repositorio.
 ## Qué es este proyecto
 
 Videojuego 2D retro (pixel art + música chiptune 8-bit) con temática de programación.
-Título provisional: **SYS://RESTORE**. La persona protagonista, **Dev**, es la única desarrolladora
+Título: **404: Devs Not Found** (*SYS://RESTORE* es el programa de restauración dentro del lore). La protagonista, **SaraDev**, es la única desarrolladora
 de turno en un mundo donde toda la humanidad fue "respaldada" dentro de un programa llamado ARCA.
 Se mueve por el mundo (vista cenital), acepta *tickets* con plazo y los resuelve como puzzles en
 primer plano: primero con el mouse y, al final, escribiendo comandos en una terminal simulada para
@@ -18,16 +18,18 @@ levantar una app en Python.
 
 ## Estado actual
 
-Etapa 0: solo hay documentación y specs, todavía no hay código. El código se crea al implementar
-[specs/001-base-proyecto](specs/001-base-proyecto/spec.md). Cuando exista, actualiza la sección
-**Comandos** con los scripts reales de `package.json`.
+Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) creó el esqueleto
+(Phaser 4.2.1 + Vite 8 + TypeScript, Vitest, Playwright y Docker) con las pantallas Boot y Título, y la
+[002-movimiento-personaje](specs/002-movimiento-personaje/spec.md) agregó el mundo del acto 1 con SaraDev.
+Siguientes: 003 (interacción y diálogos) y 013 (arte procedural completo). Mantén la sección
+**Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))
 
-- **Juego:** Phaser + TypeScript + Vite. Web estática, sin backend.
+- **Juego:** Phaser 4 + TypeScript + Vite 8. Web estática, sin backend.
 - **Tests:** Vitest para la lógica pura y Playwright para el smoke e2e.
-- **Arte:** Aseprite/LibreSprite y Tiled. Resolución nativa de 320×180 escalada ×4.
-- **Música:** FamiStudio/BeepBox y jsfxr para los efectos de sonido.
+- **Arte:** generado por código (matrices de píxeles → texturas de Phaser) con la paleta Sweetie 16; Tiled para mapas. Resolución nativa de 320×180 con escalado entero. Dirección en [docs/03-arte/guia-arte.md](docs/03-arte/guia-arte.md).
+- **Música:** chiptune de 4 canales sintetizado en el navegador (Web Audio) a partir de partituras en JSON; efectos tipo sfxr. Dirección en [docs/02-musica/musica.md](docs/02-musica/musica.md).
 - **Deploy:** Docker multi-stage (build con Node y nginx sin privilegios para servir estáticos).
 
 ## Estructura (objetivo)
@@ -36,9 +38,11 @@ Etapa 0: solo hay documentación y specs, todavía no hay código. El código se
 docs/            Documentación por etapa (lore, música, arte, arquitectura)
 specs/           Desarrollo guiado por specs (SDD): constitución, plantillas y una carpeta por feature
 .claude/skills/  Skills del proyecto (nueva-spec, implementar-spec, nueva-actividad, pixel-art, musica-8bit)
-assets-src/      Fuentes editables (.aseprite, .fms, .tmx). No se sirven.
-public/assets/   Assets exportados que carga el juego (se crea en la spec 001)
-src/             Código del juego (se crea en la spec 001)
+assets-src/      Fuentes editables (.tmx, briefs). No se sirven.
+public/assets/   Assets exportados que carga el juego (mapas, fuentes)
+src/             Código del juego: scenes/, entities/, logic/, art/, audio/, terminal/, puzzles/, data/
+scripts/         Generadores (mapa del acto 1 desde un plano ASCII)
+tests/e2e/       Tests de Playwright (smoke y mundo)
 ```
 
 ## Flujo de trabajo: SDD
@@ -53,6 +57,7 @@ src/             Código del juego (se crea en la spec 001)
 - **Nada de sobreingeniería.** Nada de backend, bases de datos, gestores de estado ni frameworks extra sin una spec que lo justifique.
 - **La terminal del juego es simulada.** Nunca ejecuta comandos ni código reales (ver [docs/04-arquitectura/seguridad.md](docs/04-arquitectura/seguridad.md)).
 - **La lógica pura va separada de las escenas de Phaser** (`src/logic/`, `src/terminal/`), para poder testearla con Vitest sin canvas.
+- **Los tests e2e leen `<html data-scene>` y `window.__debug`** (solo en desarrollo, ver `src/debug.ts`); no leen el canvas. Cada escena llama a `markScene(this)` en `create()`.
 - **El contenido va en datos:** actos, tickets, diálogos y textos viven en JSON dentro de `src/data/`.
 - **Idioma:** identificadores de código en inglés; textos del juego y documentación en español.
 - **Pixel-perfect:** 320×180, `pixelArt: true` y escalado entero.
@@ -62,15 +67,17 @@ src/             Código del juego (se crea en la spec 001)
 
 ## Comandos
 
-_Pendiente de la spec 001._ Previstos:
-
 ```bash
+npm install            # primera vez (Node 24)
 npm run dev            # Vite en http://localhost:5173
 npm run build          # build de producción en dist/
-npm test               # Vitest (lógica)
-npx vitest run src/logic/deadline.test.ts -t "expira"   # un solo test
-npm run e2e            # Playwright (smoke)
+npm run preview        # sirve dist/ en http://localhost:4173
 npm run typecheck      # tsc --noEmit
+npm test               # Vitest (lógica pura, src/**/*.test.ts)
+npx vitest run src/logic/scale.test.ts -t "1280"   # un solo test
+npm run e2e            # Playwright (smoke; levanta el dev server solo)
+npm run e2e:install    # descarga Chromium para Playwright (una vez)
+node scripts/generate-map-acto1.mjs   # regenera el mapa del acto 1 desde su plano ASCII
 docker compose up --build   # juego en http://localhost:8080
 ```
 

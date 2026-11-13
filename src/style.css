@@ -1,0 +1,17 @@
+html,
+body,
+#game {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Escalado nearest-neighbor también del lado del navegador (por si el zoom CSS no es entero). */
+#game canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
