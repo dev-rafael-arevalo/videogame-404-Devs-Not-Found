@@ -11,6 +11,7 @@ import type { DemoScene, DemoSnapshot } from './scenes/DemoScene';
 import type { DialogScene, DialogSnapshot } from './scenes/DialogScene';
 import type { PuzzleScene } from './scenes/PuzzleScene';
 import type { ResultData, ResultScene } from './scenes/ResultScene';
+import type { TerminalScene, TerminalSnapshot } from './scenes/TerminalScene';
 import type { WorldScene } from './scenes/WorldScene';
 
 export interface PlayerSnapshot {
@@ -45,6 +46,8 @@ export interface DebugApi {
   resetSave(): void;
   /** Acto actual del mundo. */
   world(): { acto: number } | null;
+  /** Estado de la terminal simulada abierta, o `null`. */
+  terminal(): TerminalSnapshot | null;
   /** Marca todos los tickets del acto como completados (y guarda). */
   completeAct(acto: number): void;
   /** Completa los actos anteriores y recarga el mundo en `acto`. */
@@ -52,7 +55,7 @@ export interface DebugApi {
 }
 
 export interface TicketSnapshot {
-  escena: 'Briefing' | 'Puzzle' | 'Result' | 'Rollback';
+  escena: 'Briefing' | 'Puzzle' | 'Terminal' | 'Result' | 'Rollback';
   restanteS: number | null;
   resultado: ResultData | null;
   puzzle: { pistas: number; tablero: unknown } | null;
@@ -94,7 +97,7 @@ export function installDebugApi(game: Phaser.Game): void {
       return game.scene.isActive('World') && world !== null && world.isPromptVisible();
     },
     ticket() {
-      const escena = (['Briefing', 'Puzzle', 'Result', 'Rollback'] as const).find((key) => game.scene.isActive(key));
+      const escena = (['Briefing', 'Puzzle', 'Terminal', 'Result', 'Rollback'] as const).find((key) => game.scene.isActive(key));
       if (!escena) return null;
       const puzzle = escena === 'Puzzle' ? (game.scene.getScene('Puzzle') as PuzzleScene) : null;
       const result = escena === 'Result' ? (game.scene.getScene('Result') as ResultScene) : null;
@@ -126,6 +129,10 @@ export function installDebugApi(game: Phaser.Game): void {
       game.registry.remove(REG.progress);
       game.registry.remove(REG.acto);
     },
+    terminal() {
+      if (!game.scene.isActive('Terminal')) return null;
+      return (game.scene.getScene('Terminal') as TerminalScene).snapshot();
+    },
     world() {
       if (!game.scene.isActive('World')) return null;
       return { acto: (game.scene.getScene('World') as WorldScene).acto };
@@ -140,7 +147,7 @@ export function installDebugApi(game: Phaser.Game): void {
       for (const a of actos.actos) if (a.numero < acto) this.completeAct(a.numero);
       writeSave(getProgress(game.registry), acto);
       game.registry.set(REG.acto, acto);
-      for (const key of ['Dialog', 'Briefing', 'Puzzle', 'Result', 'Rollback']) if (game.scene.isActive(key)) game.scene.stop(key);
+      for (const key of ['Dialog', 'Briefing', 'Puzzle', 'Terminal', 'Result', 'Rollback']) if (game.scene.isActive(key)) game.scene.stop(key);
       game.scene.getScene('World').scene.restart({ acto });
     },
   };

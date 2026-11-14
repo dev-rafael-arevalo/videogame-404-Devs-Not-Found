@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { closeDialog, collectErrors, enterWorld, holdUntil, player, promptVisible, solveFirstCables, walkToFirstTerminal } from './helpers';
 
 interface TicketSnapshot {
-  escena: 'Briefing' | 'Puzzle' | 'Result' | 'Rollback';
+  escena: 'Briefing' | 'Puzzle' | 'Terminal' | 'Result' | 'Rollback';
   restanteS: number | null;
   resultado: { ticketId: string; ganadas: number; uptime: number } | null;
 }

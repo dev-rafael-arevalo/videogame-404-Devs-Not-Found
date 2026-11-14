@@ -25,7 +25,8 @@ Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) 
 [014](specs/014-motor-chiptune/spec.md), música y efectos sintetizados; la [013](specs/013-arte-procedural/spec.md), SaraDev
 completa, kit de UI, fondos synthwave y la demo de arte en `/?demo`; la [007](specs/007-puzzles-acto1-guardado/spec.md),
 los puzzles binario, paquetes y compuertas, el guardado y el cierre del acto; la [008](specs/008-acto2-puzzles-codigo/spec.md),
-Puerto Cero con los puzzles de código. **Actos 1 y 2 completos.** Siguiente: 009 (terminal simulada) y 010 (acto 3). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
+Puerto Cero con los puzzles de código; la [009](specs/009-terminal-simulada/spec.md), la terminal simulada y el núcleo de ARCA.
+**Actos 1 y 2 completos; acto 3 con su primer ticket.** Siguiente: 010 (tickets del deploy) y 011 (menús, intro y final). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
 **Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))
@@ -63,6 +64,8 @@ tests/e2e/       Tests de Playwright (smoke y mundo)
 - **La lógica pura va separada de las escenas de Phaser** (`src/logic/`, `src/terminal/`), para poder testearla con Vitest sin canvas.
 - **Los tests e2e leen `<html data-scene>` y `window.__debug`** (solo en desarrollo, ver `src/debug.ts`); no leen el canvas. Cada escena de pantalla completa llama a `markScene(this)` en `create()`. Helpers comunes en `tests/e2e/helpers.ts`.
 - **Teclas de acción (E, Espacio, Enter) por eventos `keydown-X`, no con `JustDown`:** Phaser anula `JustDown` si la tecla se suelta en el mismo cuadro, y Playwright `press` hace justo eso.
+- **Entrada de texto (terminal):** el plugin de teclado de Phaser puede reprocesar su cola de eventos dentro de un mismo cuadro; `TerminalScene` deduplica cada `KeyboardEvent` con un `WeakSet`. Hacé lo mismo si leés `keydown` genérico en otra escena.
+- **La terminal es simulada:** un comando nuevo es una función pura en `src/terminal/commands/` registrada en `registry.ts`, con test en `registry.test.ts`. Nada de `eval`, red ni DOM.
 - **El contenido va en datos:** actos, tickets, diálogos, textos y partituras viven en JSON dentro de `src/data/`. Un ticket nuevo es un JSON en `src/data/tickets/` más su id en `actos.json`; una pista nueva es un JSON en `src/data/musica/` (notación en `docs/02-musica/musica.md`); `npm test` valida ambos.
 - **Audio solo por `audio` (`src/audio/AudioManager.ts`):** `playMusic(id)` y `playSfx(nombre)`. Nunca Web Audio ni `this.sound` desde las escenas.
 - **Un acto nuevo:** entrada en `src/data/actos.json` (mapa, música, tickets), plano en `scripts/generate-maps.mjs`, tileset en `src/art/tiles/acto<N>.ts` registrado en `tiles/index.ts`, diálogos `acto<N>_inicio` y `acto<N>_fin` en `es.json`.

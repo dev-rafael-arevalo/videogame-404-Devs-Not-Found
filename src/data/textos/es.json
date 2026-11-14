@@ -255,6 +255,36 @@
         "expresion": "determinada",
         "texto": "Entonces vamos al núcleo. Y esta vez, con terminal. (Acto 3, en construcción.)"
       }
+    ],
+    "acto3_inicio": [
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "El núcleo de ARCA. Todo es grilla y luz. Ocho mil millones de personas en estos racks."
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. Acá no hay mouse que valga: los kioscos abren una terminal. ls para mirar, cd para moverte, cat para leer. Escribí help si te perdés."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Primero el log de Marga. Después, puente.py."
+      }
+    ],
+    "pato_acto3": [
+      {
+        "quien": "pato",
+        "texto": "La terminal no muerde. Tab completa nombres y las flechas repiten comandos. Y si algo falla, leé el error: casi siempre te dice qué hacer."
+      }
     ]
+  },
+  "terminal": {
+    "cabecera": "ARCA-NUCLEO tty1",
+    "usuario": "dev@arca",
+    "abandonar": "[Esc] abandonar",
+    "pista": "PATO: PISTA (-10%)",
+    "bienvenida": "SYS://RESTORE - terminal del nucleo. Escribi help para ver los comandos.",
+    "objetivoCumplido": "CRON: objetivo del ticket cumplido."
   }
 }

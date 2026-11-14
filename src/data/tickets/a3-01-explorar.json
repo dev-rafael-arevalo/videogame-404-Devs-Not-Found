@@ -1,0 +1,25 @@
+{
+  "id": "a3-01-explorar",
+  "numero": 31,
+  "acto": 3,
+  "terminal": "terminal_7_5",
+  "titulo": "Encontrar el log de Marga",
+  "descripcion": "La antena dejó un log de Marga en algún lugar del home del núcleo. Entrá a la terminal, movete por los directorios y leé el archivo marga.log.",
+  "tipo": "terminal",
+  "plazoSegundos": 150,
+  "conciencias": 2500,
+  "pistas": ["ls lista lo que hay; cd entra a una carpeta; cat muestra un archivo.", "Está en logs/. Probá: cd logs, y después cat marga.log."],
+  "datos": {
+    "cwdInicial": "/home/dev",
+    "archivos": {
+      "/home/dev/LEEME.txt": "Bienvenida al nucleo de ARCA.\nTodo lo importante esta en puente/ y en logs/.\n- Marga",
+      "/home/dev/logs/cron.log": "[06:00:00] despliegue sin revisar: iniciando ARCA\n[06:00:00.3] 8.000.000.000 conciencias respaldadas\n[06:00:01] rollback: no disponible",
+      "/home/dev/logs/marga.log": "Si estas leyendo esto, el despliegue salio mal.\nHay una app de retorno: puente/puente.py. Nunca la desplegamos.\nNecesita su venv, sus dependencias y config.ini en modo restore.\nVos podes. - Marga",
+      "/home/dev/puente/puente.py": "import arca_bridge\n\nif __name__ == \"__main__\":\n    arca_bridge.restore(all=True)",
+      "/home/dev/puente/requirements.txt": "arca-bridge==1.0\nrich==13.7\n",
+      "/home/dev/puente/config.ini": "[arca]\nMODO=backup\nSECTORES=7\n"
+    },
+    "objetivo": { "leido": "/home/dev/logs/marga.log" },
+    "comandosPermitidos": ["help", "ls", "cd", "pwd", "cat", "clear"]
+  }
+}

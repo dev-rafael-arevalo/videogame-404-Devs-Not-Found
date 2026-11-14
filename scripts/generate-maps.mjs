@@ -100,7 +100,7 @@ const ACTO2 = {
     '#######=#######,,,,,,,,,,,#######=######',
     '#######=#######,EEE,,,,,,,#######=######',
     '#######=#######,EEE,,K,,,,#######=######',
-    '#######=#######,,,,,,,,,,,#######=######',
+    '#######=#######,,,,,,,,,,,#######X######',
     '#,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,#',
     '#.........C..............x.............#',
     '#....x........................H........#',
@@ -125,6 +125,7 @@ const ACTO2 = {
       case 'x': return { ...base, floor: T2.crack };
       case 'g': return { ...base, floor: T2.grass };
       case '=': return { ...base, floor: T2.sidewalk };
+      case 'X': return { ...base, floor: T2.sidewalk, interact: ['salida', 'salida_cerrada'] };
       case 'C': return { ...base, object: T2.car, solid: true };
       case 'M': return { ...base, floor: T2.sidewalk, object: T2.metroBottom, solid: true, aboveUp: T2.metroTop };
       case 'A': return { ...base, floor: T2.sidewalk, object: T2.antennaBottom, solid: true, aboveUp: T2.antennaTop };
@@ -138,6 +139,58 @@ const ACTO2 = {
   wall: T2.wall,
   wallFace: T2.wallFace,
   collision: T2.collision,
+};
+
+// ------------------------------------------------------------------------------------------------
+// Acto 3 · Núcleo de ARCA. Estética digital: plataformas de grilla sobre el vacío, el núcleo al centro.
+
+const T3 = { grid: 1, gridBright: 2, voidTile: 3, pillarBottom: 4, pillarTop: 5, core: 6, kiosk: 7, collision: 16 };
+
+const ACTO3 = {
+  nombre: 'acto3_nucleo',
+  tileset: 'tile_acto3',
+  spawn: [6, 11],
+  plan: [
+    '########################################',
+    '########################################',
+    '###..........###############..........##',
+    '###..P....P..###############..P....P..##',
+    '###..........###############..........##',
+    '###....K.....###############.....K....##',
+    '###..........###############..........##',
+    '###.....#######...........#######.....##',
+    '###.....#######...........#######.....##',
+    '###.....#######....NNN....#######.....##',
+    '###..............NNNNNNN..............##',
+    '###.Q............NNNNNNN..............##',
+    '###..............NNNNNNN..............##',
+    '###.....#######....NNN....#######.....##',
+    '###.....#######...........#######.....##',
+    '###.....#######...........#######.....##',
+    '###..........###############..........##',
+    '###....K.....###############.....K....##',
+    '###..........###############..........##',
+    '###..P....P..###############..P....P..##',
+    '###..........###############..........##',
+    '########################################',
+    '########################################',
+  ],
+  extras: [],
+  legend: (ch, x, y, rnd) => {
+    const base = { floor: rnd() < 0.1 ? T3.gridBright : T3.grid, object: 0, solid: false, above: 0 };
+    switch (ch) {
+      case '#': return { ...base, floor: 0, object: T3.voidTile, solid: true, wall: true };
+      case '.': return base;
+      case 'P': return { ...base, object: T3.pillarBottom, solid: true, aboveUp: T3.pillarTop };
+      case 'N': return { ...base, object: T3.core, solid: true };
+      case 'K': return { ...base, object: T3.kiosk, solid: true, interact: ['terminal', 'terminal_apagada'] };
+      case 'Q': return { ...base, solid: true, interact: ['pato', 'pato_acto3'] };
+      default: return null;
+    }
+  },
+  wall: T3.voidTile,
+  wallFace: T3.voidTile,
+  collision: T3.collision,
 };
 
 // ------------------------------------------------------------------------------------------------
@@ -231,7 +284,7 @@ function buildMap(def) {
 }
 
 mkdirSync(OUT_DIR, { recursive: true });
-for (const def of [ACTO1, ACTO2]) {
+for (const def of [ACTO1, ACTO2, ACTO3]) {
   const out = resolve(OUT_DIR, `${def.nombre}.json`);
   writeFileSync(out, `${JSON.stringify(buildMap(def))}\n`);
   console.log(`Mapa escrito en ${out}`);

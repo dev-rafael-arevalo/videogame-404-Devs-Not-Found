@@ -1,16 +1,155 @@
 {
-  "boot_beep": { "onda": "square", "frecuencia": [880, 880], "duracion": 0.06, "volumen": 0.25 },
-  "click_ui": { "onda": "square", "frecuencia": [1200, 800], "duracion": 0.05, "volumen": 0.25 },
-  "hover_ui": { "onda": "square", "frecuencia": [900, 900], "duracion": 0.02, "volumen": 0.1 },
-  "interactuar": { "onda": "square", "frecuencia": [600, 900], "duracion": 0.08, "volumen": 0.3 },
-  "dialogo_letra": { "onda": "square", "frecuencia": [1500, 1500], "duracion": 0.025, "volumen": 0.12 },
-  "paso": { "onda": "noise", "frecuencia": [500, 200], "duracion": 0.05, "volumen": 0.12 },
-  "ticket_nuevo": { "onda": "square", "frecuencia": [523, 1046], "duracion": 0.15, "volumen": 0.3 },
-  "cable_conectar": { "onda": "square", "frecuencia": [440, 880], "duracion": 0.1, "volumen": 0.3 },
-  "cable_error": { "onda": "sawtooth", "frecuencia": [300, 150], "duracion": 0.18, "volumen": 0.3 },
-  "puzzle_ok": { "onda": "triangle", "frecuencia": [523, 1568], "duracion": 0.4, "volumen": 0.4 },
-  "puzzle_error": { "onda": "square", "frecuencia": [200, 100], "duracion": 0.2, "volumen": 0.3 },
-  "alarma_plazo": { "onda": "square", "frecuencia": [900, 500], "duracion": 0.25, "volumen": 0.35 },
-  "pato_quack": { "onda": "sawtooth", "frecuencia": [700, 350], "duracion": 0.15, "volumen": 0.3 },
-  "recolector_aparece": { "onda": "noise", "frecuencia": [3000, 300], "duracion": 0.5, "volumen": 0.3 }
+  "boot_beep": {
+    "onda": "square",
+    "frecuencia": [
+      880,
+      880
+    ],
+    "duracion": 0.06,
+    "volumen": 0.25
+  },
+  "click_ui": {
+    "onda": "square",
+    "frecuencia": [
+      1200,
+      800
+    ],
+    "duracion": 0.05,
+    "volumen": 0.25
+  },
+  "hover_ui": {
+    "onda": "square",
+    "frecuencia": [
+      900,
+      900
+    ],
+    "duracion": 0.02,
+    "volumen": 0.1
+  },
+  "interactuar": {
+    "onda": "square",
+    "frecuencia": [
+      600,
+      900
+    ],
+    "duracion": 0.08,
+    "volumen": 0.3
+  },
+  "dialogo_letra": {
+    "onda": "square",
+    "frecuencia": [
+      1500,
+      1500
+    ],
+    "duracion": 0.025,
+    "volumen": 0.12
+  },
+  "paso": {
+    "onda": "noise",
+    "frecuencia": [
+      500,
+      200
+    ],
+    "duracion": 0.05,
+    "volumen": 0.12
+  },
+  "ticket_nuevo": {
+    "onda": "square",
+    "frecuencia": [
+      523,
+      1046
+    ],
+    "duracion": 0.15,
+    "volumen": 0.3
+  },
+  "cable_conectar": {
+    "onda": "square",
+    "frecuencia": [
+      440,
+      880
+    ],
+    "duracion": 0.1,
+    "volumen": 0.3
+  },
+  "cable_error": {
+    "onda": "sawtooth",
+    "frecuencia": [
+      300,
+      150
+    ],
+    "duracion": 0.18,
+    "volumen": 0.3
+  },
+  "puzzle_ok": {
+    "onda": "triangle",
+    "frecuencia": [
+      523,
+      1568
+    ],
+    "duracion": 0.4,
+    "volumen": 0.4
+  },
+  "puzzle_error": {
+    "onda": "square",
+    "frecuencia": [
+      200,
+      100
+    ],
+    "duracion": 0.2,
+    "volumen": 0.3
+  },
+  "alarma_plazo": {
+    "onda": "square",
+    "frecuencia": [
+      900,
+      500
+    ],
+    "duracion": 0.25,
+    "volumen": 0.35
+  },
+  "pato_quack": {
+    "onda": "sawtooth",
+    "frecuencia": [
+      700,
+      350
+    ],
+    "duracion": 0.15,
+    "volumen": 0.3
+  },
+  "recolector_aparece": {
+    "onda": "noise",
+    "frecuencia": [
+      3000,
+      300
+    ],
+    "duracion": 0.5,
+    "volumen": 0.3
+  },
+  "tecla": {
+    "onda": "square",
+    "frecuencia": [
+      2200,
+      1800
+    ],
+    "duracion": 0.02,
+    "volumen": 0.1
+  },
+  "comando_ok": {
+    "onda": "square",
+    "frecuencia": [
+      700,
+      1000
+    ],
+    "duracion": 0.06,
+    "volumen": 0.2
+  },
+  "comando_error": {
+    "onda": "sawtooth",
+    "frecuencia": [
+      250,
+      120
+    ],
+    "duracion": 0.14,
+    "volumen": 0.25
+  }
 }

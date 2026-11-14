@@ -65,7 +65,7 @@ describe('registry', () => {
 
   it('CA1: python sin venv ni dependencias falla como en la vida real', () => {
     expect(run(fresh(), 'python --version').output).toEqual(['Python 3.12.1']);
-    expect(run(fresh(), 'cd puente', 'python puente.py').output[0]).toContain("No module named 'arca_bridge'");
+    expect(run(fresh(), 'cd puente', 'python puente.py').output.join('\n')).toContain("No module named 'arca_bridge'");
     expect(run(fresh(), 'python nada.py').output[0]).toContain("can't open file");
   });
 
@@ -73,7 +73,7 @@ describe('registry', () => {
     const r1 = run(fresh(), 'cd puente', 'python -m venv .venv');
     expect(r1.state.venvCreated).toBe(true);
     expect(run(r1.state, 'ls').output[0]).toContain('.venv/');
-    expect(run(r1.state, 'pip install -r requirements.txt').output[0]).toContain('entorno virtual');
+    expect(run(r1.state, 'pip install -r requirements.txt').output.join('\n')).toContain('entorno virtual');
     const r2 = run(r1.state, 'source .venv/bin/activate');
     expect(r2.state.venvActive).toBe(true);
     const r3 = run(r2.state, 'pip install -r requirements.txt');

@@ -21,7 +21,7 @@ import { markScene } from './markScene';
 import type { ResultData } from './ResultScene';
 
 const ALERT_KEY = 'fx_alert';
-const INTRO_DIALOG: Record<number, string> = { 1: 'despertar', 2: 'acto2_inicio' };
+const INTRO_DIALOG: Record<number, string> = { 1: 'despertar', 2: 'acto2_inicio', 3: 'acto3_inicio' };
 
 export interface WorldData {
   acto?: number;
@@ -310,7 +310,7 @@ export class WorldScene extends Phaser.Scene {
       [EV.ticketAbandoned, () => this.closeModal()],
       [EV.resultClosed, () => this.onResultClosed()],
       [EV.rollbackBack, () => this.closeModal()],
-      [EV.briefingAccept, ({ ticketId }: TicketIdPayload) => this.scene.launch('Puzzle', { ticketId })],
+      [EV.briefingAccept, ({ ticketId }: TicketIdPayload) => this.scene.launch(getTicket(ticketId).tipo === 'terminal' ? 'Terminal' : 'Puzzle', { ticketId })],
       [EV.rollbackRetry, ({ ticketId }: TicketIdPayload) => this.scene.launch('Briefing', { ticketId })],
       [EV.ticketDone, (payload: TicketDonePayload) => this.onTicketDone(payload)],
       [EV.ticketFailed, ({ ticketId }: TicketIdPayload) => this.onTicketFailed(ticketId)],

@@ -65,17 +65,17 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 |---|---|---|---|
 | 0 · Fundaciones | AGENTS.md, skills, SDD, plan y cuestionario | `██████████` 100% | ✅ Completa |
 | 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `████████░░` 80% | 📝 Actos 1 y 2 en el juego (7 tickets, hologramas, cierres de acto); falta el acto 3 |
-| 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `██████░░░░` 60% | 🚧 Motor chiptune propio; 7 de 11 pistas y 14 efectos sintetizados |
-| 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `███████░░░` 70% | 🚧 SaraDev completa, PATO, hologramas, tilesets de los actos 1 y 2, kit de UI, synthwave y demo en `/?demo` |
-| 4 · Implementación | Juego en Phaser y deploy en Docker | `████████░░` 80% | 🎯 **Actos 1 y 2 completos**: 7 puzzles, guardado por acto y transición entre mapas (specs 001–008, 013, 014) |
+| 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `████████░░` 80% | 🚧 Motor chiptune propio; 9 de 11 pistas y 17 efectos sintetizados |
+| 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `████████░░` 80% | 🚧 SaraDev completa, PATO, hologramas, tilesets de los 3 actos, kit de UI, CRT, synthwave y demo en `/?demo` |
+| 4 · Implementación | Juego en Phaser y deploy en Docker | `█████████░` 86% | 🚧 **Terminal simulada y núcleo de ARCA**: 8 tipos de puzzle, 3 actos recorribles (specs 001–009, 013, 014) |
 
 **Hito alcanzado (2026-11-12):** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker.
 
 **Hito alcanzado (2026-11-13):** 🎯 **Acto 2 completo**: Puerto Cero con metro, central y antena, y tres puzzles de código.
 
-**Próximo hito:** acto 3 (specs 009 y 010: la terminal simulada y el deploy de `puente.py`).
+**Próximo hito:** acto 3 completo (spec 010: venv, pip y el deploy de `puente.py`) y el final (011).
 
-**Siguiente paso:** spec 009 (terminal simulada: parser, sistema de archivos virtual y comandos).
+**Siguiente paso:** spec 010 (tickets del acto 3: venv, pip, config y `python puente.py --restore all`).
 
 ## Hoja de ruta
 
@@ -92,11 +92,11 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 </details>
 
 <details>
-<summary><b>Juego completo</b> (2/6)</summary>
+<summary><b>Juego completo</b> (3/6)</summary>
 
 - [x] 007 · Puzzles del acto 1 y guardado · 2026-11-12
 - [x] 008 · Acto 2: Puerto Cero y puzzles de código · 2026-11-13
-- [ ] 009 · Terminal simulada
+- [x] 009 · Terminal simulada y núcleo de ARCA · 2026-11-13
 - [ ] 010 · Tickets del acto 3 (venv, pip y `puente.py`)
 - [ ] 011 · Menús, pausa, opciones, final y créditos
 - [ ] 012 · CI y publicación de la imagen
@@ -202,6 +202,12 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-13: Spec 009, la terminal del acto 3
+- Terminal simulada en pantalla CRT verde: `ls`, `cd`, `pwd`, `cat`, `echo`, `clear`, `help`, `python`, `pip` y `source`, con historial (↑/↓), Tab que completa comandos y rutas, y errores que imitan a los reales. Nunca ejecuta nada de verdad
+- `python` y `pip` son guiones: `python -m venv`, `source .venv/bin/activate`, `pip install -r requirements.txt` y `python puente.py` reaccionan al estado (venv, dependencias, config.ini)
+- Núcleo de ARCA: plataformas de grilla sobre el vacío, columnas de datos, el núcleo al centro y cuatro kioscos; la salida de Puerto Cero lleva allí
+- Primer ticket de terminal: encontrar y leer el log de Marga. Pistas M05 (núcleo) y M08 (terminal); efectos de tecla y de comando
 
 ### 2026-11-13: Spec 008, acto 2 en Puerto Cero
 - Al cerrar los tickets de la oficina, la puerta inferior lleva a las calles de Puerto Cero: asfalto agrietado, carteles con estática, autos abandonados, vegetación, la boca del metro, la central y la antena

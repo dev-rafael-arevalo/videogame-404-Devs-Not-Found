@@ -1,6 +1,6 @@
 # Spec 009: Terminal simulada y núcleo de ARCA
 
-- **Estado:** En curso
+- **Estado:** Terminada (2026-11-13)
 - **Etapa:** 4 Implementación
 - **Depende de:** 008
 
@@ -25,9 +25,9 @@ motor, la pantalla, el mapa del núcleo y el primer ticket; la 010 agrega los ti
 Tickets de venv, pip y `puente.py` (010), epílogo (011).
 
 ## Criterios de aceptación
-- [ ] CA1: Vitest: parser con comillas; VFS con rutas relativas, `..` y `~`; cada comando con sus errores; `python puente.py` falla sin venv y sin dependencias; objetivo; historial de 100 y autocompletado de comandos y rutas; el ticket `a3-01` valida y su terminal existe en el mapa del acto 3.
-- [ ] CA2: Playwright: en el acto 3, el kiosco abre la terminal; `ls` lista `puente/` y `logs/`; `cd logs`, Tab completa `marga.log`, `cat marga.log` cierra el ticket; un comando desconocido responde "comando no encontrado"; ↑ recupera el comando anterior.
-- [ ] CA3: Visual: captura de la terminal con salida y del núcleo de ARCA.
+- [x] CA1: Vitest: parser con comillas; VFS con rutas relativas, `..` y `~`; cada comando con sus errores; `python puente.py` falla sin venv y sin dependencias; objetivo; historial de 100 y autocompletado de comandos y rutas; el ticket `a3-01` valida y su terminal existe en el mapa del acto 3.
+- [x] CA2: Playwright: en el acto 3, el kiosco abre la terminal; `ls` lista `puente/` y `logs/`; `cd logs`, Tab completa `marga.log`, `cat marga.log` cierra el ticket; un comando desconocido responde "comando no encontrado"; ↑ recupera el comando anterior.
+- [x] CA3: Visual: captura de la terminal con salida y del núcleo de ARCA.
 
 ## Preguntas abiertas
 - Ninguna.
