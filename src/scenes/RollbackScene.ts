@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
 import { FONT, drawWindow, makeButton } from '../art/ui';
+import { SynthwaveBackground } from '../art/backgrounds';
 import { audio } from '../audio/AudioManager';
 import textos from '../data/textos/es.json';
 import { EV, type TicketIdPayload } from '../game/events';
@@ -13,6 +14,7 @@ const WIN = { x: 48, y: 36, width: 224, height: 108 } as const;
 export class RollbackScene extends Phaser.Scene {
   private ticketId = '';
   private done = false;
+  private background!: SynthwaveBackground;
 
   constructor() {
     super('Rollback');
@@ -24,9 +26,9 @@ export class RollbackScene extends Phaser.Scene {
   }
 
   create(): void {
-    const dim = this.add.graphics();
-    dim.fillStyle(PALETTE.purple, 0.5);
-    dim.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    this.background = new SynthwaveBackground(this, { tono: 'rojo', velocidad: 1.2 });
+    this.background.glitch(this.time.now, 900);
+    this.time.addEvent({ delay: 1500, loop: true, callback: () => this.background.glitch(this.time.now, 250) });
 
     audio.playMusic('jingle_rollback', { next: 'acto1_oficina' });
     // Glitch: el mundo se sacude y esta capa destella en rojo.
@@ -50,6 +52,10 @@ export class RollbackScene extends Phaser.Scene {
     const buttonsY = WIN.y + WIN.height - 14;
     makeButton(this, cx - 48, buttonsY, textos.rollback.reintentar, () => this.finish(EV.rollbackRetry), { key: 'ENTER' });
     makeButton(this, cx + 48, buttonsY, textos.rollback.volver, () => this.finish(EV.rollbackBack), { key: 'ESC' });
+  }
+
+  override update(time: number, delta: number): void {
+    this.background.update(time, delta);
   }
 
   private finish(event: string): void {

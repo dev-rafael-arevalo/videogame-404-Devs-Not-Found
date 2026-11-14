@@ -1,0 +1,15 @@
+{
+  "id": "a1-03-paquetes",
+  "numero": 9,
+  "acto": 1,
+  "terminal": "terminal_15_9",
+  "titulo": "Reordenar la cola del proxy",
+  "descripcion": "El proxy de salida recibió los paquetes fuera de orden y se niega a reenviarlos. Elegí los paquetes de menor a mayor número de secuencia.",
+  "tipo": "paquetes",
+  "plazoSegundos": 80,
+  "conciencias": 1300,
+  "pistas": ["El número de secuencia está impreso en cada paquete.", "Si te equivocás, la cola vuelve a empezar: respirá y arrancá por el #1."],
+  "datos": {
+    "paquetes": [3, 5, 1, 4, 2]
+  }
+}

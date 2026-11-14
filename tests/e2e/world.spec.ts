@@ -7,7 +7,7 @@ test('START lleva al mundo; SaraDev camina, choca con la pared y vuelve a idle',
   await closeDialog(page); // el diálogo inicial (spec 003) bloquea el movimiento
 
   const start = (await player(page))!;
-  expect(start.anim).toBe('saradev-idle-down');
+  expect(start.anim).toBe('saradev-idle-down-normal');
 
   // Camina hacia arriba hasta la pared de la sala fría.
   await page.keyboard.down('ArrowUp');
@@ -27,7 +27,7 @@ test('START lleva al mundo; SaraDev camina, choca con la pared y vuelve a idle',
 
   // CA3: al soltar, queda en idle mirando hacia la última dirección.
   await page.keyboard.up('ArrowUp');
-  await expect.poll(async () => (await player(page))?.anim).toBe('saradev-idle-up');
+  await expect.poll(async () => (await player(page))?.anim).toBe('saradev-idle-up-normal');
   expect((await player(page))!.facing).toBe('up');
 
   expect(errors).toEqual([]);

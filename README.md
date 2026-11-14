@@ -64,16 +64,18 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 | Etapa | Descripción | Progreso | Estado |
 |---|---|---|---|
 | 0 · Fundaciones | AGENTS.md, skills, SDD, plan y cuestionario | `██████████` 100% | ✅ Completa |
-| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `██████░░░░` 55% | 📝 Primeros diálogos de PATO y post-its en el juego; falta el catálogo de tickets |
+| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `███████░░░` 65% | 📝 Acto 1 completo en el juego (4 tickets, diálogos, cierre con CRON); faltan los actos 2 y 3 |
 | 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `█████░░░░░` 50% | 🚧 Motor chiptune propio; 6 de 11 pistas y 14 efectos sintetizados |
-| 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `███░░░░░░░` 25% | 🚧 Tileset del acto 1 y SaraDev mínima generados por código; referencias visuales fijadas |
-| 4 · Implementación | Juego en Phaser y deploy en Docker | `███████░░░` 65% | 🎯 **Slice vertical completo** (specs 001–006 + 014): acto 1 jugable con música y efectos |
+| 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `██████░░░░` 60% | 🚧 SaraDev completa (8 expresiones, 10 animaciones), PATO, retratos, kit de UI 9-slice, fondos synthwave y demo en `/?demo` |
+| 4 · Implementación | Juego en Phaser y deploy en Docker | `███████░░░` 72% | 🎯 **Acto 1 completo**: 4 puzzles, guardado y cierre del acto (specs 001–007, 013, 014) |
 
 **Hito alcanzado (2026-11-12):** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker.
 
-**Próximo hito:** acto 1 completo (specs 007 y 013: resto de puzzles, guardado y arte definitivo de SaraDev).
+**Hito alcanzado (2026-11-12):** 🎯 **Acto 1 completo**: cuatro tickets jugables, guardado y cierre del acto.
 
-**Siguiente paso:** spec 013 (arte procedural completo de SaraDev, PATO y kit de UI) y spec 007 (resto de puzzles del acto 1 y guardado).
+**Próximo hito:** acto 2 (spec 008: ciudad de Puerto Cero y puzzles de código).
+
+**Siguiente paso:** spec 008 (puzzles del acto 2: bloques de código, caza del bug e indentación) con su mapa de la ciudad.
 
 ## Hoja de ruta
 
@@ -90,9 +92,9 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 </details>
 
 <details>
-<summary><b>Juego completo</b> (0/6)</summary>
+<summary><b>Juego completo</b> (1/6)</summary>
 
-- [ ] 007 · Puzzles del acto 1 y guardado
+- [x] 007 · Puzzles del acto 1 y guardado · 2026-11-12
 - [ ] 008 · Puzzles del acto 2
 - [ ] 009 · Terminal simulada
 - [ ] 010 · Tickets del acto 3 (venv, pip y `puente.py`)
@@ -102,9 +104,9 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 </details>
 
 <details>
-<summary><b>Arte y audio generados por código</b> (1/2)</summary>
+<summary><b>Arte y audio generados por código</b> (2/2) ✅</summary>
 
-- [ ] 013 · Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO y kit de UI
+- [x] 013 · Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO y kit de UI · 2026-11-12
 - [x] 014 · Motor chiptune de 4 canales y efectos sintetizados · 2026-11-12 (pistas M01, M03, M06, M07, J01, J02; faltan M02, M04, M05, M08 y M09)
 
 </details>
@@ -200,6 +202,19 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-12: Spec 007, acto 1 completo y guardado
+- Tres puzzles nuevos: binario (interruptores que forman un número), paquetes (ordenar por número de secuencia; un error reinicia la cola) y compuertas (AND, OR, XOR, NAND encadenadas)
+- Cuatro tickets del acto 1 en orden, cada uno en su terminal; al cerrar el último, CRON revela la escala del desastre y PATO adelanta el acto 2
+- La partida se guarda en el navegador tras cada ticket; el Título muestra "Partida guardada" y N empieza de cero
+
+### 2026-11-12: Spec 013, SaraDev con personalidad
+- SaraDev tiene 8 expresiones (normal, cansada, feliz, sorprendida, pánico, enojada, determinada, celebración) y 10 animaciones: idle, walk, run, jump, interact, type (tecleando en su laptop), panic, hurt, attack (golpe de laptop) y victory
+- El mundo las usa: estira el brazo al usar algo, celebra con los brazos arriba al cerrar un ticket y se lastima cuando vence un plazo
+- Los retratos del diálogo cambian de expresión línea a línea; nuevo retrato de CRON
+- Kit de UI: ventanas 9-slice en cuatro estilos, íconos en el HUD y cursor pixel art
+- Título synthwave con estrellas, sol y grilla en movimiento; el rollback usa la misma grilla en rojo con glitch
+- Demo del arte en `/?demo`: recorre animaciones, expresiones, direcciones y escalas con el teclado
 
 ### 2026-11-12: Specs 006 y 014, el juego suena
 - Motor chiptune propio al estilo NES (2 pulsos, triángulo y ruido) sintetizado en el navegador; las partituras son JSON editables en `src/data/musica/`

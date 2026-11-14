@@ -22,8 +22,10 @@ Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) 
 (Phaser 4.2.1 + Vite 8 + TypeScript, Vitest, Playwright y Docker) con las pantallas Boot y Título, y la
 [002-movimiento-personaje](specs/002-movimiento-personaje/spec.md) agregó el mundo del acto 1 con SaraDev; la [003](specs/003-interaccion-dialogos/spec.md), PATO, post-its y diálogos; la
 [004](specs/004-tickets-plazos-hud/spec.md), el bucle de tickets (briefing, plazo, resultado, rollback y HUD); la [005](specs/005-puzzle-cableado/spec.md), el puzzle de cableado; la [006](specs/006-audio/spec.md) y la
-[014](specs/014-motor-chiptune/spec.md), música y efectos sintetizados. **Slice vertical alcanzado.**
-Siguientes: 013 (arte procedural completo) y 007 (resto de puzzles del acto 1 y guardado). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
+[014](specs/014-motor-chiptune/spec.md), música y efectos sintetizados; la [013](specs/013-arte-procedural/spec.md), SaraDev
+completa, kit de UI, fondos synthwave y la demo de arte en `/?demo`; la [007](specs/007-puzzles-acto1-guardado/spec.md),
+los puzzles binario, paquetes y compuertas, el guardado y el cierre del acto. **Acto 1 completo.**
+Siguiente: 008 (acto 2: mapa de la ciudad y puzzles de código). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
 **Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))
@@ -81,6 +83,7 @@ npm test               # Vitest (lógica pura, src/**/*.test.ts)
 npx vitest run src/logic/scale.test.ts -t "1280"   # un solo test
 npm run e2e            # Playwright (smoke; levanta el dev server solo)
 npm run e2e:install    # descarga Chromium para Playwright (una vez)
+# http://localhost:5173/?demo  → demo del arte (animaciones, expresiones, UI)
 node scripts/generate-map-acto1.mjs   # regenera el mapa del acto 1 desde su plano ASCII
 docker compose up --build   # juego en http://localhost:8080
 ```

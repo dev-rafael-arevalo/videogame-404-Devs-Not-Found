@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
-import { FONT, formatNumber } from '../art/ui';
+import { FONT, createUiTextures, formatNumber } from '../art/ui';
 import textos from '../data/textos/es.json';
 import { ticketOrder } from '../data/tickets/index';
 import { getActiveTicket, getProgress } from '../game/session';
@@ -18,6 +18,7 @@ export class HudScene extends Phaser.Scene {
   private uptimeBar!: Phaser.GameObjects.Graphics;
   private concienciasText!: Phaser.GameObjects.Text;
   private ticketText!: Phaser.GameObjects.Text;
+  private ticketIcon!: Phaser.GameObjects.Image;
 
   constructor() {
     super('Hud');
@@ -30,11 +31,15 @@ export class HudScene extends Phaser.Scene {
     bg.fillStyle(PALETTE.ink);
     bg.fillRect(0, HUD_HEIGHT - 1, GAME_WIDTH, 1);
 
+    createUiTextures(this);
     const label = { ...FONT, color: css(PALETTE.silver) };
-    this.uptimeText = this.add.text(4, 4, '', label);
+    this.add.image(4, 4, 'ui_icon_uptime').setOrigin(0, 0);
+    this.uptimeText = this.add.text(14, 4, '', label);
     this.uptimeBar = this.add.graphics();
+    this.add.image(122, 4, 'ui_icon_conciencias').setOrigin(0, 0);
     this.concienciasText = this.add.text(132, 4, '', label);
-    this.ticketText = this.add.text(GAME_WIDTH - 4, 4, '', { ...FONT, color: css(PALETTE.yellow) }).setOrigin(1, 0);
+    this.ticketIcon = this.add.image(GAME_WIDTH - 4, 4, 'ui_icon_ticket').setOrigin(1, 0).setVisible(false);
+    this.ticketText = this.add.text(GAME_WIDTH - 14, 4, '', { ...FONT, color: css(PALETTE.yellow) }).setOrigin(1, 0);
 
     this.registry.events.on(Phaser.Data.Events.CHANGE_DATA, this.refresh, this);
     this.registry.events.on(Phaser.Data.Events.SET_DATA, this.refresh, this);
@@ -48,9 +53,9 @@ export class HudScene extends Phaser.Scene {
   private refresh(): void {
     const progress = getProgress(this.registry);
     const uptime = uptimePercent(progress, ticketOrder(1).length);
-    this.uptimeText.setText(`${textos.hud.uptime} ${uptime}%`);
+    this.uptimeText.setText(`${uptime}%`);
 
-    const barX = 72;
+    const barX = 44;
     const barY = 6;
     this.uptimeBar.clear();
     this.uptimeBar.fillStyle(PALETTE.ink);
@@ -58,9 +63,10 @@ export class HudScene extends Phaser.Scene {
     this.uptimeBar.fillStyle(PALETTE.green);
     this.uptimeBar.fillRect(barX, barY, Math.round((BAR_WIDTH * uptime) / 100), BAR_HEIGHT);
 
-    this.concienciasText.setText(`${textos.hud.conciencias} ${formatNumber(progress.conciencias)}`);
+    this.concienciasText.setText(formatNumber(progress.conciencias));
 
     const active = getActiveTicket(this.registry);
+    this.ticketIcon.setVisible(active !== null);
     this.ticketText.setText(active ? `${formatTicketNumber(active.numero)} ${active.remainingS}s` : textos.hud.sinTicket);
   }
 }

@@ -4,7 +4,7 @@
       "numero": 1,
       "nombre": "Onboarding",
       "mapa": "acto1_oficina",
-      "tickets": ["a1-01-cables", "a1-02-binario"]
+      "tickets": ["a1-01-cables", "a1-02-binario", "a1-03-paquetes", "a1-04-compuertas"]
     }
   ]
 }

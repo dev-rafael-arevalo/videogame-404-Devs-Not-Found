@@ -53,6 +53,12 @@ líneas de 1 px y dithering, sin degradados.
 binario, ventanas de error, alertas de seguridad, virus como enemigos, sistemas caídos y efectos de
 recuperación. El humor tecnológico forma parte de la imagen, no solo del texto.
 
+**Estado (2026-11-12):** hecho en la spec 013. SaraDev vive en `src/art/characters/saradev.ts` como piezas
+(cabezas por vista, caras por expresión, torsos por pose, piernas por fase) que se componen en
+`buildSaraDevFrames()`; las animaciones salen de `saraDevAnimations()`. Para revisarla: `npm run dev` y
+abrir `http://localhost:5173/?demo`. Para cambiar una cara, editá las 4 filas de `FACES`; para una
+pose, un torso de `BODY_DOWN`; `npm test` valida tamaños, paleta y nombres.
+
 **Arquitectura del arte procedural (spec 013, adaptada a `docs/04-arquitectura/arquitectura.md`):**
 `src/art/palette.ts` (colores) · `src/art/pixelSprite.ts` (matriz → textura, sin objetos nuevos por
 cuadro) · `src/art/characters/saradev.ts` (matrices por expresión y animación) ·

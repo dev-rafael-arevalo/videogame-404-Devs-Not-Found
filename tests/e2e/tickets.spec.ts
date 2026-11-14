@@ -43,6 +43,8 @@ test('ticket completo: briefing, plazo, rollback forzado, reintento y resultado 
   await page.evaluate(() => window.__debug!.expireDeadline());
   await expect.poll(() => escena(page)).toBe('Rollback');
   expect((await progress(page)).fallos['a1-01-cables']).toBe(1);
+  // CA3 (013): al vencer, SaraDev se lastima.
+  expect((await player(page))!.anim).toBe('saradev-hurt');
   await page.keyboard.press('Enter');
   await expect.poll(() => escena(page)).toBe('Briefing');
   await page.keyboard.press('Enter');
@@ -51,10 +53,12 @@ test('ticket completo: briefing, plazo, rollback forzado, reintento y resultado 
   // Se resuelve el cableado (spec 005).
   await solveFirstCables(page);
   await expect.poll(() => escena(page)).toBe('Result');
+  // CA3 (013): al cerrar el ticket, SaraDev celebra.
+  expect((await player(page))!.anim).toBe('saradev-victory');
   const result = (await ticket(page))!.resultado!;
   expect(result.ticketId).toBe('a1-01-cables');
   expect(result.ganadas).toBe(900); // 1.200 − 25% por el rollback
-  expect(result.uptime).toBe(50);
+  expect(result.uptime).toBe(25); // 1 de 4 tickets del acto
 
   // CA2: al continuar, el progreso quedó guardado y SaraDev se mueve otra vez.
   await page.keyboard.press('Enter');

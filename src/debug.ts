@@ -1,7 +1,10 @@
 import type Phaser from 'phaser';
 import { audio, type AudioSnapshot } from './audio/AudioManager';
-import { getProgress } from './game/session';
+import { clearSave, loadSave } from './game/save';
+import { REG, getProgress } from './game/session';
+import type { LoadedSave } from './logic/save';
 import type { ProgressState } from './logic/progress';
+import type { DemoScene, DemoSnapshot } from './scenes/DemoScene';
 import type { DialogScene, DialogSnapshot } from './scenes/DialogScene';
 import type { PuzzleScene } from './scenes/PuzzleScene';
 import type { ResultData, ResultScene } from './scenes/ResultScene';
@@ -12,6 +15,8 @@ export interface PlayerSnapshot {
   y: number;
   facing: string;
   anim: string | null;
+  expresion: string;
+  accion: string | null;
 }
 
 export interface DebugApi {
@@ -29,6 +34,12 @@ export interface DebugApi {
   expireDeadline(): void;
   /** Pista actual, estado del contexto y último efecto. */
   audio(): AudioSnapshot;
+  /** Estado de la escena de demo del arte, o `null`. */
+  demo(): DemoSnapshot | null;
+  /** Guardado en localStorage (o `null`). */
+  save(): LoadedSave | null;
+  /** Borra el guardado y el progreso en memoria. */
+  resetSave(): void;
 }
 
 export interface TicketSnapshot {
@@ -61,6 +72,8 @@ export function installDebugApi(game: Phaser.Game): void {
         y: player.y,
         facing: player.facing,
         anim: player.anims.currentAnim?.key ?? null,
+        expresion: player.expression,
+        accion: player.action,
       };
     },
     dialog() {
@@ -91,6 +104,17 @@ export function installDebugApi(game: Phaser.Game): void {
     },
     audio() {
       return audio.snapshot();
+    },
+    demo() {
+      if (!game.scene.isActive('Demo')) return null;
+      return (game.scene.getScene('Demo') as DemoScene).snapshot();
+    },
+    save() {
+      return loadSave();
+    },
+    resetSave() {
+      clearSave();
+      game.registry.remove(REG.progress);
     },
   };
 }

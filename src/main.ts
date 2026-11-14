@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import './style.css';
+import { installCursor } from './art/ui';
 import { audio } from './audio/AudioManager';
 import { gameConfig } from './config';
 import { installDebugApi } from './debug';
@@ -24,6 +25,12 @@ window.addEventListener('resize', () => {
 
 game.events.once(Phaser.Core.Events.READY, () => {
   document.documentElement.dataset.gameReady = 'true';
+  installCursor(game);
+  // `/?demo` abre la escena de demostración del arte (spec 013) en vez del juego.
+  if (new URLSearchParams(window.location.search).has('demo')) {
+    game.scene.stop('Boot');
+    game.scene.start('Demo');
+  }
 });
 
 // Los navegadores bloquean el audio hasta la primera interacción: se desbloquea con ella.

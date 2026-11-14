@@ -53,8 +53,8 @@ Terminado cuando: cada pantalla tiene su pista asignada y cada acción del juego
 > **Decisión 2026-11-12:** el arte se **genera por código** (matrices de píxeles → texturas de Phaser), con SaraDev al estilo chibi de humor tecnológico descrito en [guia-arte.md](03-arte/guia-arte.md) (spec 013).
 
 Entregables (ver [guia-arte.md](03-arte/guia-arte.md)):
-- Paleta, tipografía pixel y kit de UI (ventanas 9-slice, botones, cursor, HUD)
-- Sprites: Dev, PATO, El Recolector, hologramas y gato
+- Paleta ✅, tipografía pixel y kit de UI ✅ (ventanas 9-slice, botones, cursor, íconos del HUD)
+- Sprites: SaraDev ✅ (8 expresiones, 10 animaciones), PATO ✅, El Recolector, hologramas y gato
 - Tilesets de los 3 actos con sombras y texturas (dithering)
 - Piezas de puzzle por tipo y layouts de cada pantalla
 
@@ -74,13 +74,13 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 | 004 | Sistema de tickets, plazos y HUD | ✅ **terminada** 2026-11-12 |
 | 005 | Primer puzzle: cableado | ✅ **terminada** 2026-11-12 |
 | 006 | Audio: música, efectos de sonido y volumen | ✅ **terminada** 2026-11-12 |
-| 007 | Resto de puzzles del acto 1 y guardado (localStorage) | Acto 1 completo |
+| 007 | Resto de puzzles del acto 1 y guardado (localStorage) | ✅ **terminada** 2026-11-12 · acto 1 completo |
 | 008 | Puzzles del acto 2 (bloques de código, caza del bug, indentación) | Acto 2 |
 | 009 | Terminal simulada (parser, FS virtual, comandos) | Acto 3 |
 | 010 | Tickets del acto 3: venv, pip y `python puente.py` | Acto 3 |
 | 011 | Menús, pausa, opciones, final y créditos | Juego completo |
 | 012 | CI en GitHub Actions y publicación de la imagen | Release |
-| 013 | Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO, kit de UI y escena de demo | Slice vertical (tras la 002) |
+| 013 | Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO, kit de UI y escena de demo | ✅ **terminada** 2026-11-12 |
 | 014 | Motor chiptune de 4 canales y SFX sintetizados; pistas M01–M09, J01–J02 | ✅ **terminada** 2026-11-12 (motor + 6 pistas; las 5 restantes van con sus pantallas) |
 
 **Slice vertical (001–006 + 014):** ✅ **alcanzado el 2026-11-12.** Una partida jugable del acto 1 con 1 puzzle, plazo, música y Docker. La 013 (arte definitivo) sigue en el camino al acto 1 completo.

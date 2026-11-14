@@ -1,11 +1,16 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
+import { SynthwaveBackground } from '../art/backgrounds';
 import { audio } from '../audio/AudioManager';
 import textos from '../data/textos/es.json';
+import { clearSave, loadSave } from '../game/save';
+import { REG } from '../game/session';
+import { ticketOrder } from '../data/tickets/index';
+import { uptimePercent } from '../logic/progress';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
 import { markScene } from './markScene';
 
-const RAIN_COLUMNS = 24;
+const RAIN_COLUMNS = 12;
 const RAIN_GLYPHS = '01{}<>;=/#$%&*+-:';
 const BLINK_MS = 500;
 
@@ -17,6 +22,7 @@ interface RainDrop {
 /** P02 · Título: nombre del juego, lluvia de caracteres de fondo y "PRESIONA START". */
 export class TitleScene extends Phaser.Scene {
   private drops: RainDrop[] = [];
+  private background!: SynthwaveBackground;
 
   constructor() {
     super('Title');
@@ -25,6 +31,7 @@ export class TitleScene extends Phaser.Scene {
   create(): void {
     markScene(this);
     audio.playMusic('titulo');
+    this.background = new SynthwaveBackground(this, { tono: 'neon' });
     this.createRain();
 
     const centerX = GAME_WIDTH / 2;
@@ -59,6 +66,21 @@ export class TitleScene extends Phaser.Scene {
 
     this.time.addEvent({ delay: BLINK_MS, loop: true, callback: () => start.setVisible(!start.visible) });
 
+    const savedText = this.add
+      .text(centerX, 140, '', { fontFamily: 'monospace', fontSize: '8px', color: css(PALETTE.cyan) })
+      .setOrigin(0.5);
+    const refreshSaved = (): void => {
+      const saved = loadSave();
+      savedText.setText(saved ? textos.titulo.guardado.replace('{uptime}', String(uptimePercent(saved.progress, ticketOrder(1).length))) : '');
+    };
+    refreshSaved();
+    this.input.keyboard?.on('keydown-N', () => {
+      clearSave();
+      this.registry.remove(REG.progress);
+      audio.playSfx('click_ui');
+      refreshSaved();
+    });
+
     this.add
       .text(GAME_WIDTH - 4, GAME_HEIGHT - 4, textos.titulo.version, {
         fontFamily: 'monospace',
@@ -81,7 +103,8 @@ export class TitleScene extends Phaser.Scene {
     this.input.on('pointerdown', onStart);
   }
 
-  override update(_time: number, delta: number): void {
+  override update(time: number, delta: number): void {
+    this.background.update(time, delta);
     const dy = delta / 1000;
     for (const drop of this.drops) {
       drop.text.y += drop.speed * dy;

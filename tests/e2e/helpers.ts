@@ -1,5 +1,8 @@
 import { expect, type Page } from '@playwright/test';
+import { layoutSwitches } from '../../src/logic/puzzles/binario';
 import { layoutPorts } from '../../src/logic/puzzles/cables';
+import { layoutGates } from '../../src/logic/puzzles/compuertas';
+import { layoutPackets } from '../../src/logic/puzzles/paquetes';
 import { PUZZLE_BOARD_AREA } from '../../src/puzzles/layout';
 
 export interface PlayerSnapshot {
@@ -114,4 +117,47 @@ export async function solveFirstCables(page: Page): Promise<void> {
   await dragGame(page, ports.left[0]!, ports.right[1]!);
   await dragGame(page, ports.left[1]!, ports.right[0]!);
   await dragGame(page, ports.left[2]!, ports.right[2]!);
+}
+
+/** Camina por el pasillo de la fila 6 hasta pararse a la izquierda de la terminal (tx, ty). */
+export async function walkToTerminal(page: Page, tx: number, ty: number): Promise<void> {
+  const targetX = (tx - 1) * 16 + 8;
+  const targetY = ty * 16 + 14;
+  const corridorY = 110;
+  await holdUntil(page, ((await player(page))!.y < corridorY ? 'ArrowDown' : 'ArrowUp'), async () => Math.abs(((await player(page))?.y ?? 0) - corridorY) <= 6, 4000);
+  await nudgeTo(page, 'y', corridorY);
+  const dx = targetX - (await player(page))!.x;
+  if (Math.abs(dx) > 6) {
+    await holdUntil(page, dx > 0 ? 'ArrowRight' : 'ArrowLeft', async () => Math.abs(((await player(page))?.x ?? 0) - targetX) <= 10, 8000);
+  }
+  await nudgeTo(page, 'x', targetX);
+  const dy = targetY - (await player(page))!.y;
+  if (Math.abs(dy) > 6) {
+    await holdUntil(page, dy > 0 ? 'ArrowDown' : 'ArrowUp', async () => Math.abs(((await player(page))?.y ?? 0) - targetY) <= 10, 4000);
+  }
+  await nudgeTo(page, 'y', targetY);
+}
+
+export async function clickGame(page: Page, p: { x: number; y: number }): Promise<void> {
+  const s = await gamePoint(page, p.x, p.y);
+  await page.mouse.click(s.x, s.y);
+  await page.waitForTimeout(60);
+}
+
+/** Ticket a1-02: 42 = 32 + 8 + 2 con 8 interruptores. */
+export async function solveBinario(page: Page): Promise<void> {
+  const points = layoutSwitches(PUZZLE_BOARD_AREA, 8);
+  for (const i of [2, 4, 6]) await clickGame(page, points[i]!);
+}
+
+/** Ticket a1-03: paquetes [3, 5, 1, 4, 2] en orden 1..5. */
+export async function solvePaquetes(page: Page): Promise<void> {
+  const points = layoutPackets(PUZZLE_BOARD_AREA, 5);
+  for (const i of [2, 4, 0, 3, 1]) await clickGame(page, points[i]!);
+}
+
+/** Ticket a1-04: (1 AND 0) OR 1 = 1 → un click en la segunda ranura (AND → OR). */
+export async function solveCompuertas(page: Page): Promise<void> {
+  const layout = layoutGates(PUZZLE_BOARD_AREA, 3);
+  await clickGame(page, layout.slots[1]!);
 }

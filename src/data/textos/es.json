@@ -14,7 +14,8 @@
     "nombre": "404: DEVS NOT FOUND",
     "subtitulo": "Es tu primer dia. No queda nadie mas.",
     "start": "PRESIONA START",
-    "version": "v0.1.0 · slice vertical en construccion"
+    "version": "v0.1.0 · slice vertical en construccion",
+    "guardado": "Partida guardada: {uptime}% · Enter continúa · N nueva partida"
   },
   "ui": {
     "usar": "[E] usar",
@@ -40,7 +41,20 @@
     "placeholder": "Puzzle \"{tipo}\" en construcción.\nPor ahora, este botón lo da por resuelto.",
     "marcarResuelto": "MARCAR RESUELTO",
     "pista": "PATO: PISTA [H] (-10%)",
-    "sinPistas": "PATO: Ya te dije todo lo que sé. ¿Probaste explicármelo en voz alta?"
+    "sinPistas": "PATO: Ya te dije todo lo que sé. ¿Probaste explicármelo en voz alta?",
+    "binario": {
+      "instruccion": "Click en los interruptores hasta formar el número",
+      "valor": "VALOR",
+      "objetivo": "OBJETIVO"
+    },
+    "paquetes": {
+      "instruccion": "Click en los paquetes de menor a mayor número de secuencia",
+      "siguiente": "siguiente"
+    },
+    "compuertas": {
+      "instruccion": "Click en una ranura para cambiar su compuerta",
+      "objetivo": "SALIDA ESPERADA"
+    }
   },
   "resultado": {
     "titulo": "✔ TICKET CERRADO",
@@ -63,31 +77,97 @@
   },
   "dialogos": {
     "despertar": [
-      { "quien": "saradev", "texto": "...¿Hola? ¿Alguien? El rack 7 ya está reiniciado, pueden dejar de ignorarme." },
-      { "quien": "saradev", "texto": "Qué silencio. Ni el aire acondicionado hace ruido... y era lo único que funcionaba acá." },
-      { "quien": "saradev", "texto": "Mejor busco a Marga. Dijo que si pasaba algo raro, le preguntara al pato. Al pato." }
+      {
+        "quien": "saradev",
+        "expresion": "cansada",
+        "texto": "...¿Hola? ¿Alguien? El rack 7 ya está reiniciado, pueden dejar de ignorarme."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "Qué silencio. Ni el aire acondicionado hace ruido... y era lo único que funcionaba acá."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Mejor busco a Marga. Dijo que si pasaba algo raro, le preguntara al pato. Al pato."
+      }
     ],
     "pato_intro": [
-      { "quien": "pato", "texto": "¡Cuac! Bienvenida al primer día del resto de tu vida, SaraDev. Literalmente." },
-      { "quien": "pato", "texto": "Soy PATO, asistente de depuración de Marga. Modelo de goma, firmware 1.0, cero paciencia." },
-      { "quien": "pato", "texto": "Resumen: a las 06:00 un despliegue sin revisar activó ARCA y respaldó a toda la humanidad. Toda. Menos a vos: la jaula de Faraday de esta sala te salvó." },
-      { "quien": "pato", "texto": "La buena noticia: existe un sistema de restauración, SYS://RESTORE. La mala: hay que levantarlo ticket por ticket, y CRON no se destaca por su paciencia." },
-      { "quien": "pato", "texto": "Buscá la terminal con el aviso de CRON parpadeando. Y cuando te trabes, ya sabés: ¿ya probaste explicármelo en voz alta?" }
+      {
+        "quien": "pato",
+        "texto": "¡Cuac! Bienvenida al primer día del resto de tu vida, SaraDev. Literalmente."
+      },
+      {
+        "quien": "pato",
+        "texto": "Soy PATO, asistente de depuración de Marga. Modelo de goma, firmware 1.0, cero paciencia."
+      },
+      {
+        "quien": "pato",
+        "texto": "Resumen: a las 06:00 un despliegue sin revisar activó ARCA y respaldó a toda la humanidad. Toda. Menos a vos: la jaula de Faraday de esta sala te salvó."
+      },
+      {
+        "quien": "pato",
+        "texto": "La buena noticia: existe un sistema de restauración, SYS://RESTORE. La mala: hay que levantarlo ticket por ticket, y CRON no se destaca por su paciencia."
+      },
+      {
+        "quien": "pato",
+        "texto": "Buscá la terminal con el aviso de CRON parpadeando. Y cuando te trabes, ya sabés: ¿ya probaste explicármelo en voz alta?"
+      }
     ],
     "postit_1": [
-      { "quien": "marga", "texto": "\"Si el servidor no responde, primero fijate si está enchufado. En serio. Firmado: yo, tres veces.\"" }
+      {
+        "quien": "marga",
+        "texto": "\"Si el servidor no responde, primero fijate si está enchufado. En serio. Firmado: yo, tres veces.\""
+      }
     ],
     "postit_2": [
-      { "quien": "marga", "texto": "\"Nunca hagas deploy un viernes. Ni un martes a las 06:00. Ni... bueno, ya vas a entender.\"" }
+      {
+        "quien": "marga",
+        "texto": "\"Nunca hagas deploy un viernes. Ni un martes a las 06:00. Ni... bueno, ya vas a entender.\""
+      }
     ],
     "postit_3": [
-      { "quien": "marga", "texto": "\"El pato no es decorativo. Hablale. Y no, no estoy loca.\"" }
+      {
+        "quien": "marga",
+        "texto": "\"El pato no es decorativo. Hablale. Y no, no estoy loca.\""
+      }
     ],
     "terminal_apagada": [
-      { "quien": "saradev", "texto": "Esta terminal está en espera. CRON asignó el ticket a otra: la que tiene el aviso parpadeando." }
+      {
+        "quien": "saradev",
+        "texto": "Esta terminal está en espera. CRON asignó el ticket a otra: la que tiene el aviso parpadeando."
+      }
     ],
     "terminal_sin_tickets": [
-      { "quien": "cron", "texto": "No quedan tickets en este sector. Conciencias en línea: 0,0000001%. Buen trabajo. Es un decir." }
+      {
+        "quien": "cron",
+        "texto": "No quedan tickets en este sector. Conciencias en línea: 0,0000001%. Buen trabajo. Es un decir."
+      }
+    ],
+    "acto1_fin": [
+      {
+        "quien": "cron",
+        "texto": "TICKETS DEL SECTOR OFICINAS: 4/4. Red del edificio restaurada. Conciencias en línea: 0,0000001%."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "¿Cero coma cero cero... cuántos ceros? ¿Eso es todo lo que recuperamos?"
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. Son ocho mil millones de personas, SaraDev. Pero ya se escuchan las primeras voces en los parlantes. Un ticket a la vez."
+      },
+      {
+        "quien": "pato",
+        "texto": "Lo que sigue está afuera: el metro, la central eléctrica y la antena. Puerto Cero te espera. (Acto 2, en construcción.)"
+      },
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Primer día. Primer deploy. Vamos."
+      }
     ]
   }
 }

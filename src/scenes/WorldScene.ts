@@ -1,7 +1,5 @@
 import Phaser from 'phaser';
-import { registerSaraDevAnimations } from '../art/animations';
 import { PATO_IDLE_ANIM, PATO_KEY, createPatoSheet } from '../art/characters/pato';
-import { createSaraDevSheet } from '../art/characters/saradev';
 import { audio } from '../audio/AudioManager';
 import { PALETTE, css } from '../art/palette';
 import { createPixelTexture } from '../art/pixelTexture';
@@ -11,7 +9,8 @@ import textos from '../data/textos/es.json';
 import { getTicket, ticketOrder } from '../data/tickets/index';
 import { DEPTH, Player } from '../entities/Player';
 import { EV, type TicketDonePayload, type TicketIdPayload } from '../game/events';
-import { getProgress, setProgress } from '../game/session';
+import { loadSave, writeSave } from '../game/save';
+import { REG, getProgress, setProgress } from '../game/session';
 import { INTERACT_RANGE, pickInteractable } from '../logic/interaction';
 import { completeTicket, failTicket, uptimePercent } from '../logic/progress';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
@@ -55,6 +54,7 @@ export class WorldScene extends Phaser.Scene {
   /** Diálogo o ventana de ticket abierta: el mundo no se mueve. */
   private modalOpen = false;
   private static introShown = false;
+  private static finaleShown = false;
 
   constructor() {
     super('World');
@@ -62,9 +62,12 @@ export class WorldScene extends Phaser.Scene {
 
   create(): void {
     markScene(this);
+    if (!this.registry.has(REG.progress)) {
+      const saved = loadSave();
+      if (saved) setProgress(this.registry, saved.progress);
+    }
     createActo1Tileset(this);
-    createSaraDevSheet(this);
-    registerSaraDevAnimations(this.anims);
+    Player.prepare(this);
     createPatoSheet(this);
     createProps(this);
     createPixelTexture(this, ALERT_KEY, ['.ooo.', 'oyyyo', 'oyyyo', 'oyyyo', '.oyo.', '.ooo.', '.oyo.', '.ooo.'], {
@@ -212,6 +215,7 @@ export class WorldScene extends Phaser.Scene {
     const target = this.currentTarget();
     if (!target) return;
 
+    this.player.playAction('interact');
     if (target.tipo !== 'terminal') {
       audio.playSfx(target.tipo === 'pato' ? 'pato_quack' : 'interactuar');
       this.openDialog(target.dialogo);
@@ -250,7 +254,7 @@ export class WorldScene extends Phaser.Scene {
       [EV.dialogClosed, () => this.closeModal()],
       [EV.briefingBack, () => this.closeModal()],
       [EV.ticketAbandoned, () => this.closeModal()],
-      [EV.resultClosed, () => this.closeModal()],
+      [EV.resultClosed, () => this.onResultClosed()],
       [EV.rollbackBack, () => this.closeModal()],
       [EV.briefingAccept, ({ ticketId }: TicketIdPayload) => this.scene.launch('Puzzle', { ticketId })],
       [EV.rollbackRetry, ({ ticketId }: TicketIdPayload) => this.scene.launch('Briefing', { ticketId })],
@@ -267,13 +271,30 @@ export class WorldScene extends Phaser.Scene {
     const ticket = getTicket(ticketId);
     const { state, ganadas } = completeTicket(getProgress(this.registry), ticketId, ticket.conciencias, pistas);
     setProgress(this.registry, state);
+    writeSave(state, ACTO);
     this.placeAlert();
+    this.player.setExpression('celebracion');
+    this.player.playAction('victory');
+    this.time.delayedCall(4000, () => this.player.setExpression('normal'));
     const result: ResultData = { ticketId, elapsedMs, ganadas, uptime: uptimePercent(state, ticketOrder(ACTO).length) };
     this.scene.launch('Result', result);
   }
 
+  private onResultClosed(): void {
+    this.closeModal();
+    if (this.pendingTicketId() === null && !WorldScene.finaleShown) {
+      WorldScene.finaleShown = true;
+      this.time.delayedCall(150, () => this.openDialog('acto1_fin'));
+    }
+  }
+
   private onTicketFailed(ticketId: string): void {
-    setProgress(this.registry, failTicket(getProgress(this.registry), ticketId));
+    const failed = failTicket(getProgress(this.registry), ticketId);
+    setProgress(this.registry, failed);
+    writeSave(failed, ACTO);
+    this.player.setExpression('panico');
+    this.player.playAction('hurt');
+    this.time.delayedCall(4000, () => this.player.setExpression('cansada'));
     this.scene.launch('Rollback', { ticketId } satisfies TicketIdPayload);
   }
 }

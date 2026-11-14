@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { PALETTE, css } from '../art/palette';
 import { audio } from '../audio/AudioManager';
-import { PORTRAITS_KEY, PORTRAIT_SIZE, createPortraits, type PortraitName } from '../art/portraits';
+import { PORTRAITS_KEY, PORTRAIT_SIZE, createPortraits, portraitFor } from '../art/portraits';
 import textos from '../data/textos/es.json';
 import { INITIAL_CURSOR, confirm, paginate, visibleChars, wrapText, type DialogCursor } from '../logic/dialog';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
@@ -23,6 +23,8 @@ type SpeakerId = keyof typeof textos.nombres;
 interface DialogLine {
   quien: string;
   texto: string;
+  /** Expresión del retrato de SaraDev (spec 013). */
+  expresion?: string;
 }
 
 export interface DialogSnapshot {
@@ -74,7 +76,7 @@ export class DialogScene extends Phaser.Scene {
     box.fillStyle(PALETTE.ink);
     box.fillRect(PADDING - 1, BOX_Y + PADDING - 1, PORTRAIT_SIZE + 2, PORTRAIT_SIZE + 2);
 
-    this.portrait = this.add.image(PADDING, BOX_Y + PADDING, PORTRAITS_KEY, 'saradev').setOrigin(0, 0);
+    this.portrait = this.add.image(PADDING, BOX_Y + PADDING, PORTRAITS_KEY, 'saradev-normal').setOrigin(0, 0);
     this.nameText = this.add.text(TEXT_X, BOX_Y + 5, '', {
       fontFamily: 'monospace',
       fontSize: '8px',
@@ -162,8 +164,7 @@ export class DialogScene extends Phaser.Scene {
     const line = this.lines[this.cursor.line];
     const speaker = (line?.quien ?? 'cron') as SpeakerId;
     this.nameText.setText(textos.nombres[speaker] ?? speaker);
-    const portrait: PortraitName = speaker === 'pato' ? 'pato' : speaker === 'marga' ? 'marga' : 'saradev';
-    this.portrait.setFrame(portrait);
+    this.portrait.setFrame(portraitFor(speaker, line?.expresion));
     this.bodyText.setText('');
     this.moreIndicator.setVisible(false);
   }
