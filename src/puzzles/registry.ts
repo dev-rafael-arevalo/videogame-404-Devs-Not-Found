@@ -1,4 +1,7 @@
 import { BinarioPuzzle } from './BinarioPuzzle';
+import { BloquesPuzzle } from './BloquesPuzzle';
+import { BugPuzzle } from './BugPuzzle';
+import { IndentacionPuzzle } from './IndentacionPuzzle';
 import { CablesPuzzle } from './CablesPuzzle';
 import { CompuertasPuzzle } from './CompuertasPuzzle';
 import { PaquetesPuzzle } from './PaquetesPuzzle';
@@ -11,6 +14,9 @@ const PUZZLES: Record<string, PuzzleFactory> = {
   binario: () => new BinarioPuzzle(),
   paquetes: () => new PaquetesPuzzle(),
   compuertas: () => new CompuertasPuzzle(),
+  bloques: () => new BloquesPuzzle(),
+  bug: () => new BugPuzzle(),
+  indentacion: () => new IndentacionPuzzle(),
 };
 
 export function registerPuzzle(tipo: string, factory: PuzzleFactory): void {

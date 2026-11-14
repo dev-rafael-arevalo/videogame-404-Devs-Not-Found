@@ -6,8 +6,8 @@
 ## Resumen: lo que bloquea al proyecto hoy
 
 1. ✅ Cuestionario respondido (2026-11-12). Quedan abiertas la 7 (personajes secundarios), la 13 (comandos) y la 22 (equipo).
-2. ✅ **Acto 1 completo** (specs 001–007, 013 y 014). ⛔ **Siguiente:** spec 008 (acto 2: mapa de la ciudad y puzzles de código).
-3. ✅ Catálogo del acto 1 (4 tickets en `src/data/tickets/`). Faltan los catálogos de los actos 2 y 3.
+2. ✅ **Actos 1 y 2 completos** (specs 001–008, 013 y 014). ⛔ **Siguiente:** spec 009 (terminal simulada) y 010 (tickets del acto 3).
+3. ✅ Catálogos de los actos 1 y 2 (7 tickets en `src/data/tickets/`). Falta el del acto 3.
 4. ✅ Paleta confirmada (Sweetie 16 + verde terminal, en `src/art/palette.ts`). Falta la fuente pixel (se genera por código en la 013).
 
 ---
@@ -69,7 +69,8 @@
 | `014-motor-chiptune/` | Motor NES de 4 canales, notación, partituras y SFX | Desarrollo y Música | ✅ | Terminada 2026-11-12; faltan M02, M04, M05, M08, M09 |
 | `013-arte-procedural/` | SaraDev completa, retratos, kit de UI, fondos synthwave y demo | Desarrollo y Arte | ✅ | Terminada 2026-11-12 |
 | `007-puzzles-acto1-guardado/` | Binario, paquetes, compuertas, guardado y cierre del acto | Desarrollo | ✅ | Terminada 2026-11-12 |
-| `008` … `012` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
+| `008-acto2-puzzles-codigo/` | Mapa de Puerto Cero, salida al acto 2, hologramas y puzzles de código | Desarrollo | ✅ | Terminada 2026-11-13 |
+| `009` … `012` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
 
 ## `assets-src/`: fuentes editables (no las carga el juego)
 
@@ -78,7 +79,7 @@
 | `arte/briefs/*.md` | Un brief por asset: tamaño, animaciones, colores y referencias (skill `/pixel-art`) | Arte (o el agente) | ⬜ | Ya no hacen falta para SaraDev, PATO ni la UI (arte por código); quedan El Recolector, hologramas, gato y tilesets 2–3 |
 | `arte/*.aseprite` | Archivos fuente de sprites, tiles y UI | Arte | ⬜ | Todo |
 | `arte/CREDITOS.md` | Autor y licencia de cada asset de terceros | Arte | ✅ | Completarlo cuando se use algo de terceros |
-| `mapas/*.tmx` | Mapas de Tiled por acto (capas `suelo`, `objetos`, `colision` y `encima`) | Arte y Narrativa | 📝 | El acto 1 se genera con `scripts/generate-map-acto1.mjs` (plano ASCII → Tiled JSON); los actos 2 y 3 faltan |
+| `mapas/*.tmx` | Mapas de Tiled por acto (capas `suelo`, `objetos`, `colision` y `encima`) | Arte y Narrativa | 📝 | Los actos 1 y 2 se generan con `scripts/generate-maps.mjs` (plano ASCII → Tiled JSON); falta el acto 3 |
 | `musica/briefs/*.md` | Un brief por pista (skill `/musica-8bit`) | Música (o el agente) | ⬜ | Ya no hacen falta: las pistas se escriben directo como JSON en `src/data/musica/` |
 | `musica/*.fms` | Proyectos de FamiStudio | Música | ⬜ | Opcional: las pistas viven como JSON en `src/data/musica/` |
 | `musica/sfx/*.json` | Parámetros de jsfxr de cada efecto de sonido | Música | ⬜ | Reemplazado por `src/data/musica/sfx.json` |
@@ -91,13 +92,13 @@
 | `src/scenes/` | Una escena de Phaser por pantalla (✅ Boot, Title, World, Hud, Briefing, Puzzle, Result, Rollback, Dialog, Demo) | Desarrollo | 001 → 011 |
 | `src/game/` | Estado en el registry (`session.ts`), eventos (`events.ts`) y guardado en localStorage (`save.ts`) | Desarrollo | 004+ |
 | `src/entities/` | Entidades del mundo (✅ `Player`) | Desarrollo | 002+ |
-| `scripts/` | Generadores (✅ mapa del acto 1) | Desarrollo | 002+ |
-| `src/logic/` | Lógica pura con tests (✅ `scale`, `movement`, `dialog`, `interaction`, `deadline`, `progress`, `tickets`, `save`, `puzzles/{cables,binario,paquetes,compuertas}`) | Desarrollo | 001 → 007 |
+| `scripts/` | Generadores (✅ `generate-maps.mjs`: mapas de los actos 1 y 2) | Desarrollo | 002+ |
+| `src/logic/` | Lógica pura con tests (✅ `scale`, `movement`, `dialog`, `interaction`, `deadline`, `progress`, `tickets`, `save`, `puzzles/{cables,binario,paquetes,compuertas,bloques,bug,indentacion}`) | Desarrollo | 001 → 008 |
 | `src/art/` | Paleta, `pixelTexture`, tileset del acto 1, SaraDev completa, PATO, props, retratos, kit de UI y fondos (✅); El Recolector, hologramas y tilesets 2–3 faltan | Desarrollo y Arte | 001–003, 013 |
 | `src/audio/` | `AudioManager`, notación, canciones, sintetizador y SFX (✅) | Desarrollo y Música | 006, 014 |
-| `src/puzzles/` | La vista de cada tipo de puzzle (✅ `Cables`, `Binario`, `Paquetes`, `Compuertas`; faltan `bloques`, `bug`, `indentacion`) | Desarrollo | 004, 005, 007, 008 |
+| `src/puzzles/` | La vista de cada tipo de puzzle (✅ los 7 tipos de mouse; falta `terminal`) | Desarrollo | 004, 005, 007, 008 |
 | `src/terminal/` | Parser, sistema de archivos virtual y comandos simulados | Desarrollo | 009 |
-| `src/data/tickets/*.json` | Un JSON por ticket (✅ los 4 del acto 1; validados por `tickets.test.ts`) y `actos.json` con el orden | Narrativa (con `/nueva-actividad`) | 004+ |
+| `src/data/tickets/*.json` | Un JSON por ticket (✅ los 4 del acto 1 y los 3 del acto 2; validados por `tickets.test.ts`) y `actos.json` con mapa, música y orden por acto | Narrativa (con `/nueva-actividad`) | 004+ |
 | `src/data/textos/es.json` | Todos los textos visibles del juego (✅ boot, título, UI y diálogos del acto 1) | Narrativa | 001+ |
 | `public/assets/sprites/` · `maps/` · `audio/` · `fonts/` | Exportaciones finales | Arte y Música | 001+ |
-| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio`, `demo`, `puzzles`, `save` y `helpers.ts`) | Desarrollo | 001+ |
+| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio`, `demo`, `puzzles`, `save`, `acto2` y `helpers.ts`) | Desarrollo | 001+ |

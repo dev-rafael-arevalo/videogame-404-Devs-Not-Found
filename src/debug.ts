@@ -1,7 +1,10 @@
 import type Phaser from 'phaser';
 import { audio, type AudioSnapshot } from './audio/AudioManager';
-import { clearSave, loadSave } from './game/save';
-import { REG, getProgress } from './game/session';
+import actos from './data/actos.json';
+import { getTicket, ticketOrder } from './data/tickets/index';
+import { clearSave, loadSave, writeSave } from './game/save';
+import { REG, getProgress, setProgress } from './game/session';
+import { completeTicket } from './logic/progress';
 import type { LoadedSave } from './logic/save';
 import type { ProgressState } from './logic/progress';
 import type { DemoScene, DemoSnapshot } from './scenes/DemoScene';
@@ -40,6 +43,12 @@ export interface DebugApi {
   save(): LoadedSave | null;
   /** Borra el guardado y el progreso en memoria. */
   resetSave(): void;
+  /** Acto actual del mundo. */
+  world(): { acto: number } | null;
+  /** Marca todos los tickets del acto como completados (y guarda). */
+  completeAct(acto: number): void;
+  /** Completa los actos anteriores y recarga el mundo en `acto`. */
+  jumpToAct(acto: number): void;
 }
 
 export interface TicketSnapshot {
@@ -115,6 +124,24 @@ export function installDebugApi(game: Phaser.Game): void {
     resetSave() {
       clearSave();
       game.registry.remove(REG.progress);
+      game.registry.remove(REG.acto);
+    },
+    world() {
+      if (!game.scene.isActive('World')) return null;
+      return { acto: (game.scene.getScene('World') as WorldScene).acto };
+    },
+    completeAct(acto) {
+      let state = getProgress(game.registry);
+      for (const id of ticketOrder(acto)) state = completeTicket(state, id, getTicket(id).conciencias).state;
+      setProgress(game.registry, state);
+      writeSave(state, (game.registry.get(REG.acto) as number | undefined) ?? acto);
+    },
+    jumpToAct(acto) {
+      for (const a of actos.actos) if (a.numero < acto) this.completeAct(a.numero);
+      writeSave(getProgress(game.registry), acto);
+      game.registry.set(REG.acto, acto);
+      for (const key of ['Dialog', 'Briefing', 'Puzzle', 'Result', 'Rollback']) if (game.scene.isActive(key)) game.scene.stop(key);
+      game.scene.getScene('World').scene.restart({ acto });
     },
   };
 }

@@ -1,10 +1,12 @@
 import Phaser from 'phaser';
 import { PATO_IDLE_ANIM, PATO_KEY, createPatoSheet } from '../art/characters/pato';
-import { audio } from '../audio/AudioManager';
 import { PALETTE, css } from '../art/palette';
 import { createPixelTexture } from '../art/pixelTexture';
-import { POSTIT_KEY, createProps } from '../art/props';
-import { ACTO1_TILESET_KEY, TILE_SIZE, createActo1Tileset } from '../art/tiles/acto1';
+import { HOLOGRAM_KEY, POSTIT_KEY, createProps } from '../art/props';
+import { TILE_SIZE } from '../art/tiles/acto1';
+import { createTileset } from '../art/tiles/index';
+import { audio } from '../audio/AudioManager';
+import actos from '../data/actos.json';
 import textos from '../data/textos/es.json';
 import { getTicket, ticketOrder } from '../data/tickets/index';
 import { DEPTH, Player } from '../entities/Player';
@@ -12,16 +14,22 @@ import { EV, type TicketDonePayload, type TicketIdPayload } from '../game/events
 import { loadSave, writeSave } from '../game/save';
 import { REG, getProgress, setProgress } from '../game/session';
 import { INTERACT_RANGE, pickInteractable } from '../logic/interaction';
-import { completeTicket, failTicket, uptimePercent } from '../logic/progress';
+import { actUptime, completeTicket, failTicket } from '../logic/progress';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
 import { nextTicket } from '../logic/tickets';
 import { markScene } from './markScene';
 import type { ResultData } from './ResultScene';
 
-export const MAP_ACTO1_KEY = 'map_acto1';
-const ACTO = 1;
-const INTRO_DIALOG = 'despertar';
 const ALERT_KEY = 'fx_alert';
+const INTRO_DIALOG: Record<number, string> = { 1: 'despertar', 2: 'acto2_inicio' };
+
+export interface WorldData {
+  acto?: number;
+}
+
+export function mapKeyFor(mapa: string): string {
+  return `map_${mapa}`;
+}
 
 type MoveKeys = Record<'up' | 'down' | 'left' | 'right' | 'w' | 's' | 'a' | 'd', Phaser.Input.Keyboard.Key>;
 
@@ -44,29 +52,42 @@ function readProperties(raw: unknown): Record<string, string> {
   return {};
 }
 
-/** P06 · Mundo: mapa del acto 1, SaraDev, interactuables, diálogos y el flujo de tickets (specs 002–004). */
+/** P06 · Mundo: mapa del acto, SaraDev, interactuables, diálogos y el flujo de tickets (specs 002–008). */
 export class WorldScene extends Phaser.Scene {
   player!: Player;
+  acto = 1;
   private keys!: MoveKeys;
   private interactables: Interactable[] = [];
   private prompt!: Phaser.GameObjects.Text;
   private alert!: Phaser.GameObjects.Image;
   /** Diálogo o ventana de ticket abierta: el mundo no se mueve. */
   private modalOpen = false;
-  private static introShown = false;
-  private static finaleShown = false;
+  private static introShown = new Set<number>();
+  private static finaleShown = new Set<number>();
 
   constructor() {
     super('World');
   }
 
-  create(): void {
-    markScene(this);
+  init(data: WorldData): void {
     if (!this.registry.has(REG.progress)) {
       const saved = loadSave();
-      if (saved) setProgress(this.registry, saved.progress);
+      if (saved) {
+        setProgress(this.registry, saved.progress);
+        this.registry.set(REG.acto, saved.acto);
+      }
     }
-    createActo1Tileset(this);
+    this.acto = data.acto ?? (this.registry.get(REG.acto) as number | undefined) ?? 1;
+    this.registry.set(REG.acto, this.acto);
+    this.modalOpen = false;
+  }
+
+  create(): void {
+    markScene(this);
+    const actoDef = actos.actos.find((a) => a.numero === this.acto);
+    if (!actoDef) throw new Error(`No existe el acto ${this.acto}`);
+
+    const tilesetKey = createTileset(this, this.acto);
     Player.prepare(this);
     createPatoSheet(this);
     createProps(this);
@@ -75,9 +96,9 @@ export class WorldScene extends Phaser.Scene {
       y: PALETTE.yellow,
     });
 
-    const map = this.make.tilemap({ key: MAP_ACTO1_KEY });
-    const tiles = map.addTilesetImage(ACTO1_TILESET_KEY, ACTO1_TILESET_KEY, TILE_SIZE, TILE_SIZE, 0, 0);
-    if (!tiles) throw new Error('No se pudo cargar el tileset del acto 1');
+    const map = this.make.tilemap({ key: mapKeyFor(actoDef.mapa) });
+    const tiles = map.addTilesetImage(tilesetKey, tilesetKey, TILE_SIZE, TILE_SIZE, 0, 0);
+    if (!tiles) throw new Error(`No se pudo cargar el tileset del acto ${this.acto}`);
 
     map.createLayer('suelo', tiles)?.setDepth(DEPTH.floor);
     map.createLayer('objetos', tiles)?.setDepth(DEPTH.objects);
@@ -98,6 +119,7 @@ export class WorldScene extends Phaser.Scene {
     camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     camera.startFollow(this.player, true);
     camera.setDeadzone(48, 32);
+    camera.fadeIn(300, 0x1a, 0x1c, 0x2c);
 
     this.prompt = this.add
       .text(GAME_WIDTH - 4, GAME_HEIGHT - 4, textos.ui.usar, {
@@ -140,11 +162,12 @@ export class WorldScene extends Phaser.Scene {
     if (!this.scene.isActive('Hud')) {
       this.scene.launch('Hud');
     }
-    audio.playMusic('acto1_oficina');
+    audio.playMusic(actoDef.musica);
 
-    if (!WorldScene.introShown) {
-      WorldScene.introShown = true;
-      this.openDialog(INTRO_DIALOG);
+    const intro = INTRO_DIALOG[this.acto];
+    if (intro && !WorldScene.introShown.has(this.acto)) {
+      WorldScene.introShown.add(this.acto);
+      this.openDialog(intro);
     }
   }
 
@@ -188,6 +211,9 @@ export class WorldScene extends Phaser.Scene {
         this.add.sprite(item.x, item.y, PATO_KEY, 'idle-0').setDepth(DEPTH.objects + 1).play(PATO_IDLE_ANIM);
       } else if (item.tipo === 'postit') {
         this.add.image(item.x, item.y, POSTIT_KEY).setDepth(DEPTH.objects + 1);
+      } else if (item.tipo === 'holograma') {
+        const hologram = this.add.image(item.x, item.y + 8, HOLOGRAM_KEY).setOrigin(0.5, 1).setDepth(DEPTH.player - 1).setAlpha(0.8);
+        this.tweens.add({ targets: hologram, alpha: 0.35, duration: 700, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
       }
     }
   }
@@ -197,7 +223,7 @@ export class WorldScene extends Phaser.Scene {
   }
 
   private pendingTicketId(): string | null {
-    return nextTicket(ticketOrder(ACTO), getProgress(this.registry).completados);
+    return nextTicket(ticketOrder(this.acto), getProgress(this.registry).completados);
   }
 
   private placeAlert(): void {
@@ -216,13 +242,27 @@ export class WorldScene extends Phaser.Scene {
     if (!target) return;
 
     this.player.playAction('interact');
-    if (target.tipo !== 'terminal') {
-      audio.playSfx(target.tipo === 'pato' ? 'pato_quack' : 'interactuar');
-      this.openDialog(target.dialogo);
-      return;
+    switch (target.tipo) {
+      case 'terminal':
+        audio.playSfx('interactuar');
+        this.useTerminal(target);
+        break;
+      case 'salida':
+        audio.playSfx('interactuar');
+        if (this.pendingTicketId() === null) this.goToNextAct();
+        else this.openDialog(target.dialogo);
+        break;
+      case 'pato':
+        audio.playSfx('pato_quack');
+        this.openDialog(target.dialogo);
+        break;
+      default:
+        audio.playSfx('interactuar');
+        this.openDialog(target.dialogo);
     }
-    audio.playSfx('interactuar');
+  }
 
+  private useTerminal(target: Interactable): void {
     const pending = this.pendingTicketId();
     if (pending === null) {
       this.openDialog('terminal_sin_tickets');
@@ -231,6 +271,20 @@ export class WorldScene extends Phaser.Scene {
     } else {
       this.openDialog('terminal_apagada');
     }
+  }
+
+  /** Fundido y recarga del mundo en el acto siguiente (spec 008). */
+  private goToNextAct(): void {
+    if (this.modalOpen) return;
+    const next = this.acto + 1;
+    if (!actos.actos.some((a) => a.numero === next)) {
+      this.openDialog('salida_fin');
+      return;
+    }
+    this.modalOpen = true;
+    writeSave(getProgress(this.registry), next);
+    this.cameras.main.fadeOut(400, 0x1a, 0x1c, 0x2c);
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => this.scene.restart({ acto: next } satisfies WorldData));
   }
 
   private openDialog(dialogo: string): void {
@@ -271,27 +325,28 @@ export class WorldScene extends Phaser.Scene {
     const ticket = getTicket(ticketId);
     const { state, ganadas } = completeTicket(getProgress(this.registry), ticketId, ticket.conciencias, pistas);
     setProgress(this.registry, state);
-    writeSave(state, ACTO);
+    writeSave(state, this.acto);
     this.placeAlert();
     this.player.setExpression('celebracion');
     this.player.playAction('victory');
     this.time.delayedCall(4000, () => this.player.setExpression('normal'));
-    const result: ResultData = { ticketId, elapsedMs, ganadas, uptime: uptimePercent(state, ticketOrder(ACTO).length) };
+    const result: ResultData = { ticketId, elapsedMs, ganadas, uptime: actUptime(state, ticketOrder(this.acto)) };
     this.scene.launch('Result', result);
   }
 
   private onResultClosed(): void {
     this.closeModal();
-    if (this.pendingTicketId() === null && !WorldScene.finaleShown) {
-      WorldScene.finaleShown = true;
-      this.time.delayedCall(150, () => this.openDialog('acto1_fin'));
+    const finale = `acto${this.acto}_fin`;
+    if (this.pendingTicketId() === null && !WorldScene.finaleShown.has(this.acto) && finale in textos.dialogos) {
+      WorldScene.finaleShown.add(this.acto);
+      this.time.delayedCall(150, () => this.openDialog(finale));
     }
   }
 
   private onTicketFailed(ticketId: string): void {
     const failed = failTicket(getProgress(this.registry), ticketId);
     setProgress(this.registry, failed);
-    writeSave(failed, ACTO);
+    writeSave(failed, this.acto);
     this.player.setExpression('panico');
     this.player.playAction('hurt');
     this.time.delayedCall(4000, () => this.player.setExpression('cansada'));

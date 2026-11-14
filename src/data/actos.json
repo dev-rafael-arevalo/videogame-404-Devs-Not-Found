@@ -4,7 +4,15 @@
       "numero": 1,
       "nombre": "Onboarding",
       "mapa": "acto1_oficina",
+      "musica": "acto1_oficina",
       "tickets": ["a1-01-cables", "a1-02-binario", "a1-03-paquetes", "a1-04-compuertas"]
+    },
+    {
+      "numero": 2,
+      "nombre": "Producción",
+      "mapa": "acto2_ciudad",
+      "musica": "acto2_ciudad",
+      "tickets": ["a2-01-bloques", "a2-02-bug", "a2-03-indentacion"]
     }
   ]
 }

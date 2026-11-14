@@ -9,6 +9,7 @@ export const REG = {
   progress: 'progress',
   activeTicket: 'activeTicket',
   sinPresion: 'sinPresion',
+  acto: 'acto',
 } as const;
 
 export interface ActiveTicketInfo {

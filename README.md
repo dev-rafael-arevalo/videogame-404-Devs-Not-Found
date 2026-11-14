@@ -13,7 +13,7 @@ Videojuego 2D retro de puzzles y exploración con temática de programación · 
 ![Docker](https://img.shields.io/badge/deploy-Docker-2496ed)
 ![Licencia](https://img.shields.io/badge/licencia-por%20definir-lightgrey)
 
-_Última actualización: **2026-11-12**_
+_Última actualización: **2026-11-13**_
 
 </div>
 
@@ -64,18 +64,18 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 | Etapa | Descripción | Progreso | Estado |
 |---|---|---|---|
 | 0 · Fundaciones | AGENTS.md, skills, SDD, plan y cuestionario | `██████████` 100% | ✅ Completa |
-| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `███████░░░` 65% | 📝 Acto 1 completo en el juego (4 tickets, diálogos, cierre con CRON); faltan los actos 2 y 3 |
-| 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `█████░░░░░` 50% | 🚧 Motor chiptune propio; 6 de 11 pistas y 14 efectos sintetizados |
-| 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `██████░░░░` 60% | 🚧 SaraDev completa (8 expresiones, 10 animaciones), PATO, retratos, kit de UI 9-slice, fondos synthwave y demo en `/?demo` |
-| 4 · Implementación | Juego en Phaser y deploy en Docker | `███████░░░` 72% | 🎯 **Acto 1 completo**: 4 puzzles, guardado y cierre del acto (specs 001–007, 013, 014) |
+| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `████████░░` 80% | 📝 Actos 1 y 2 en el juego (7 tickets, hologramas, cierres de acto); falta el acto 3 |
+| 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `██████░░░░` 60% | 🚧 Motor chiptune propio; 7 de 11 pistas y 14 efectos sintetizados |
+| 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `███████░░░` 70% | 🚧 SaraDev completa, PATO, hologramas, tilesets de los actos 1 y 2, kit de UI, synthwave y demo en `/?demo` |
+| 4 · Implementación | Juego en Phaser y deploy en Docker | `████████░░` 80% | 🎯 **Actos 1 y 2 completos**: 7 puzzles, guardado por acto y transición entre mapas (specs 001–008, 013, 014) |
 
 **Hito alcanzado (2026-11-12):** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker.
 
-**Hito alcanzado (2026-11-12):** 🎯 **Acto 1 completo**: cuatro tickets jugables, guardado y cierre del acto.
+**Hito alcanzado (2026-11-13):** 🎯 **Acto 2 completo**: Puerto Cero con metro, central y antena, y tres puzzles de código.
 
-**Próximo hito:** acto 2 (spec 008: ciudad de Puerto Cero y puzzles de código).
+**Próximo hito:** acto 3 (specs 009 y 010: la terminal simulada y el deploy de `puente.py`).
 
-**Siguiente paso:** spec 008 (puzzles del acto 2: bloques de código, caza del bug e indentación) con su mapa de la ciudad.
+**Siguiente paso:** spec 009 (terminal simulada: parser, sistema de archivos virtual y comandos).
 
 ## Hoja de ruta
 
@@ -92,10 +92,10 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 </details>
 
 <details>
-<summary><b>Juego completo</b> (1/6)</summary>
+<summary><b>Juego completo</b> (2/6)</summary>
 
 - [x] 007 · Puzzles del acto 1 y guardado · 2026-11-12
-- [ ] 008 · Puzzles del acto 2
+- [x] 008 · Acto 2: Puerto Cero y puzzles de código · 2026-11-13
 - [ ] 009 · Terminal simulada
 - [ ] 010 · Tickets del acto 3 (venv, pip y `puente.py`)
 - [ ] 011 · Menús, pausa, opciones, final y créditos
@@ -202,6 +202,13 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-13: Spec 008, acto 2 en Puerto Cero
+- Al cerrar los tickets de la oficina, la puerta inferior lleva a las calles de Puerto Cero: asfalto agrietado, carteles con estática, autos abandonados, vegetación, la boca del metro, la central y la antena
+- Tres puzzles de código: ordenar las líneas de una función intercambiándolas, cazar la línea con el bug (con explicación al acertar) y poner cada línea de Python en su nivel de sangría
+- Hologramas de personas atrapadas que hablan al acercarse; nuevos post-its de Marga; CRON cierra el acto revelando `puente.py`
+- El guardado recuerda el acto y el Título continúa donde quedaste; nueva pista M04 para la ciudad
+- Los tests e2e aceptan `PW_CHANNEL=msedge` para correr con Edge si Windows bloquea el Chromium de Playwright
 
 ### 2026-11-12: Spec 007, acto 1 completo y guardado
 - Tres puzzles nuevos: binario (interruptores que forman un número), paquetes (ordenar por número de secuencia; un error reinicia la cola) y compuertas (AND, OR, XOR, NAND encadenadas)

@@ -24,8 +24,8 @@ Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) 
 [004](specs/004-tickets-plazos-hud/spec.md), el bucle de tickets (briefing, plazo, resultado, rollback y HUD); la [005](specs/005-puzzle-cableado/spec.md), el puzzle de cableado; la [006](specs/006-audio/spec.md) y la
 [014](specs/014-motor-chiptune/spec.md), música y efectos sintetizados; la [013](specs/013-arte-procedural/spec.md), SaraDev
 completa, kit de UI, fondos synthwave y la demo de arte en `/?demo`; la [007](specs/007-puzzles-acto1-guardado/spec.md),
-los puzzles binario, paquetes y compuertas, el guardado y el cierre del acto. **Acto 1 completo.**
-Siguiente: 008 (acto 2: mapa de la ciudad y puzzles de código). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
+los puzzles binario, paquetes y compuertas, el guardado y el cierre del acto; la [008](specs/008-acto2-puzzles-codigo/spec.md),
+Puerto Cero con los puzzles de código. **Actos 1 y 2 completos.** Siguiente: 009 (terminal simulada) y 010 (acto 3). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
 **Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))
@@ -45,7 +45,7 @@ specs/           Desarrollo guiado por specs (SDD): constitución, plantillas y 
 assets-src/      Fuentes editables (.tmx, briefs). No se sirven.
 public/assets/   Assets exportados que carga el juego (mapas, fuentes)
 src/             Código del juego: scenes/, entities/, game/ (estado y eventos), logic/, art/, audio/, terminal/, puzzles/, data/
-scripts/         Generadores (mapa del acto 1 desde un plano ASCII)
+scripts/         Generadores (mapas de los actos desde planos ASCII)
 tests/e2e/       Tests de Playwright (smoke y mundo)
 ```
 
@@ -65,6 +65,7 @@ tests/e2e/       Tests de Playwright (smoke y mundo)
 - **Teclas de acción (E, Espacio, Enter) por eventos `keydown-X`, no con `JustDown`:** Phaser anula `JustDown` si la tecla se suelta en el mismo cuadro, y Playwright `press` hace justo eso.
 - **El contenido va en datos:** actos, tickets, diálogos, textos y partituras viven en JSON dentro de `src/data/`. Un ticket nuevo es un JSON en `src/data/tickets/` más su id en `actos.json`; una pista nueva es un JSON en `src/data/musica/` (notación en `docs/02-musica/musica.md`); `npm test` valida ambos.
 - **Audio solo por `audio` (`src/audio/AudioManager.ts`):** `playMusic(id)` y `playSfx(nombre)`. Nunca Web Audio ni `this.sound` desde las escenas.
+- **Un acto nuevo:** entrada en `src/data/actos.json` (mapa, música, tickets), plano en `scripts/generate-maps.mjs`, tileset en `src/art/tiles/acto<N>.ts` registrado en `tiles/index.ts`, diálogos `acto<N>_inicio` y `acto<N>_fin` en `es.json`.
 - **Idioma:** identificadores de código en inglés; textos del juego y documentación en español.
 - **Pixel-perfect:** 320×180, `pixelArt: true` y escalado entero.
 - **El README refleja el avance.** Al terminar una spec, o cualquier entregable de las etapas 1–3, actualiza en `README.md` la tabla *Estado del proyecto* (porcentaje y estado), la *Hoja de ruta*, el *Changelog* (entrada arriba de todo, con fecha `AAAA-MM-DD`), la fecha de *Última actualización* y el badge de etapa. Después actualiza `docs/00-plan.md`.
@@ -84,7 +85,8 @@ npx vitest run src/logic/scale.test.ts -t "1280"   # un solo test
 npm run e2e            # Playwright (smoke; levanta el dev server solo)
 npm run e2e:install    # descarga Chromium para Playwright (una vez)
 # http://localhost:5173/?demo  → demo del arte (animaciones, expresiones, UI)
-node scripts/generate-map-acto1.mjs   # regenera el mapa del acto 1 desde su plano ASCII
+node scripts/generate-maps.mjs        # regenera los mapas (planos ASCII → Tiled JSON)
+PW_CHANNEL=msedge npm run e2e          # e2e con Edge si Windows bloquea el Chromium de Playwright
 docker compose up --build   # juego en http://localhost:8080
 ```
 

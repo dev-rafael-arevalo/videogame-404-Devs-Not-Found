@@ -55,7 +55,7 @@ Terminado cuando: cada pantalla tiene su pista asignada y cada acción del juego
 Entregables (ver [guia-arte.md](03-arte/guia-arte.md)):
 - Paleta ✅, tipografía pixel y kit de UI ✅ (ventanas 9-slice, botones, cursor, íconos del HUD)
 - Sprites: SaraDev ✅ (8 expresiones, 10 animaciones), PATO ✅, El Recolector, hologramas y gato
-- Tilesets de los 3 actos con sombras y texturas (dithering)
+- Tilesets de los 3 actos con sombras y texturas (dithering): ✅ actos 1 y 2
 - Piezas de puzzle por tipo y layouts de cada pantalla
 
 Terminado cuando: el slice vertical (acto 1) se ve sin placeholders.
@@ -75,7 +75,7 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 | 005 | Primer puzzle: cableado | ✅ **terminada** 2026-11-12 |
 | 006 | Audio: música, efectos de sonido y volumen | ✅ **terminada** 2026-11-12 |
 | 007 | Resto de puzzles del acto 1 y guardado (localStorage) | ✅ **terminada** 2026-11-12 · acto 1 completo |
-| 008 | Puzzles del acto 2 (bloques de código, caza del bug, indentación) | Acto 2 |
+| 008 | Puzzles del acto 2 (bloques de código, caza del bug, indentación) | ✅ **terminada** 2026-11-13 · acto 2 completo |
 | 009 | Terminal simulada (parser, FS virtual, comandos) | Acto 3 |
 | 010 | Tickets del acto 3: venv, pip y `python puente.py` | Acto 3 |
 | 011 | Menús, pausa, opciones, final y créditos | Juego completo |

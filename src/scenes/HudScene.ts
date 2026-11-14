@@ -3,8 +3,8 @@ import { PALETTE, css } from '../art/palette';
 import { FONT, createUiTextures, formatNumber } from '../art/ui';
 import textos from '../data/textos/es.json';
 import { ticketOrder } from '../data/tickets/index';
-import { getActiveTicket, getProgress } from '../game/session';
-import { uptimePercent } from '../logic/progress';
+import { REG, getActiveTicket, getProgress } from '../game/session';
+import { actUptime } from '../logic/progress';
 import { formatTicketNumber } from '../logic/tickets';
 import { GAME_WIDTH } from '../logic/scale';
 
@@ -52,7 +52,8 @@ export class HudScene extends Phaser.Scene {
 
   private refresh(): void {
     const progress = getProgress(this.registry);
-    const uptime = uptimePercent(progress, ticketOrder(1).length);
+    const acto = (this.registry.get(REG.acto) as number | undefined) ?? 1;
+    const uptime = actUptime(progress, ticketOrder(acto));
     this.uptimeText.setText(`${uptime}%`);
 
     const barX = 44;

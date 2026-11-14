@@ -1,5 +1,6 @@
 import { expect, type Page } from '@playwright/test';
 import { layoutSwitches } from '../../src/logic/puzzles/binario';
+import { layoutLines } from '../../src/logic/puzzles/bloques';
 import { layoutPorts } from '../../src/logic/puzzles/cables';
 import { layoutGates } from '../../src/logic/puzzles/compuertas';
 import { layoutPackets } from '../../src/logic/puzzles/paquetes';
@@ -119,11 +120,10 @@ export async function solveFirstCables(page: Page): Promise<void> {
   await dragGame(page, ports.left[2]!, ports.right[2]!);
 }
 
-/** Camina por el pasillo de la fila 6 hasta pararse a la izquierda de la terminal (tx, ty). */
-export async function walkToTerminal(page: Page, tx: number, ty: number): Promise<void> {
+/** Camina por un pasillo horizontal (fila `corridorY`) hasta pararse a la izquierda de la terminal (tx, ty). */
+export async function walkToTerminal(page: Page, tx: number, ty: number, corridorY = 110): Promise<void> {
   const targetX = (tx - 1) * 16 + 8;
   const targetY = ty * 16 + 14;
-  const corridorY = 110;
   await holdUntil(page, ((await player(page))!.y < corridorY ? 'ArrowDown' : 'ArrowUp'), async () => Math.abs(((await player(page))?.y ?? 0) - corridorY) <= 6, 4000);
   await nudgeTo(page, 'y', corridorY);
   const dx = targetX - (await player(page))!.x;
@@ -160,4 +160,33 @@ export async function solvePaquetes(page: Page): Promise<void> {
 export async function solveCompuertas(page: Page): Promise<void> {
   const layout = layoutGates(PUZZLE_BOARD_AREA, 3);
   await clickGame(page, layout.slots[1]!);
+}
+
+/** Ticket a2-01: orden inicial [2,0,3,1] → tres intercambios. */
+export async function solveBloques(page: Page): Promise<void> {
+  const rows = layoutLines(PUZZLE_BOARD_AREA, 4);
+  const center = (i: number): { x: number; y: number } => ({ x: rows[i]!.x + 40, y: rows[i]!.y + rows[i]!.height / 2 });
+  for (const [a, b] of [
+    [0, 1],
+    [1, 3],
+    [2, 3],
+  ] as const) {
+    await clickGame(page, center(a));
+    await clickGame(page, center(b));
+  }
+}
+
+/** Ticket a2-02: la línea 3 (índice 2) tiene el `=`. */
+export async function solveBug(page: Page): Promise<void> {
+  const rows = layoutLines(PUZZLE_BOARD_AREA, 5);
+  await clickGame(page, { x: rows[2]!.x + 40, y: rows[2]!.y + rows[2]!.height / 2 });
+}
+
+/** Ticket a2-03: inicial [0,2,1,1,0,2] → correcto [0,1,2,1,2,1]. */
+export async function solveIndentacion(page: Page): Promise<void> {
+  const rows = layoutLines(PUZZLE_BOARD_AREA, 6);
+  const clicks: Record<number, number> = { 1: 3, 2: 1, 4: 2, 5: 3 }; // fila → clicks (módulo 4)
+  for (const [row, n] of Object.entries(clicks)) {
+    for (let i = 0; i < n; i += 1) await clickGame(page, { x: rows[Number(row)]!.x + 40, y: rows[Number(row)]!.y + rows[Number(row)]!.height / 2 });
+  }
 }

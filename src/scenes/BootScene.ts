@@ -4,7 +4,8 @@ import { audio } from '../audio/AudioManager';
 import textos from '../data/textos/es.json';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
 import { markScene } from './markScene';
-import { MAP_ACTO1_KEY } from './WorldScene';
+import actos from '../data/actos.json';
+import { mapKeyFor } from './WorldScene';
 
 const LINE_DELAY_MS = 220;
 const END_DELAY_MS = 500;
@@ -22,7 +23,9 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.tilemapTiledJSON(MAP_ACTO1_KEY, '/assets/maps/acto1_oficina.json');
+    for (const acto of actos.actos) {
+      this.load.tilemapTiledJSON(mapKeyFor(acto.mapa), `/assets/maps/${acto.mapa}.json`);
+    }
   }
 
   create(): void {

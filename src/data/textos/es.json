@@ -15,7 +15,7 @@
     "subtitulo": "Es tu primer dia. No queda nadie mas.",
     "start": "PRESIONA START",
     "version": "v0.1.0 · slice vertical en construccion",
-    "guardado": "Partida guardada: {uptime}% · Enter continúa · N nueva partida"
+    "guardado": "Partida guardada (acto {acto}, {uptime}%) · Enter continúa · N nueva partida"
   },
   "ui": {
     "usar": "[E] usar",
@@ -54,6 +54,15 @@
     "compuertas": {
       "instruccion": "Click en una ranura para cambiar su compuerta",
       "objetivo": "SALIDA ESPERADA"
+    },
+    "bloques": {
+      "instruccion": "Click en una línea y luego en otra para intercambiarlas"
+    },
+    "bug": {
+      "instruccion": "Click en la línea que tiene el error"
+    },
+    "indentacion": {
+      "instruccion": "Click en una línea para subir su sangría (0 → 1 → 2 → 3 → 0)"
     }
   },
   "resultado": {
@@ -167,6 +176,84 @@
         "quien": "saradev",
         "expresion": "determinada",
         "texto": "Primer día. Primer deploy. Vamos."
+      }
+    ],
+    "salida_cerrada": [
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Afuera está Puerto Cero. Pero CRON no me deja salir hasta cerrar los tickets de este piso."
+      }
+    ],
+    "salida_fin": [
+      {
+        "quien": "cron",
+        "texto": "SECTOR SIGUIENTE: NÚCLEO DE ARCA. Acceso en construcción (acto 3)."
+      }
+    ],
+    "acto2_inicio": [
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "Puerto Cero. Ni un auto andando, ni una persona. Solo los carteles con estática y el viento."
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. Hay tres sectores afuera: el metro, la central eléctrica y la antena. CRON ya tiene los tickets listos. Y acá los puzzles son de código, SaraDev: ponete los lentes."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "cansada",
+        "texto": "No uso lentes. Es una forma de decir, ¿no?"
+      },
+      {
+        "quien": "pato",
+        "texto": "Es una forma de decir. ¿Ya probaste explicármelo en voz alta?"
+      }
+    ],
+    "pato_acto2": [
+      {
+        "quien": "pato",
+        "texto": "Metro, central, antena. Buscá los kioscos con el aviso parpadeando. Y mirá a los hologramas: son personas, no decoración."
+      }
+    ],
+    "holograma_1": [
+      {
+        "quien": "cron",
+        "texto": "HOLOGRAMA · SECTOR METRO: \"¿Hola? ¿Hay alguien? Mi gato quedó afuera. Se llama Croquetas. Dale de comer, por favor.\""
+      }
+    ],
+    "holograma_2": [
+      {
+        "quien": "cron",
+        "texto": "HOLOGRAMA · SECTOR ANTENA: \"Estaba en una reunión que podría haber sido un mail. Y después... acá. ¿Esto cuenta como home office?\""
+      }
+    ],
+    "postit_4": [
+      {
+        "quien": "marga",
+        "texto": "\"Si un cartel muestra estática, no es el cartel: es el feed. Reiniciá la fuente, no la pantalla.\""
+      }
+    ],
+    "postit_5": [
+      {
+        "quien": "marga",
+        "texto": "\"Python cuenta espacios. Cuatro por nivel, siempre. Lo digo por experiencia (y por un deploy de 2019).\""
+      }
+    ],
+    "acto2_fin": [
+      {
+        "quien": "cron",
+        "texto": "SECTOR PUERTO CERO: 3/3. Metro, central y antena en línea. Conciencias en línea: 0,0004%."
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. Hay un log de Marga en la antena: existe una app de retorno, puente.py, que nunca se desplegó. Está en el núcleo de ARCA."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Entonces vamos al núcleo. Y esta vez, con terminal. (Acto 3, en construcción.)"
       }
     ]
   }

@@ -1,0 +1,23 @@
+{
+  "id": "a2-02-bug",
+  "numero": 22,
+  "acto": 2,
+  "terminal": "terminal_21_12",
+  "titulo": "Cazar el bug de la central",
+  "descripcion": "La rutina que enciende las turbinas de la central eléctrica no compila. Hay una sola línea con un error. Hacé click en ella.",
+  "tipo": "bug",
+  "plazoSegundos": 90,
+  "conciencias": 2000,
+  "pistas": ["Comparar y asignar se parecen mucho... pero no son lo mismo.", "Mirá la línea del if."],
+  "datos": {
+    "lineas": [
+      "def encender_turbinas(turbinas):",
+      "    for turbina in turbinas:",
+      "        if turbina.estado = \"apagada\":",
+      "            turbina.encender()",
+      "    return True"
+    ],
+    "bug": 2,
+    "explicacion": "Para comparar se usa ==. Con un solo = Python intenta asignar y se queja."
+  }
+}

@@ -21,6 +21,13 @@ export function uptimePercent(state: ProgressState, totalTickets: number): numbe
   return Math.round((state.completados.length / totalTickets) * 100);
 }
 
+/** Uptime de un acto: tickets de `order` completados sobre el total de `order` (spec 008). */
+export function actUptime(state: ProgressState, order: readonly string[]): number {
+  if (order.length === 0) return 0;
+  const done = order.filter((id) => state.completados.includes(id)).length;
+  return Math.round((done / order.length) * 100);
+}
+
 export function rewardFor(base: number, failures: number, hints = 0): number {
   const factor = Math.max(MIN_REWARD_FRACTION, 1 - ROLLBACK_PENALTY * failures - HINT_PENALTY * hints);
   return Math.round(base * factor);

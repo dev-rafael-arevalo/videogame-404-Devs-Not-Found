@@ -10,6 +10,9 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}`,
     browserName: 'chromium',
+    // PW_CHANNEL=msedge usa el Edge del sistema (útil si el Control de aplicaciones de Windows
+    // bloquea el Chromium que descarga Playwright).
+    channel: process.env['PW_CHANNEL'] || undefined,
     viewport: { width: 1280, height: 720 },
   },
   webServer: {

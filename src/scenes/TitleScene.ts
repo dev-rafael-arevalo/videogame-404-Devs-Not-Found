@@ -6,7 +6,7 @@ import textos from '../data/textos/es.json';
 import { clearSave, loadSave } from '../game/save';
 import { REG } from '../game/session';
 import { ticketOrder } from '../data/tickets/index';
-import { uptimePercent } from '../logic/progress';
+import { actUptime } from '../logic/progress';
 import { GAME_HEIGHT, GAME_WIDTH } from '../logic/scale';
 import { markScene } from './markScene';
 
@@ -71,12 +71,13 @@ export class TitleScene extends Phaser.Scene {
       .setOrigin(0.5);
     const refreshSaved = (): void => {
       const saved = loadSave();
-      savedText.setText(saved ? textos.titulo.guardado.replace('{uptime}', String(uptimePercent(saved.progress, ticketOrder(1).length))) : '');
+      savedText.setText(saved ? textos.titulo.guardado.replace('{uptime}', String(actUptime(saved.progress, ticketOrder(saved.acto)))).replace('{acto}', String(saved.acto)) : '');
     };
     refreshSaved();
     this.input.keyboard?.on('keydown-N', () => {
       clearSave();
       this.registry.remove(REG.progress);
+      this.registry.remove(REG.acto);
       audio.playSfx('click_ui');
       refreshSaved();
     });
@@ -96,7 +97,7 @@ export class TitleScene extends Phaser.Scene {
       started = true;
       audio.playSfx('click_ui');
       this.cameras.main.fadeOut(200, 0x1a, 0x1c, 0x2c);
-      this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => this.scene.start('World'));
+      this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => this.scene.start('World', { acto: loadSave()?.acto ?? 1 }));
     };
     this.input.keyboard?.on('keydown-ENTER', onStart);
     this.input.keyboard?.on('keydown-SPACE', onStart);

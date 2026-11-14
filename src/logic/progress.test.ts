@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { completeTicket, failTicket, initialProgress, rewardFor, uptimePercent } from './progress';
+import { actUptime, completeTicket, failTicket, initialProgress, rewardFor, uptimePercent } from './progress';
 
 describe('progress', () => {
   it('arranca en cero', () => {
@@ -45,6 +45,14 @@ describe('progress', () => {
     expect(failed.fallos['a1-01']).toBe(1);
     const { ganadas } = completeTicket(failed, 'a1-01', 1200);
     expect(ganadas).toBe(900);
+  });
+
+  it('CA1 (008): el uptime de un acto ignora los tickets de otros actos', () => {
+    let p = initialProgress();
+    for (const id of ['a1-01', 'a1-02', 'a2-01']) p = completeTicket(p, id, 1).state;
+    expect(actUptime(p, ['a2-01', 'a2-02', 'a2-03'])).toBe(33);
+    expect(actUptime(p, ['a1-01', 'a1-02'])).toBe(100);
+    expect(actUptime(p, [])).toBe(0);
   });
 
   it('el uptime se redondea y no divide por cero', () => {
