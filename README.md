@@ -424,13 +424,6 @@ Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spe
 - Skills de agente y configuración de MCP
 - Guía de contribución, mapa del proyecto, plantillas de issue y PR, y estrategia de ramas (`main`, `develop` y ramas por etapa)
 
-## Créditos y licencia
-
-- **Dirección y desarrollo:** _por definir_
-- **Arte:** _por definir_ · **Música:** _por definir_
-- Assets de terceros: ver `assets-src/*/CREDITOS.md`
-
-Licencia: **por definir**.
 
 <div align="center">
 <sub>Hecho con Phaser, TypeScript y un pato de goma. 🦆</sub>
