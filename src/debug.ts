@@ -9,6 +9,9 @@ import type { LoadedSave } from './logic/save';
 import type { ProgressState } from './logic/progress';
 import type { DemoScene, DemoSnapshot } from './scenes/DemoScene';
 import type { DialogScene, DialogSnapshot } from './scenes/DialogScene';
+import type { EndScene, EndSnapshot } from './scenes/EndScene';
+import type { IntroScene, IntroSnapshot } from './scenes/IntroScene';
+import type { MenuScene, MenuSnapshot } from './scenes/MenuScene';
 import type { PuzzleScene } from './scenes/PuzzleScene';
 import type { ResultData, ResultScene } from './scenes/ResultScene';
 import type { TerminalScene, TerminalSnapshot } from './scenes/TerminalScene';
@@ -48,6 +51,10 @@ export interface DebugApi {
   world(): { acto: number } | null;
   /** Estado de la terminal simulada abierta, o `null`. */
   terminal(): TerminalSnapshot | null;
+  /** Menús: escena activa entre Menu/Options/Pause/Intro/End y datos. */
+  menu(): { escena: string | null; menu: MenuSnapshot | null; intro: IntroSnapshot | null; final: EndSnapshot | null; sinPresion: boolean };
+  /** Completa los 3 actos y abre el epílogo. */
+  finishGame(): void;
   /** Marca todos los tickets del acto como completados (y guarda). */
   completeAct(acto: number): void;
   /** Completa los actos anteriores y recarga el mundo en `acto`. */
@@ -77,7 +84,7 @@ export function installDebugApi(game: Phaser.Game): void {
     game,
     player() {
       const world = game.scene.getScene('World') as WorldScene | null;
-      if (!world || !game.scene.isActive('World')) return null;
+      if (!world || !(game.scene.isActive('World') || game.scene.isPaused('World'))) return null;
       const player = world.player;
       return {
         x: player.x,
@@ -128,6 +135,23 @@ export function installDebugApi(game: Phaser.Game): void {
       clearSave();
       game.registry.remove(REG.progress);
       game.registry.remove(REG.acto);
+    },
+    menu() {
+      const escena = (['Options', 'Pause', 'Menu', 'Intro', 'End'] as const).find((key) => game.scene.isActive(key)) ?? null;
+      return {
+        escena,
+        menu: game.scene.isActive('Menu') ? (game.scene.getScene('Menu') as MenuScene).snapshot() : null,
+        intro: game.scene.isActive('Intro') ? (game.scene.getScene('Intro') as IntroScene).snapshot() : null,
+        final: game.scene.isActive('End') ? (game.scene.getScene('End') as EndScene).snapshot() : null,
+        sinPresion: game.registry.get(REG.sinPresion) === true,
+      };
+    },
+    finishGame() {
+      for (const a of actos.actos) this.completeAct(a.numero);
+      for (const key of ['Dialog', 'Briefing', 'Puzzle', 'Terminal', 'Result', 'Rollback', 'Pause', 'Options', 'Hud', 'World']) {
+        if (game.scene.isActive(key) || game.scene.isPaused(key)) game.scene.stop(key);
+      }
+      game.scene.start('End', {});
     },
     terminal() {
       if (!game.scene.isActive('Terminal')) return null;

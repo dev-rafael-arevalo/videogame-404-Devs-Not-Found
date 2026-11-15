@@ -41,13 +41,22 @@ export function collectErrors(page: Page): string[] {
   return errors;
 }
 
-/** Boot → Título → Mundo. Deja el diálogo inicial abierto. */
-export async function enterWorld(page: Page): Promise<void> {
+/** Boot → Título → Menú. */
+export async function enterMenu(page: Page): Promise<void> {
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('data-scene', 'Boot');
   await page.keyboard.press('Enter');
   await expect(page.locator('html')).toHaveAttribute('data-scene', 'Title');
   await page.keyboard.press('Enter');
+  await expect(page.locator('html')).toHaveAttribute('data-scene', 'Menu');
+}
+
+/** Boot → Título → Menú → Nueva partida → Intro (saltada) → Mundo. Deja el diálogo inicial abierto. */
+export async function enterWorld(page: Page): Promise<void> {
+  await enterMenu(page);
+  await page.keyboard.press('Enter'); // Nueva partida
+  await expect(page.locator('html')).toHaveAttribute('data-scene', 'Intro');
+  await page.keyboard.press('Escape');
   await expect(page.locator('html')).toHaveAttribute('data-scene', 'World');
   await expect.poll(() => player(page)).not.toBeNull();
 }
@@ -204,4 +213,15 @@ export async function walkPath(page: Page, points: { x: number; y: number }[]): 
       await nudgeTo(page, 'y', point.y);
     }
   }
+}
+
+/** En una escena con menú (Menu, Pause, Options), baja hasta el índice indicado y confirma con Enter. */
+export async function menuSelect(page: Page, index: number): Promise<void> {
+  for (let i = 0; i < 8; i += 1) {
+    const current = await page.evaluate(() => window.__debug!.menu().menu?.indice ?? -1);
+    if (current === index) break;
+    await page.keyboard.press('ArrowDown');
+    await page.waitForTimeout(60);
+  }
+  await page.keyboard.press('Enter');
 }

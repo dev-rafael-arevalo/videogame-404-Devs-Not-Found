@@ -10,6 +10,7 @@ export const REG = {
   activeTicket: 'activeTicket',
   sinPresion: 'sinPresion',
   acto: 'acto',
+  escalado: 'escalado',
 } as const;
 
 export interface ActiveTicketInfo {

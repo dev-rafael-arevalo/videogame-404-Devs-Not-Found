@@ -16,3 +16,21 @@ export function integerZoom(
   const zoom = Math.floor(Math.min(viewportWidth / gameWidth, viewportHeight / gameHeight));
   return Number.isFinite(zoom) && zoom > 1 ? zoom : 1;
 }
+
+/** Zoom fraccionario que llena la ventana conservando la proporción 16:9 (píxeles algo desparejos). */
+export function fitZoom(
+  viewportWidth: number,
+  viewportHeight: number,
+  gameWidth: number = GAME_WIDTH,
+  gameHeight: number = GAME_HEIGHT,
+): number {
+  const zoom = Math.min(viewportWidth / gameWidth, viewportHeight / gameHeight);
+  return Number.isFinite(zoom) && zoom > 1 ? Math.floor(zoom * 100) / 100 : 1;
+}
+
+export type ScaleMode = 'entero' | 'ajustar';
+
+/** Zoom según la opción de escalado: entero (pixel-perfect) o ajustar a la ventana. */
+export function zoomFor(mode: ScaleMode, viewportWidth: number, viewportHeight: number): number {
+  return mode === 'ajustar' ? fitZoom(viewportWidth, viewportHeight) : integerZoom(viewportWidth, viewportHeight);
+}

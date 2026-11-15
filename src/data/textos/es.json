@@ -15,7 +15,7 @@
     "subtitulo": "Es tu primer dia. No queda nadie mas.",
     "start": "PRESIONA START",
     "version": "v0.1.0 · slice vertical en construccion",
-    "guardado": "Partida guardada (acto {acto}, {uptime}%) · Enter continúa · N nueva partida"
+    "guardado": "Partida guardada: acto {acto}"
   },
   "ui": {
     "usar": "[E] usar",
@@ -310,5 +310,106 @@
     "pista": "PATO: PISTA (-10%)",
     "bienvenida": "SYS://RESTORE - terminal del nucleo. Escribi help para ver los comandos.",
     "objetivoCumplido": "CRON: objetivo del ticket cumplido."
+  },
+  "menu": {
+    "nueva": "Nueva partida",
+    "continuar": "Continuar",
+    "opciones": "Opciones",
+    "creditos": "Créditos",
+    "ayuda": "Flechas o mouse para elegir · Enter para confirmar"
+  },
+  "opciones": {
+    "titulo": "OPCIONES",
+    "musica": "Música",
+    "efectos": "Efectos",
+    "sinPresion": "Modo sin presión",
+    "pantallaCompleta": "Pantalla completa",
+    "si": "Sí",
+    "no": "No",
+    "volver": "Volver",
+    "ayuda": "Flechas para cambiar · Esc para volver",
+    "escalado": "Escalado",
+    "entero": "Entero (nítido)",
+    "ajustar": "Ajustar a la ventana"
+  },
+  "pausa": {
+    "titulo": "PAUSA",
+    "continuar": "Continuar",
+    "opciones": "Opciones",
+    "salir": "Guardar y salir"
+  },
+  "intro": {
+    "avanzar": "Enter avanza · Esc salta",
+    "vinetas": [
+      {
+        "titulo": "Puerto Cero, un martes",
+        "texto": "Una ciudad costera común. En el datacenter de Kernel & Co. duerme ARCA, el Archivo de Respaldo de Conciencias Automatizado. Nunca se probó en producción."
+      },
+      {
+        "titulo": "06:00 a.m.",
+        "texto": "Un despliegue sin revisar activa el protocolo de ARCA por un falso positivo. Nadie está mirando la pantalla correcta."
+      },
+      {
+        "titulo": "0,3 segundos",
+        "texto": "Toda la humanidad es respaldada dentro del programa. Los animales no: ARCA solo reconoce conciencias humanas."
+      },
+      {
+        "titulo": "La sala fría",
+        "texto": "SaraDev, en su primer turno de guardia, está reiniciando un rack dentro de la jaula de Faraday. La señal no la alcanza."
+      },
+      {
+        "titulo": "El primer día",
+        "texto": "Sale a un mundo vacío: tazas tibias, autos encendidos, semáforos para nadie. Y un pato de goma que habla."
+      }
+    ]
+  },
+  "final": {
+    "titulos": {
+      "completo": "TODAS LAS CONCIENCIAS EN LÍNEA",
+      "parcial": "LA MAYORÍA VOLVIÓ",
+      "pendiente": "SIGUE EL SPRINT"
+    },
+    "textos": {
+      "completo": [
+        "Las personas regresan en el mismo instante en que se fueron. Los semáforos vuelven a cambiar para alguien.",
+        "Marga entra a la oficina con un café. \"¿Así que vos sos la persona nueva? Bienvenida al equipo. ¿Qué tal tu primer día?\"",
+        "SaraDev mira al pato. El pato, por primera vez, no dice nada."
+      ],
+      "parcial": [
+        "La mayoría regresa en el mismo instante en que se fue. Algunos sectores quedaron \"en pausa\": CRON promete tickets para la semana que viene. Todos críticos.",
+        "Marga entra con un café y dos vasos. \"Vamos a necesitar más café.\"",
+        "SaraDev mira al pato. \"Mañana seguimos.\" \"Cuac.\""
+      ],
+      "pendiente": [
+        "Volvieron pocos. El resto sigue dentro de ARCA, estable, esperando a que alguien cierre los tickets que faltan.",
+        "CRON abre un nuevo sprint. PATO se aclara la garganta de goma.",
+        "\"¿Ya probaste explicármelo en voz alta?\""
+      ]
+    },
+    "resumen": "Conciencias rescatadas: {porcentaje}% ({conciencias}) · Rollbacks: {rollbacks}",
+    "acelerar": "Enter acelera · Esc salta",
+    "creditos": [
+      "# 404: DEVS NOT FOUND",
+      "Un videojuego retro de puzzles y programación",
+      "",
+      "# Protagonizado por",
+      "SaraDev, PATO, CRON, El Recolector y Marga",
+      "",
+      "# Hecho con",
+      "Phaser 4 · TypeScript · Vite · Vitest · Playwright",
+      "Arte pixel y música chiptune generados por código",
+      "Paleta Sweetie 16 (lospec.com)",
+      "",
+      "# Dirección y desarrollo",
+      "Equipo de 404: Devs Not Found",
+      "Desarrollo asistido por agentes de IA",
+      "",
+      "# Gracias",
+      "A las personas que depuran en voz alta con un pato",
+      "",
+      "SYS://RESTORE · estado: en línea",
+      "",
+      "Gracias por jugar"
+    ]
   }
 }

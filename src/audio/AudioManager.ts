@@ -38,6 +38,7 @@ export class AudioManager {
   private options: AudioOptions;
   private lastSfx: string | null = null;
   private sfxCount = 0;
+  private ducked = false;
 
   constructor(private readonly storage: Pick<Storage, 'getItem' | 'setItem'> | null = safeStorage()) {
     this.options = parseAudioOptions(readStorage(this.storage));
@@ -105,6 +106,12 @@ export class AudioManager {
     if (this.ready()) playSfx(this.ctx!, this.sfxGain!, def);
   }
 
+  /** Baja la música al 50% (pausa). */
+  setDucked(ducked: boolean): void {
+    this.ducked = ducked;
+    this.applyVolumes();
+  }
+
   getOptions(): AudioOptions {
     return { ...this.options };
   }
@@ -156,7 +163,7 @@ export class AudioManager {
   }
 
   private applyVolumes(): void {
-    if (this.musicGain) this.musicGain.gain.value = this.options.musica;
+    if (this.musicGain) this.musicGain.gain.value = this.options.musica * (this.ducked ? 0.5 : 1);
     if (this.sfxGain) this.sfxGain.gain.value = this.options.sfx;
   }
 

@@ -43,7 +43,7 @@ Terminado cuando: cada ticket del catálogo tiene un tipo de puzzle definido y c
 > **Decisión 2026-11-12:** no habrá fuentes externas. La música y los efectos se **sintetizan en el navegador** con un motor chiptune de 4 canales propio (spec 014); las partituras viven en JSON. Ver [musica.md](02-musica/musica.md).
 
 Entregables (ver [musica.md](02-musica/musica.md)):
-- 11 pistas (9 temas y 2 jingles) y unos 20 efectos de sonido como partituras y parámetros JSON en `src/data/musica/` (✅ motor, M01, M03, M06, M07, J01, J02 y 14 efectos)
+- 11 pistas (9 temas y 2 jingles) y unos 20 efectos de sonido como partituras y parámetros JSON en `src/data/musica/` (✅ motor, las 11 pistas y 17 efectos)
 - Exportación a OGG/MP3 solo si hiciera falta para otros usos
 
 Terminado cuando: cada pantalla tiene su pista asignada y cada acción del juego su efecto de sonido.
@@ -78,8 +78,8 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 | 008 | Puzzles del acto 2 (bloques de código, caza del bug, indentación) | ✅ **terminada** 2026-11-13 · acto 2 completo |
 | 009 | Terminal simulada (parser, FS virtual, comandos) | ✅ **terminada** 2026-11-13 · incluye el mapa del núcleo |
 | 010 | Tickets del acto 3: venv, pip y `python puente.py` | ✅ **terminada** 2026-11-13 · acto 3 completo |
-| 011 | Menús, pausa, opciones, final y créditos | Juego completo |
-| 012 | CI en GitHub Actions y publicación de la imagen | Release |
+| 011 | Menús, pausa, opciones, final y créditos | ✅ **terminada** 2026-11-13 · juego completo |
+| 012 | CI en GitHub Actions y publicación de la imagen | ✅ **terminada** 2026-11-13 · release |
 | 013 | Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO, kit de UI y escena de demo | ✅ **terminada** 2026-11-12 |
 | 014 | Motor chiptune de 4 canales y SFX sintetizados; pistas M01–M09, J01–J02 | ✅ **terminada** 2026-11-12 (motor + 6 pistas; las 5 restantes van con sus pantallas) |
 

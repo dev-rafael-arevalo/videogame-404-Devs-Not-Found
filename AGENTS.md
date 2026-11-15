@@ -26,8 +26,9 @@ Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) 
 completa, kit de UI, fondos synthwave y la demo de arte en `/?demo`; la [007](specs/007-puzzles-acto1-guardado/spec.md),
 los puzzles binario, paquetes y compuertas, el guardado y el cierre del acto; la [008](specs/008-acto2-puzzles-codigo/spec.md),
 Puerto Cero con los puzzles de código; la [009](specs/009-terminal-simulada/spec.md), la terminal simulada y el núcleo de ARCA.
-la [010](specs/010-tickets-acto3-deploy/spec.md), los tickets del deploy. **Los 3 actos se juegan completos.**
-Siguiente: 011 (menús, pausa, opciones, intro, final y créditos) y 012 (CI y release). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
+la [010](specs/010-tickets-acto3-deploy/spec.md), los tickets del deploy; la [011](specs/011-menus-intro-final/spec.md), menú, opciones,
+intro, pausa, final y créditos; la [012](specs/012-ci-release/spec.md), CI y publicación de la imagen. **Hoja de ruta completa.**
+La CI (`.github/workflows/ci.yml`) corre lo mismo que la verificación local; el e2e en CI usa el Chromium de Playwright en Ubuntu. Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
 **Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))
@@ -63,9 +64,9 @@ tests/e2e/       Tests de Playwright (smoke y mundo)
 - **Nada de sobreingeniería.** Nada de backend, bases de datos, gestores de estado ni frameworks extra sin una spec que lo justifique.
 - **La terminal del juego es simulada.** Nunca ejecuta comandos ni código reales (ver [docs/04-arquitectura/seguridad.md](docs/04-arquitectura/seguridad.md)).
 - **La lógica pura va separada de las escenas de Phaser** (`src/logic/`, `src/terminal/`), para poder testearla con Vitest sin canvas.
-- **Los tests e2e leen `<html data-scene>` y `window.__debug`** (solo en desarrollo, ver `src/debug.ts`); no leen el canvas. Cada escena de pantalla completa llama a `markScene(this)` en `create()`. Helpers comunes en `tests/e2e/helpers.ts`.
+- **Los tests e2e leen `<html data-scene>` y `window.__debug`** (solo en desarrollo, ver `src/debug.ts`); no leen el canvas. Cada escena de pantalla completa llama a `markScene(this)` en `create()`. Helpers comunes en `tests/e2e/helpers.ts` (`enterWorld` pasa por Menú → Nueva partida → Intro saltada; `menuSelect` elige por índice y salta los ítems deshabilitados).
 - **Teclas de acción (E, Espacio, Enter) por eventos `keydown-X`, no con `JustDown`:** Phaser anula `JustDown` si la tecla se suelta en el mismo cuadro, y Playwright `press` hace justo eso.
-- **Entrada de texto (terminal):** el plugin de teclado de Phaser puede reprocesar su cola de eventos dentro de un mismo cuadro; `TerminalScene` deduplica cada `KeyboardEvent` con un `WeakSet`. Hacé lo mismo si leés `keydown` genérico en otra escena.
+- **Un evento de teclado, una acción:** el plugin de teclado de Phaser puede reprocesar su cola dentro de un cuadro y varias escenas activas reciben el mismo evento. Para teclas discretas usá `onKeyOnce(keyboard, 'ESC', fn)` o `claimKeyEvent(event)` de `src/art/keys.ts` (lo hacen los menús, Esc, Intro, Final y la terminal).
 - **La terminal es simulada:** un comando nuevo es una función pura en `src/terminal/commands/` registrada en `registry.ts`, con test en `registry.test.ts`. Nada de `eval`, red ni DOM.
 - **El contenido va en datos:** actos, tickets, diálogos, textos y partituras viven en JSON dentro de `src/data/`. Un ticket nuevo es un JSON en `src/data/tickets/` más su id en `actos.json`; una pista nueva es un JSON en `src/data/musica/` (notación en `docs/02-musica/musica.md`); `npm test` valida ambos.
 - **Audio solo por `audio` (`src/audio/AudioManager.ts`):** `playMusic(id)` y `playSfx(nombre)`. Nunca Web Audio ni `this.sound` desde las escenas.

@@ -6,7 +6,7 @@
 ## Resumen: lo que bloquea al proyecto hoy
 
 1. ✅ Cuestionario respondido (2026-11-12). Quedan abiertas la 7 (personajes secundarios), la 13 (comandos) y la 22 (equipo).
-2. ✅ **Los 3 actos completos** (specs 001–010, 013 y 014). ⛔ **Siguiente:** spec 011 (menús, pausa, opciones, intro, final y créditos) y 012 (CI y release).
+2. ✅ **Hoja de ruta completa** (specs 001–014). Siguiente: mergear `develop` en `main`, activar la protección de ramas (CONTRIBUTING §7) y jugar el juego entero a mano.
 3. ✅ Catálogos de los 3 actos (11 tickets en `src/data/tickets/`).
 4. ✅ Paleta confirmada (Sweetie 16 + verde terminal, en `src/art/palette.ts`). Falta la fuente pixel (se genera por código en la 013).
 
@@ -32,8 +32,8 @@
 |---|---|---|---|---|
 | `pull_request_template.md` | Checklist de cada PR | Lead | ✅ | — |
 | `ISSUE_TEMPLATE/tarea.md` · `bug.md` | Plantillas de issues | Lead | ✅ | — |
-| `workflows/ci.yml` | typecheck, tests y build en cada PR; imagen Docker en `main` | Desarrollo | ⬜ | Spec 012 |
-| `dependabot.yml` | Actualizaciones de npm y Docker | Desarrollo | ⬜ | Spec 012 |
+| `workflows/ci.yml` · `workflows/docker.yml` | CI en cada PR; imagen Docker publicada en GHCR desde `main` y tags | Desarrollo | ✅ | — |
+| `dependabot.yml` | Actualizaciones semanales de npm, acciones y Docker contra `develop` | Desarrollo | ✅ | — |
 | `CODEOWNERS` | Revisor automático por carpeta | Lead | ⬜ | Cuando haya usuarios de GitHub por rol |
 
 ## `docs/`: documentación
@@ -44,7 +44,7 @@
 | `cuestionario.md` | Decisiones abiertas del proyecto | Lead | ✅ | Quedan la 7, 13 y 22 |
 | `mapa-del-proyecto.md` | Este archivo | Lead | ✅ | Marcar avances |
 | `01-lore/lore.md` | Mundo, personajes, actos, mecánicas con justificación, tono y glosario | Narrativa | 📝 | Validar nombres (🔸), descripción física de cada personaje (para Arte), los 3 epílogos según el porcentaje rescatado |
-| `01-lore/pantallas.md` | Las 15 pantallas: propósito, controles, música, flujo y wireframes | Narrativa y Arte | 📝 | Wireframes de P02, P03, P09, P12, P14 y P15; layout de zonas de cada acto |
+| `01-lore/pantallas.md` | Las 15 pantallas: propósito, controles, música, flujo y wireframes | Narrativa y Arte | ✅ | Las 15 están implementadas; los wireframes que faltan son opcionales |
 | `01-lore/catalogo-tickets.md` | Por acto, 4–5 tickets con id, título, tipo de puzzle, plazo, dificultad y concepto que enseña | Narrativa | ⬜ | **Crearlo** (empezar por el acto 1) |
 | `01-lore/guion.md` | Textos de la intro (P05), diálogos de PATO por acto, post-its de Marga (10 o más), frases de hologramas, mensajes de CRON y epílogos | Narrativa | 📝 | Los primeros diálogos ya viven en `src/data/textos/es.json`; falta el resto |
 | `02-musica/musica.md` | Dirección, lista de pistas, efectos de sonido y decisión de síntesis en código | Música | 📝 | Partituras JSON por pista (spec 014) |
@@ -72,7 +72,8 @@
 | `008-acto2-puzzles-codigo/` | Mapa de Puerto Cero, salida al acto 2, hologramas y puzzles de código | Desarrollo | ✅ | Terminada 2026-11-13 |
 | `009-terminal-simulada/` | Motor de la terminal, `TerminalScene`, núcleo de ARCA y primer ticket | Desarrollo | ✅ | Terminada 2026-11-13 |
 | `010-tickets-acto3-deploy/` | venv, dependencias y deploy de `puente.py`; cierre del acto 3 | Desarrollo y Narrativa | ✅ | Terminada 2026-11-13 |
-| `011` … `012` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
+| `011-menus-intro-final/` | Menú, opciones, intro, pausa, final con 3 variantes y créditos | Desarrollo y Narrativa | ✅ | Terminada 2026-11-13 |
+| `012-ci-release/` | CI, publicación en GHCR y Dependabot | Desarrollo | ✅ | Terminada 2026-11-13 (CA3 tras el push) | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
 
 ## `assets-src/`: fuentes editables (no las carga el juego)
 
@@ -91,11 +92,11 @@
 
 | Ruta | Qué debe llevar | Rol | Spec |
 |---|---|---|---|
-| `src/scenes/` | Una escena de Phaser por pantalla (✅ Boot, Title, World, Hud, Briefing, Puzzle, Terminal, Result, Rollback, Dialog, Demo) | Desarrollo | 001 → 011 |
+| `src/scenes/` | Una escena de Phaser por pantalla (✅ las 15 pantallas: Boot, Title, Menu, Intro, World, Hud, Dialog, Briefing, Puzzle, Terminal, Result, Rollback, Pause, Options, End; más Demo) | Desarrollo | 001 → 011 |
 | `src/game/` | Estado en el registry (`session.ts`), eventos (`events.ts`) y guardado en localStorage (`save.ts`) | Desarrollo | 004+ |
 | `src/entities/` | Entidades del mundo (✅ `Player`) | Desarrollo | 002+ |
 | `scripts/` | Generadores (✅ `generate-maps.mjs`: mapas de los actos 1 y 2) | Desarrollo | 002+ |
-| `src/logic/` | Lógica pura con tests (✅ `scale`, `movement`, `dialog`, `interaction`, `deadline`, `progress`, `tickets`, `save`, `puzzles/{cables,binario,paquetes,compuertas,bloques,bug,indentacion}`) | Desarrollo | 001 → 008 |
+| `src/logic/` | Lógica pura con tests (✅ `scale`, `movement`, `dialog`, `interaction`, `deadline`, `progress`, `tickets`, `save`, `ending`, `gameOptions`, `puzzles/*`) | Desarrollo | 001 → 011 |
 | `src/art/` | Paleta, `pixelTexture`, tileset del acto 1, SaraDev completa, PATO, props, retratos, kit de UI y fondos (✅); El Recolector, hologramas y tilesets 2–3 faltan | Desarrollo y Arte | 001–003, 013 |
 | `src/audio/` | `AudioManager`, notación, canciones, sintetizador y SFX (✅) | Desarrollo y Música | 006, 014 |
 | `src/puzzles/` | La vista de cada tipo de puzzle (✅ los 7 tipos de mouse; `terminal` vive en `scenes/TerminalScene.ts`) | Desarrollo | 004, 005, 007, 008, 009 |
@@ -103,4 +104,4 @@
 | `src/data/tickets/*.json` | Un JSON por ticket (✅ los 11 de los 3 actos; validados por `tickets.test.ts`) y `actos.json` con mapa, música y orden por acto | Narrativa (con `/nueva-actividad`) | 004+ |
 | `src/data/textos/es.json` | Todos los textos visibles del juego (✅ boot, título, UI y diálogos del acto 1) | Narrativa | 001+ |
 | `public/assets/sprites/` · `maps/` · `audio/` · `fonts/` | Exportaciones finales | Arte y Música | 001+ |
-| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio`, `demo`, `puzzles`, `save`, `acto2`, `terminal`, `acto3` y `helpers.ts`) | Desarrollo | 001+ |
+| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio`, `demo`, `puzzles`, `save`, `acto2`, `terminal`, `acto3`, `menu` y `helpers.ts`) | Desarrollo | 001+ |

@@ -5,6 +5,11 @@ import { BootScene } from './scenes/BootScene';
 import { BriefingScene } from './scenes/BriefingScene';
 import { DemoScene } from './scenes/DemoScene';
 import { DialogScene } from './scenes/DialogScene';
+import { EndScene } from './scenes/EndScene';
+import { IntroScene } from './scenes/IntroScene';
+import { MenuScene } from './scenes/MenuScene';
+import { OptionsScene } from './scenes/OptionsScene';
+import { PauseScene } from './scenes/PauseScene';
 import { HudScene } from './scenes/HudScene';
 import { PuzzleScene } from './scenes/PuzzleScene';
 import { ResultScene } from './scenes/ResultScene';
@@ -39,5 +44,22 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
     arcade: { gravity: { x: 0, y: 0 }, debug: false },
   },
   // El orden define quién se dibuja encima: el HUD sobre el mundo, las ventanas sobre el HUD.
-  scene: [BootScene, TitleScene, WorldScene, HudScene, BriefingScene, PuzzleScene, ResultScene, RollbackScene, TerminalScene, DialogScene, DemoScene],
+  scene: [
+    BootScene,
+    TitleScene,
+    MenuScene,
+    IntroScene,
+    WorldScene,
+    HudScene,
+    BriefingScene,
+    PuzzleScene,
+    ResultScene,
+    RollbackScene,
+    TerminalScene,
+    DialogScene,
+    PauseScene,
+    OptionsScene,
+    EndScene,
+    DemoScene,
+  ],
 };

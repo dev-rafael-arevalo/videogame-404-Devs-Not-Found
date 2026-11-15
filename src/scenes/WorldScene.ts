@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { PATO_IDLE_ANIM, PATO_KEY, createPatoSheet } from '../art/characters/pato';
 import { PALETTE, css } from '../art/palette';
+import { onKeyOnce } from '../art/keys';
 import { createPixelTexture } from '../art/pixelTexture';
 import { HOLOGRAM_KEY, POSTIT_KEY, createProps } from '../art/props';
 import { TILE_SIZE } from '../art/tiles/acto1';
@@ -156,6 +157,7 @@ export class WorldScene extends Phaser.Scene {
     // Eventos y no `JustDown`: un toque corto también cuenta (ver DialogScene).
     keyboard.on('keydown-E', this.tryInteract, this);
     keyboard.on('keydown-SPACE', this.tryInteract, this);
+    onKeyOnce(keyboard, 'ESC', () => this.openPause(), () => !this.modalOpen);
 
     this.bindFlowEvents();
 
@@ -305,7 +307,8 @@ export class WorldScene extends Phaser.Scene {
   private bindFlowEvents(): void {
     const events = this.game.events;
     const handlers: [string, (payload: never) => void][] = [
-      [EV.dialogClosed, () => this.closeModal()],
+      [EV.dialogClosed, (dialogo: string) => this.onDialogClosed(dialogo)],
+      [EV.overlayClosed, (key: string) => this.onOverlayClosed(key)],
       [EV.briefingBack, () => this.closeModal()],
       [EV.ticketAbandoned, () => this.closeModal()],
       [EV.resultClosed, () => this.onResultClosed()],
@@ -332,6 +335,27 @@ export class WorldScene extends Phaser.Scene {
     this.time.delayedCall(4000, () => this.player.setExpression('normal'));
     const result: ResultData = { ticketId, elapsedMs, ganadas, uptime: actUptime(state, ticketOrder(this.acto)) };
     this.scene.launch('Result', result);
+  }
+
+  private onDialogClosed(dialogo: string): void {
+    this.closeModal();
+    if (dialogo === `acto${this.acto}_fin` && this.pendingTicketId() === null && !actos.actos.some((a) => a.numero === this.acto + 1)) {
+      // Último acto cerrado: epílogo (spec 011).
+      this.scene.stop('Hud');
+      this.scene.start('End', {});
+    }
+  }
+
+  private openPause(): void {
+    if (this.modalOpen) return;
+    this.modalOpen = true;
+    this.player.move({ up: false, down: false, left: false, right: false });
+    this.scene.launch('Pause');
+    this.scene.pause();
+  }
+
+  private onOverlayClosed(key: string): void {
+    if (key === 'Pause') this.modalOpen = false;
   }
 
   private onResultClosed(): void {

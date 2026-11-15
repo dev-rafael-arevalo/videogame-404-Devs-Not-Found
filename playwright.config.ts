@@ -6,6 +6,8 @@ export default defineConfig({
   testDir: 'tests/e2e',
   timeout: 30_000,
   retries: 0,
+  // Cada test abre un navegador y el juego corre a 60 fps: con más workers el recorrido por el mapa se vuelve impreciso.
+  workers: 4,
   reporter: [['list']],
   use: {
     baseURL: `http://localhost:${PORT}`,

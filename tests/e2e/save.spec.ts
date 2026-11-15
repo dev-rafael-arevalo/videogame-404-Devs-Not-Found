@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { closeDialog, collectErrors, enterWorld, promptVisible, solveFirstCables, walkToFirstTerminal } from './helpers';
+import { closeDialog, collectErrors, enterMenu, enterWorld, menuSelect, promptVisible, solveFirstCables, walkToFirstTerminal } from './helpers';
 
 interface Save {
   acto: number;
@@ -9,7 +9,7 @@ interface Save {
 const escena = (page: Page): Promise<string | null> => page.evaluate(() => window.__debug?.ticket()?.escena ?? null);
 const save = (page: Page): Promise<Save | null> => page.evaluate(() => window.__debug!.save());
 
-test('CA3: el progreso sobrevive a una recarga y N lo borra', async ({ page }) => {
+test('CA3: el progreso sobrevive a una recarga; Continuar lo retoma y Nueva partida lo borra', async ({ page }) => {
   const errors = collectErrors(page);
   await enterWorld(page);
   await page.evaluate(() => window.__debug!.resetSave());
@@ -31,23 +31,21 @@ test('CA3: el progreso sobrevive a una recarga y N lo borra', async ({ page }) =
   expect(saved.progress.completados).toEqual(['a1-01-cables']);
   expect(saved.progress.conciencias).toBe(1200);
 
-  // Recargar: el guardado sigue y el mundo lo carga.
+  // Recargar: el menú ofrece Continuar y el mundo carga el progreso.
   await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-scene', 'Boot');
-  await page.keyboard.press('Enter');
-  await expect(page.locator('html')).toHaveAttribute('data-scene', 'Title');
+  await enterMenu(page);
   expect((await save(page))!.progress.completados).toEqual(['a1-01-cables']);
-  await page.keyboard.press('Enter');
+  await menuSelect(page, 1); // Continuar
   await expect(page.locator('html')).toHaveAttribute('data-scene', 'World');
   await expect.poll(() => page.evaluate(() => window.__debug!.progress().completados)).toEqual(['a1-01-cables']);
 
-  // N en el Título borra el guardado.
+  // Nueva partida borra el guardado.
   await page.reload();
-  await page.keyboard.press('Enter');
-  await expect(page.locator('html')).toHaveAttribute('data-scene', 'Title');
-  await page.keyboard.press('n');
+  await enterMenu(page);
+  await page.keyboard.press('Enter'); // Nueva partida
+  await expect(page.locator('html')).toHaveAttribute('data-scene', 'Intro');
   await expect.poll(() => save(page)).toBeNull();
-  await page.keyboard.press('Enter');
+  await page.keyboard.press('Escape');
   await expect(page.locator('html')).toHaveAttribute('data-scene', 'World');
   await expect.poll(() => page.evaluate(() => window.__debug!.progress().completados)).toEqual([]);
 

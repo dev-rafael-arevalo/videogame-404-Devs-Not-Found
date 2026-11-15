@@ -9,6 +9,8 @@ export const EV = {
   resultClosed: 'result:closed',
   rollbackRetry: 'rollback:retry',
   rollbackBack: 'rollback:back',
+  /** Se cerró un overlay (Options, Pause); el payload es la clave de la escena. */
+  overlayClosed: 'overlay:closed',
 } as const;
 
 export interface TicketDonePayload {

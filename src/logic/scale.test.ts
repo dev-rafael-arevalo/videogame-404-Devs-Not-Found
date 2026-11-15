@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { GAME_HEIGHT, GAME_WIDTH, integerZoom } from './scale';
+import { GAME_HEIGHT, GAME_WIDTH, fitZoom, integerZoom, zoomFor } from './scale';
 
 describe('integerZoom', () => {
   it('a 1280×720 escala ×4 exacto', () => {
@@ -25,6 +25,14 @@ describe('integerZoom', () => {
 
   it('acepta otra resolución base', () => {
     expect(integerZoom(640, 480, 320, 240)).toBe(2);
+  });
+
+  it('fitZoom llena la ventana y zoomFor elige según la opción', () => {
+    expect(fitZoom(1000, 700)).toBeCloseTo(3.12, 2);
+    expect(fitZoom(1280, 720)).toBe(4);
+    expect(fitZoom(100, 100)).toBe(1);
+    expect(zoomFor('entero', 1000, 700)).toBe(3);
+    expect(zoomFor('ajustar', 1000, 700)).toBeCloseTo(3.12, 2);
   });
 
   it('exporta la resolución nativa del juego', () => {

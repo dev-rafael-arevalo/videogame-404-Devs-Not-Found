@@ -6,8 +6,9 @@
 
 Videojuego 2D retro de puzzles y exploración con temática de programación · pixel art · chiptune 8-bit
 
-![Estado](https://img.shields.io/badge/estado-en%20desarrollo-yellow)
-![Etapa](https://img.shields.io/badge/etapa-4%20implementación-blue)
+![Estado](https://img.shields.io/badge/estado-juego%20completo-brightgreen)
+![CI](https://github.com/dev-rafael-arevalo/videogame-404-Devs-Not-Found/actions/workflows/ci.yml/badge.svg)
+![Etapa](https://img.shields.io/badge/etapa-release-blue)
 ![Motor](https://img.shields.io/badge/motor-Phaser%204-8a2be2)
 ![Lenguaje](https://img.shields.io/badge/TypeScript-3178c6)
 ![Docker](https://img.shields.io/badge/deploy-Docker-2496ed)
@@ -64,20 +65,20 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 | Etapa | Descripción | Progreso | Estado |
 |---|---|---|---|
 | 0 · Fundaciones | AGENTS.md, skills, SDD, plan y cuestionario | `██████████` 100% | ✅ Completa |
-| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `█████████░` 90% | 📝 Los 3 actos en el juego (11 tickets, cierres de acto); falta el epílogo visual |
-| 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `████████░░` 80% | 🚧 Motor chiptune propio; 9 de 11 pistas y 17 efectos sintetizados |
+| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `██████████` 100% | ✅ Las 15 pantallas, 11 tickets, intro y 3 epílogos en el juego |
+| 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `██████████` 100% | ✅ Motor chiptune propio; las 11 pistas y 17 efectos sintetizados |
 | 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `████████░░` 80% | 🚧 SaraDev completa, PATO, hologramas, tilesets de los 3 actos, kit de UI, CRT, synthwave y demo en `/?demo` |
-| 4 · Implementación | Juego en Phaser y deploy en Docker | `█████████░` 90% | 🎯 **Los 3 actos se juegan de punta a punta**: 11 tickets, del cableado al `python puente.py --restore all` (specs 001–010, 013, 014) |
+| 4 · Implementación | Juego en Phaser y deploy en Docker | `██████████` 100% | ✅ **Juego completo con CI y release**: las 14 specs de la hoja de ruta están terminadas |
 
 **Hito alcanzado (2026-11-12):** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker.
 
 **Hito alcanzado (2026-11-13):** 🎯 **Acto 2 completo**: Puerto Cero con metro, central y antena, y tres puzzles de código.
 
-**Hito alcanzado (2026-11-13):** 🎯 **Historia completa**: los tres actos se juegan de principio a fin.
+**Hito alcanzado (2026-11-13):** 🎯 **Release**: juego completo, CI en cada PR e imagen Docker publicada en GHCR desde `main`.
 
-**Próximo hito:** juego completo (spec 011: menú, opciones, intro, epílogo y créditos) y release (012).
+**Lo que sigue** ya no está en la hoja de ruta: pulido de arte y música con oídos y ojos humanos, más tickets por acto y balance de plazos.
 
-**Siguiente paso:** spec 011 (menús, pausa, opciones, intro, final y créditos).
+**Siguiente paso:** mergear `develop` en `main` para que la CI publique la primera imagen, y jugar el juego entero a mano.
 
 ## Hoja de ruta
 
@@ -94,14 +95,14 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 </details>
 
 <details>
-<summary><b>Juego completo</b> (4/6)</summary>
+<summary><b>Juego completo</b> (6/6) ✅</summary>
 
 - [x] 007 · Puzzles del acto 1 y guardado · 2026-11-12
 - [x] 008 · Acto 2: Puerto Cero y puzzles de código · 2026-11-13
 - [x] 009 · Terminal simulada y núcleo de ARCA · 2026-11-13
 - [x] 010 · Tickets del acto 3 (venv, pip y `puente.py`) · 2026-11-13
-- [ ] 011 · Menús, pausa, opciones, final y créditos
-- [ ] 012 · CI y publicación de la imagen
+- [x] 011 · Menús, pausa, opciones, intro, final y créditos · 2026-11-13
+- [x] 012 · CI y publicación de la imagen · 2026-11-13
 
 </details>
 
@@ -145,6 +146,9 @@ npm run e2e                 # smoke test (Playwright)
 
 # Producción en Docker
 docker compose up --build   # http://localhost:8080
+
+# Imagen publicada (tras cada merge a main)
+docker run --rm -p 8080:8080 ghcr.io/dev-rafael-arevalo/videogame-404-devs-not-found:latest
 ```
 
 ## Estructura del repositorio
@@ -204,6 +208,22 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-13: Opción de escalado
+- Opciones → Escalado: "Entero (nítido)" mantiene los píxeles perfectos; "Ajustar a la ventana" llena la ventana aunque el múltiplo no sea entero, para pantallas o ventanas chicas
+- Las teclas discretas (menús, Esc, Intro, Final) se atienden una sola vez por evento aunque haya varias escenas activas
+
+### 2026-11-13: Spec 012, CI y release
+- Cada PR a `develop` o `main` corre typecheck, tests, build, auditoría de dependencias y el e2e con Playwright, y construye la imagen Docker
+- Cada merge a `main` publica la imagen en GitHub Container Registry (`latest`, `sha-…` y la etiqueta de versión)
+- Dependabot vigila npm, las acciones y la imagen base de nginx
+
+### 2026-11-13: Spec 011, del menú a los créditos
+- Menú principal con Nueva partida, Continuar, Opciones y Créditos
+- Opciones: volumen de música y de efectos, modo sin presión (los plazos no corren) y pantalla completa; se recuerdan entre sesiones
+- Intro en cinco viñetas: Puerto Cero, las 06:00, los 0,3 segundos, la sala fría y el primer día
+- Pausa con Esc: continuar, opciones o guardar y salir; la música baja mientras tanto
+- Tres finales según las conciencias rescatadas (todas, la mayoría o pocas), con el regreso de Marga, y créditos que suben; pistas M02 y M09
 
 ### 2026-11-13: Spec 010, el deploy
 - Tres tickets nuevos en el núcleo: crear y activar el venv, instalar las dependencias con `pip` (que se queja si no activaste el entorno) y desplegar: `python puente.py --check`, `--fix-config` y `--restore all` con su barra de progreso
