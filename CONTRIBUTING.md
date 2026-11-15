@@ -98,6 +98,7 @@ El ámbito es el número de spec o el área: `feat(002): …`, `docs(lore): …`
 
 - **Base:** `develop`. Solo el Lead abre PRs de `develop` a `main`, en cada hito.
 - Completa la [plantilla de PR](.github/pull_request_template.md).
+- **La CI tiene que pasar** (typecheck, tests, build, auditoría, e2e e imagen Docker): corre sola en cada PR.
 - **Una aprobación** como mínimo, de alguien del rol afectado (los PRs de arte los revisa alguien de Arte o el Lead).
 - PRs chicos: idealmente menos de 400 líneas de código o un solo grupo de assets.
 - Tras el merge: borra la rama y actualiza el README si cerraste un entregable (estado, hoja de ruta y changelog).
@@ -120,7 +121,7 @@ El ámbito es el número de spec o el área: `feat(002): …`, `docs(lore): …`
 ## 7. Configuración recomendada en GitHub (la hace el Lead una vez)
 
 En **Settings → Branches → Add rule**:
-- `main`: requerir PR, 1 aprobación y (desde la spec 012) que el CI pase; bloquear el push directo.
+- `main`: requerir PR, 1 aprobación y que el check **CI / Typecheck, tests, build, auditoría y e2e** pase; bloquear el push directo.
 - `develop`: requerir PR y 1 aprobación.
 - **Settings → General → Default branch:** `develop`, para que los PRs apunten ahí por defecto.
 - Activar **Dependabot alerts** en *Security*.

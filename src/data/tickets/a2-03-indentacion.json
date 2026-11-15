@@ -1,0 +1,23 @@
+{
+  "id": "a2-03-indentacion",
+  "numero": 23,
+  "acto": 2,
+  "terminal": "terminal_35_9",
+  "titulo": "Alinear la antena (y su código)",
+  "descripcion": "El firmware de la antena perdió la sangría y Python no sabe qué va dentro de qué. Click en cada línea hasta dejarla en su nivel.",
+  "tipo": "indentacion",
+  "plazoSegundos": 120,
+  "conciencias": 2200,
+  "pistas": ["Lo que va dentro de un if o un else lleva un nivel más que ellos.", "def va en el nivel 0; if y else, en el 1; lo que hacen, en el 2."],
+  "datos": {
+    "lineas": [
+      { "texto": "def emitir(senal):", "nivel": 0 },
+      { "texto": "if senal.fuerte():", "nivel": 1 },
+      { "texto": "antena.transmitir(senal)", "nivel": 2 },
+      { "texto": "else:", "nivel": 1 },
+      { "texto": "antena.amplificar(senal)", "nivel": 2 },
+      { "texto": "return \"ok\"", "nivel": 1 }
+    ],
+    "inicial": [0, 2, 1, 1, 0, 2]
+  }
+}

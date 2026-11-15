@@ -1,0 +1,24 @@
+{
+  "id": "a3-02-venv",
+  "numero": 32,
+  "acto": 3,
+  "terminal": "terminal_33_5",
+  "titulo": "Preparar el entorno de puente.py",
+  "descripcion": "puente.py necesita su propio entorno virtual. Entrá a ~/puente, creá el venv y activalo. La terminal te avisa con (.venv) cuando esté activo.",
+  "tipo": "terminal",
+  "plazoSegundos": 150,
+  "conciencias": 3000,
+  "pistas": ["Un venv se crea con python -m venv .venv y se activa con source.", "cd puente, después python -m venv .venv y por último source .venv/bin/activate"],
+  "datos": {
+    "cwdInicial": "/home/dev",
+    "archivos": {
+      "/home/dev/LEEME.txt": "Todo lo importante esta en puente/ y en logs/.\n- Marga",
+      "/home/dev/logs/marga.log": "Necesita su venv, sus dependencias y config.ini en modo restore.",
+      "/home/dev/puente/puente.py": "import arca_bridge\n\nif __name__ == \"__main__\":\n    arca_bridge.restore(all=True)",
+      "/home/dev/puente/requirements.txt": "arca-bridge==1.0\nrich==13.7\n",
+      "/home/dev/puente/config.ini": "[arca]\nMODO=backup\nSECTORES=7\n"
+    },
+    "objetivo": { "venvActivo": true },
+    "comandosPermitidos": ["help", "ls", "cd", "pwd", "cat", "clear", "python", "source"]
+  }
+}

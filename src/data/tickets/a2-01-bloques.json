@@ -1,0 +1,16 @@
+{
+  "id": "a2-01-bloques",
+  "numero": 21,
+  "acto": 2,
+  "terminal": "terminal_7_9",
+  "titulo": "Reordenar el despachador del metro",
+  "descripcion": "El despachador del metro tiene las líneas de su función mezcladas y los trenes no salen. Click en una línea y luego en otra para intercambiarlas hasta que la función tenga sentido.",
+  "tipo": "bloques",
+  "plazoSegundos": 110,
+  "conciencias": 1800,
+  "pistas": ["Una función empieza con def y termina devolviendo algo.", "Primero sacás el tren de la cola, después lo arrancás."],
+  "datos": {
+    "lineas": ["def siguiente_tren(cola):", "    tren = cola.pop(0)", "    tren.arrancar()", "    return tren"],
+    "inicial": [2, 0, 3, 1]
+  }
+}

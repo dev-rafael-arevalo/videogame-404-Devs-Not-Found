@@ -1,0 +1,25 @@
+{
+  "id": "a3-03-deps",
+  "numero": 33,
+  "acto": 3,
+  "terminal": "terminal_7_17",
+  "titulo": "Instalar las dependencias",
+  "descripcion": "El venv está listo pero vacío. Instalá lo que pide requirements.txt dentro del entorno virtual. Si pip se queja, leé lo que dice.",
+  "tipo": "terminal",
+  "plazoSegundos": 150,
+  "conciencias": 3200,
+  "pistas": ["pip instala; -r lee la lista de un archivo. Y pip solo trabaja dentro del venv activo.", "source .venv/bin/activate y después pip install -r requirements.txt"],
+  "datos": {
+    "cwdInicial": "/home/dev/puente",
+    "estadoInicial": { "venvCreado": true },
+    "archivos": {
+      "/home/dev/puente/puente.py": "import arca_bridge\n\nif __name__ == \"__main__\":\n    arca_bridge.restore(all=True)",
+      "/home/dev/puente/requirements.txt": "arca-bridge==1.0\nrich==13.7\n",
+      "/home/dev/puente/config.ini": "[arca]\nMODO=backup\nSECTORES=7\n",
+      "/home/dev/puente/.venv/bin/activate": "# This file must be used with \"source bin/activate\"",
+      "/home/dev/puente/.venv/pyvenv.cfg": "version = 3.12.1\n"
+    },
+    "objetivo": { "depsInstaladas": true },
+    "comandosPermitidos": ["help", "ls", "cd", "pwd", "cat", "clear", "python", "pip", "source"]
+  }
+}

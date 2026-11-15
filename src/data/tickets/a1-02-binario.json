@@ -1,0 +1,16 @@
+{
+  "id": "a1-02-binario",
+  "numero": 8,
+  "acto": 1,
+  "terminal": "terminal_22_4",
+  "titulo": "Fijar la dirección del rack 7",
+  "descripcion": "El rack 7 perdió su dirección de red. CRON pide que los interruptores formen el número 42 en binario.",
+  "tipo": "binario",
+  "plazoSegundos": 75,
+  "conciencias": 1500,
+  "pistas": ["Cada interruptor vale el doble que el de su derecha.", "32 + 8 + 2."],
+  "datos": {
+    "bits": 8,
+    "objetivo": 42
+  }
+}

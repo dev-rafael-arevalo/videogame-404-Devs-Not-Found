@@ -1,5 +1,12 @@
 # Musicalización 8-bit
 
+> **Decisión (2026-11-12): música y efectos sintetizados en el navegador.** No habrá fuentes externas.
+> Un motor chiptune propio (`src/audio/`, spec 014) reproduce **partituras en JSON** (`src/data/musica/`)
+> con la restricción de la NES: 2 canales de pulso (melodía y armonía), triángulo (bajo) y ruido
+> (percusión), vía Web Audio. Los efectos se definen con parámetros tipo sfxr en JSON y se generan al
+> vuelo. Nada se descarga ni se carga de un CDN (respeta la CSP). Las secciones de herramientas y
+> exportación de abajo quedan como opción para quien quiera producir versiones OGG afuera.
+
 ## Dirección
 
 - **Estilo:** chiptune al estilo NES. Restricción de **4 canales**: 2 de pulso (melodía y armonía), triángulo (bajo) y ruido (percusión). La restricción mantiene todo coherente y es fácil de cumplir.
@@ -10,10 +17,23 @@
 
 | Uso | Herramienta | Por qué |
 |---|---|---|
-| Composición | **FamiStudio** | Emula el chip de la NES, exporta WAV/MP3/OGG y es fácil para quien empieza |
+| Composición | **FamiStudio** | Emula el chip de la NES, exporta WAV/MP3/OGG y es fácil para quien empieza | 
 | Bocetos rápidos | **BeepBox** (web) | Sin instalación; las canciones se comparten por URL |
 | Efectos de sonido | **jsfxr** (sfxr.me) | Genera efectos 8-bit con presets (moneda, salto, explosión) |
 | Edición y loudness | **Audacity** | Recortar, normalizar y convertir formatos |
+
+## Estado (2026-11-12)
+
+Motor en `src/audio/` (`notation.ts`, `songs.ts`, `synth.ts`, `sfx.ts`, `AudioManager.ts`). Pistas listas:
+M01, M03, M06, M07, J01 y J02. Efectos listos: `boot_beep`, `click_ui`, `hover_ui`, `interactuar`,
+`dialogo_letra`, `paso`, `ticket_nuevo`, `cable_conectar`, `cable_error`, `puzzle_ok`, `puzzle_error`,
+`alarma_plazo`, `pato_quack`, `recolector_aparece`.
+
+### Cómo escribir una pista
+Un JSON en `src/data/musica/` con `id`, `bpm`, `loop` y `canales` (`pulso1`, `pulso2`, `triangulo`,
+`ruido`). Cada canal es texto con tokens `NOTA:duración` en semicorcheas: `C4:4 -:2 A#3:2`. En el
+ruido, `K` bombo, `S` caja y `H` hi-hat. Los cuatro canales miden lo mismo y terminan en compás
+completo; `npm test` lo valida. `igualQue` reutiliza los canales de otra pista con otro tempo.
 
 ## Pistas
 

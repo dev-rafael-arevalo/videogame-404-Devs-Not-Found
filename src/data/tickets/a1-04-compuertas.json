@@ -1,0 +1,17 @@
+{
+  "id": "a1-04-compuertas",
+  "numero": 10,
+  "acto": 1,
+  "terminal": "terminal_22_9",
+  "titulo": "Reparar la lógica del portón",
+  "descripcion": "El portón de la sala fría solo abre si la lógica de sus sensores da 1. Alguien cambió las compuertas. Elegí una compuerta por ranura hasta que la salida sea la esperada.",
+  "tipo": "compuertas",
+  "plazoSegundos": 100,
+  "conciencias": 1600,
+  "pistas": ["Se evalúa de izquierda a derecha: primero A con B, y ese resultado con C.", "OR deja pasar un 1 aunque el otro lado sea 0."],
+  "datos": {
+    "entradas": [true, false, true],
+    "objetivo": true,
+    "compuertas": ["AND", "OR", "XOR", "NAND"]
+  }
+}

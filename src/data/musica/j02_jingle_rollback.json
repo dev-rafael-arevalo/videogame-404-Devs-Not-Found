@@ -1,0 +1,12 @@
+{
+  "id": "jingle_rollback",
+  "nombre": "J02 · Rollback",
+  "bpm": 120,
+  "loop": false,
+  "canales": {
+    "pulso1": "G4:2 F#4:2 F4:2 E4:2 D#4:4 C3:4",
+    "pulso2": "-:1 G#4:1 -:1 G4:1 -:1 F#4:1 -:1 F4:1 C#4:8",
+    "triangulo": "C2:8 B1:8",
+    "ruido": "S:2 -:2 S:2 -:2 K:8"
+  }
+}

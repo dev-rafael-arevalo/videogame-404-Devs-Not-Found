@@ -13,7 +13,7 @@ agentes con el **valor por defecto** indicado.
 
 ## Lore y personajes
 
-6. **Protagonista:** RonyDev-hombre-moreno
+6. **Protagonista:** SaraDev-mujer-timida
 7. ¿Te gustan **PATO** (pato de goma asistente), **CRON** (sistema de tickets), **El Recolector** (antagonista) y **Valeria** (la senior)? ¿Cambios?
 8. **Tono:** 70% humor, 30% melancolía
 9. **Finales:** varios, según las personas rescatadas con epilogos diferentes.

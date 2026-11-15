@@ -1,0 +1,415 @@
+{
+  "boot": {
+    "lineas": [
+      "ARCA BIOS v0.3.14 (c) Kernel & Co.",
+      "Comprobando memoria ........ 640K OK",
+      "Detectando conciencias ..... 0 encontradas",
+      "Montando SYS://RESTORE ..... OK",
+      "Buscando a Marga ........... [sin respuesta]",
+      "Iniciando turno de SaraDev ... "
+    ],
+    "saltar": "Cualquier tecla para saltar"
+  },
+  "titulo": {
+    "nombre": "404: DEVS NOT FOUND",
+    "subtitulo": "Es tu primer dia. No queda nadie mas.",
+    "start": "PRESIONA START",
+    "version": "v0.1.0 · SYS://RESTORE",
+    "guardado": "Partida guardada: acto {acto}"
+  },
+  "ui": {
+    "usar": "[E] usar",
+    "continuar": "E / Espacio"
+  },
+  "hud": {
+    "uptime": "UPTIME",
+    "conciencias": "CONC.",
+    "sinTicket": "sin ticket"
+  },
+  "briefing": {
+    "cabecera": "CRON · TICKET",
+    "prioridad": "PRIORIDAD: CRÍTICA (todas lo son)",
+    "plazo": "PLAZO",
+    "conciencias": "CONCIENCIAS",
+    "aceptar": "ACEPTAR [Enter]",
+    "volver": "VOLVER [Esc]"
+  },
+  "puzzle": {
+    "plazo": "PLAZO",
+    "abandonar": "[Esc] abandonar",
+    "sinPresion": "sin presión",
+    "placeholder": "Puzzle \"{tipo}\" en construcción.\nPor ahora, este botón lo da por resuelto.",
+    "marcarResuelto": "MARCAR RESUELTO",
+    "pista": "PATO: PISTA [H] (-10%)",
+    "sinPistas": "PATO: Ya te dije todo lo que sé. ¿Probaste explicármelo en voz alta?",
+    "binario": {
+      "instruccion": "Click en los interruptores hasta formar el número",
+      "valor": "VALOR",
+      "objetivo": "OBJETIVO"
+    },
+    "paquetes": {
+      "instruccion": "Click en los paquetes de menor a mayor número de secuencia",
+      "siguiente": "siguiente"
+    },
+    "compuertas": {
+      "instruccion": "Click en una ranura para cambiar su compuerta",
+      "objetivo": "SALIDA ESPERADA"
+    },
+    "bloques": {
+      "instruccion": "Click en una línea y luego en otra para intercambiarlas"
+    },
+    "bug": {
+      "instruccion": "Click en la línea que tiene el error"
+    },
+    "indentacion": {
+      "instruccion": "Click en una línea para subir su sangría (0 → 1 → 2 → 3 → 0)"
+    }
+  },
+  "resultado": {
+    "titulo": "✔ TICKET CERRADO",
+    "tiempo": "Tiempo",
+    "conciencias": "Conciencias restauradas",
+    "uptime": "Uptime del sistema",
+    "continuar": "CONTINUAR [Enter]"
+  },
+  "rollback": {
+    "titulo": "PLAZO VENCIDO · ROLLBACK DEL SECTOR",
+    "mensaje": "CRON: El Recolector liberó el sector sin referencias. El próximo intento restaura un 25% menos de conciencias.",
+    "reintentar": "REINTENTAR [Enter]",
+    "volver": "VOLVER [Esc]"
+  },
+  "nombres": {
+    "saradev": "SaraDev",
+    "pato": "PATO",
+    "marga": "Post-it de Marga",
+    "cron": "CRON"
+  },
+  "dialogos": {
+    "despertar": [
+      {
+        "quien": "saradev",
+        "expresion": "cansada",
+        "texto": "...¿Hola? ¿Alguien? El rack 7 ya está reiniciado, pueden dejar de ignorarme."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "Qué silencio. Ni el aire acondicionado hace ruido... y era lo único que funcionaba acá."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Mejor busco a Marga. Dijo que si pasaba algo raro, le preguntara al pato. Al pato."
+      }
+    ],
+    "pato_intro": [
+      {
+        "quien": "pato",
+        "texto": "¡Cuac! Bienvenida al primer día del resto de tu vida, SaraDev. Literalmente."
+      },
+      {
+        "quien": "pato",
+        "texto": "Soy PATO, asistente de depuración de Marga. Modelo de goma, firmware 1.0, cero paciencia."
+      },
+      {
+        "quien": "pato",
+        "texto": "Resumen: a las 06:00 un despliegue sin revisar activó ARCA y respaldó a toda la humanidad. Toda. Menos a vos: la jaula de Faraday de esta sala te salvó."
+      },
+      {
+        "quien": "pato",
+        "texto": "La buena noticia: existe un sistema de restauración, SYS://RESTORE. La mala: hay que levantarlo ticket por ticket, y CRON no se destaca por su paciencia."
+      },
+      {
+        "quien": "pato",
+        "texto": "Buscá la terminal con el aviso de CRON parpadeando. Y cuando te trabes, ya sabés: ¿ya probaste explicármelo en voz alta?"
+      }
+    ],
+    "postit_1": [
+      {
+        "quien": "marga",
+        "texto": "\"Si el servidor no responde, primero fijate si está enchufado. En serio. Firmado: yo, tres veces.\""
+      }
+    ],
+    "postit_2": [
+      {
+        "quien": "marga",
+        "texto": "\"Nunca hagas deploy un viernes. Ni un martes a las 06:00. Ni... bueno, ya vas a entender.\""
+      }
+    ],
+    "postit_3": [
+      {
+        "quien": "marga",
+        "texto": "\"El pato no es decorativo. Hablale. Y no, no estoy loca.\""
+      }
+    ],
+    "terminal_apagada": [
+      {
+        "quien": "saradev",
+        "texto": "Esta terminal está en espera. CRON asignó el ticket a otra: la que tiene el aviso parpadeando."
+      }
+    ],
+    "terminal_sin_tickets": [
+      {
+        "quien": "cron",
+        "texto": "No quedan tickets en este sector. Conciencias en línea: 0,0000001%. Buen trabajo. Es un decir."
+      }
+    ],
+    "acto1_fin": [
+      {
+        "quien": "cron",
+        "texto": "TICKETS DEL SECTOR OFICINAS: 4/4. Red del edificio restaurada. Conciencias en línea: 0,0000001%."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "¿Cero coma cero cero... cuántos ceros? ¿Eso es todo lo que recuperamos?"
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. Son ocho mil millones de personas, SaraDev. Pero ya se escuchan las primeras voces en los parlantes. Un ticket a la vez."
+      },
+      {
+        "quien": "pato",
+        "texto": "Lo que sigue está afuera: el metro, la central eléctrica y la antena. Puerto Cero te espera. (Acto 2, en construcción.)"
+      },
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Primer día. Primer deploy. Vamos."
+      }
+    ],
+    "salida_cerrada": [
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Afuera está Puerto Cero. Pero CRON no me deja salir hasta cerrar los tickets de este piso."
+      }
+    ],
+    "salida_fin": [
+      {
+        "quien": "cron",
+        "texto": "SECTOR SIGUIENTE: NÚCLEO DE ARCA. Acceso en construcción (acto 3)."
+      }
+    ],
+    "acto2_inicio": [
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "Puerto Cero. Ni un auto andando, ni una persona. Solo los carteles con estática y el viento."
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. Hay tres sectores afuera: el metro, la central eléctrica y la antena. CRON ya tiene los tickets listos. Y acá los puzzles son de código, SaraDev: ponete los lentes."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "cansada",
+        "texto": "No uso lentes. Es una forma de decir, ¿no?"
+      },
+      {
+        "quien": "pato",
+        "texto": "Es una forma de decir. ¿Ya probaste explicármelo en voz alta?"
+      }
+    ],
+    "pato_acto2": [
+      {
+        "quien": "pato",
+        "texto": "Metro, central, antena. Buscá los kioscos con el aviso parpadeando. Y mirá a los hologramas: son personas, no decoración."
+      }
+    ],
+    "holograma_1": [
+      {
+        "quien": "cron",
+        "texto": "HOLOGRAMA · SECTOR METRO: \"¿Hola? ¿Hay alguien? Mi gato quedó afuera. Se llama Croquetas. Dale de comer, por favor.\""
+      }
+    ],
+    "holograma_2": [
+      {
+        "quien": "cron",
+        "texto": "HOLOGRAMA · SECTOR ANTENA: \"Estaba en una reunión que podría haber sido un mail. Y después... acá. ¿Esto cuenta como home office?\""
+      }
+    ],
+    "postit_4": [
+      {
+        "quien": "marga",
+        "texto": "\"Si un cartel muestra estática, no es el cartel: es el feed. Reiniciá la fuente, no la pantalla.\""
+      }
+    ],
+    "postit_5": [
+      {
+        "quien": "marga",
+        "texto": "\"Python cuenta espacios. Cuatro por nivel, siempre. Lo digo por experiencia (y por un deploy de 2019).\""
+      }
+    ],
+    "acto2_fin": [
+      {
+        "quien": "cron",
+        "texto": "SECTOR PUERTO CERO: 3/3. Metro, central y antena en línea. Conciencias en línea: 0,0004%."
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. Hay un log de Marga en la antena: existe una app de retorno, puente.py, que nunca se desplegó. Está en el núcleo de ARCA."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Entonces vamos al núcleo. Y esta vez, con terminal. (Acto 3, en construcción.)"
+      }
+    ],
+    "acto3_inicio": [
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "El núcleo de ARCA. Todo es grilla y luz. Ocho mil millones de personas en estos racks."
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. Acá no hay mouse que valga: los kioscos abren una terminal. ls para mirar, cd para moverte, cat para leer. Escribí help si te perdés."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "determinada",
+        "texto": "Primero el log de Marga. Después, puente.py."
+      }
+    ],
+    "pato_acto3": [
+      {
+        "quien": "pato",
+        "texto": "La terminal no muerde. Tab completa nombres y las flechas repiten comandos. Y si algo falla, leé el error: casi siempre te dice qué hacer."
+      }
+    ],
+    "acto3_fin": [
+      {
+        "quien": "cron",
+        "texto": "puente.py: restauración completa. Conciencias en línea: 100%. Sectores: 7/7. TICKETS PENDIENTES: 0."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "¿Cien por ciento? ¿Están... todos? ¿Volvieron?"
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. En el mismo instante en que se fueron. Afuera es martes a las 06:00 y alguien está entrando a la oficina con un café."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "celebracion",
+        "texto": "Primer día. Primer deploy a producción. Sola. Con un pato."
+      },
+      {
+        "quien": "pato",
+        "texto": "Con un pato. Andá a saludar a Marga. (Epílogo y créditos: spec 011.)"
+      }
+    ]
+  },
+  "terminal": {
+    "cabecera": "ARCA-NUCLEO tty1",
+    "usuario": "dev@arca",
+    "abandonar": "[Esc] abandonar",
+    "pista": "PATO: PISTA (-10%)",
+    "bienvenida": "SYS://RESTORE - terminal del nucleo. Escribi help para ver los comandos.",
+    "objetivoCumplido": "CRON: objetivo del ticket cumplido."
+  },
+  "menu": {
+    "nueva": "Nueva partida",
+    "continuar": "Continuar",
+    "opciones": "Opciones",
+    "creditos": "Créditos",
+    "ayuda": "Flechas o mouse para elegir · Enter para confirmar"
+  },
+  "opciones": {
+    "titulo": "OPCIONES",
+    "musica": "Música",
+    "efectos": "Efectos",
+    "sinPresion": "Modo sin presión",
+    "pantallaCompleta": "Pantalla completa",
+    "si": "Sí",
+    "no": "No",
+    "volver": "Volver",
+    "ayuda": "Flechas para cambiar · Esc para volver",
+    "escalado": "Escalado",
+    "entero": "Entero (nítido)",
+    "ajustar": "Ajustar a la ventana"
+  },
+  "pausa": {
+    "titulo": "PAUSA",
+    "continuar": "Continuar",
+    "opciones": "Opciones",
+    "salir": "Guardar y salir"
+  },
+  "intro": {
+    "avanzar": "Enter avanza · Esc salta",
+    "vinetas": [
+      {
+        "titulo": "Puerto Cero, un martes",
+        "texto": "Una ciudad costera común. En el datacenter de Kernel & Co. duerme ARCA, el Archivo de Respaldo de Conciencias Automatizado. Nunca se probó en producción."
+      },
+      {
+        "titulo": "06:00 a.m.",
+        "texto": "Un despliegue sin revisar activa el protocolo de ARCA por un falso positivo. Nadie está mirando la pantalla correcta."
+      },
+      {
+        "titulo": "0,3 segundos",
+        "texto": "Toda la humanidad es respaldada dentro del programa. Los animales no: ARCA solo reconoce conciencias humanas."
+      },
+      {
+        "titulo": "La sala fría",
+        "texto": "SaraDev, en su primer turno de guardia, está reiniciando un rack dentro de la jaula de Faraday. La señal no la alcanza."
+      },
+      {
+        "titulo": "El primer día",
+        "texto": "Sale a un mundo vacío: tazas tibias, autos encendidos, semáforos para nadie. Y un pato de goma que habla."
+      }
+    ]
+  },
+  "final": {
+    "titulos": {
+      "completo": "TODAS LAS CONCIENCIAS EN LÍNEA",
+      "parcial": "LA MAYORÍA VOLVIÓ",
+      "pendiente": "SIGUE EL SPRINT"
+    },
+    "textos": {
+      "completo": [
+        "Las personas regresan en el mismo instante en que se fueron. Los semáforos vuelven a cambiar para alguien.",
+        "Marga entra a la oficina con un café. \"¿Así que vos sos la persona nueva? Bienvenida al equipo. ¿Qué tal tu primer día?\"",
+        "SaraDev mira al pato. El pato, por primera vez, no dice nada."
+      ],
+      "parcial": [
+        "La mayoría regresa en el mismo instante en que se fue. Algunos sectores quedaron \"en pausa\": CRON promete tickets para la semana que viene. Todos críticos.",
+        "Marga entra con un café y dos vasos. \"Vamos a necesitar más café.\"",
+        "SaraDev mira al pato. \"Mañana seguimos.\" \"Cuac.\""
+      ],
+      "pendiente": [
+        "Volvieron pocos. El resto sigue dentro de ARCA, estable, esperando a que alguien cierre los tickets que faltan.",
+        "CRON abre un nuevo sprint. PATO se aclara la garganta de goma.",
+        "\"¿Ya probaste explicármelo en voz alta?\""
+      ]
+    },
+    "resumen": "Conciencias rescatadas: {porcentaje}% ({conciencias}) · Rollbacks: {rollbacks}",
+    "acelerar": "Enter acelera · Esc salta",
+    "creditos": [
+      "# 404: DEVS NOT FOUND",
+      "Un videojuego retro de puzzles y programación",
+      "",
+      "# Protagonizado por",
+      "SaraDev, PATO, CRON, El Recolector y Marga",
+      "",
+      "# Hecho con",
+      "Phaser 4 · TypeScript · Vite · Vitest · Playwright",
+      "Arte pixel y música chiptune generados por código",
+      "Paleta Sweetie 16 (lospec.com)",
+      "",
+      "# Dirección y desarrollo",
+      "Equipo de 404: Devs Not Found",
+      "Desarrollo asistido por agentes de IA",
+      "",
+      "# Gracias",
+      "A las personas que depuran en voz alta con un pato",
+      "",
+      "SYS://RESTORE · estado: en línea",
+      "",
+      "Gracias por jugar"
+    ]
+  }
+}

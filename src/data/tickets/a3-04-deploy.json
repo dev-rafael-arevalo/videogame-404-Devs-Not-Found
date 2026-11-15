@@ -1,0 +1,25 @@
+{
+  "id": "a3-04-deploy",
+  "numero": 34,
+  "acto": 3,
+  "terminal": "terminal_33_17",
+  "titulo": "Desplegar puente.py",
+  "descripcion": "Todo está en su lugar, salvo la configuración. Comprobá el entorno, corregí config.ini y ejecutá el deploy: python puente.py --restore all. Es el ticket que trae a todos de vuelta.",
+  "tipo": "terminal",
+  "plazoSegundos": 180,
+  "conciencias": 5000,
+  "pistas": ["Empezá con python puente.py --check: te dice qué falta.", "python puente.py --fix-config y después python puente.py --restore all"],
+  "datos": {
+    "cwdInicial": "/home/dev/puente",
+    "estadoInicial": { "venvCreado": true, "venvActivo": true, "instalados": ["arca-bridge", "rich"] },
+    "archivos": {
+      "/home/dev/puente/puente.py": "import arca_bridge\n\nif __name__ == \"__main__\":\n    arca_bridge.restore(all=True)",
+      "/home/dev/puente/requirements.txt": "arca-bridge==1.0\nrich==13.7\n",
+      "/home/dev/puente/config.ini": "[arca]\nMODO=backup\nSECTORES=7\n",
+      "/home/dev/puente/.venv/bin/activate": "# This file must be used with \"source bin/activate\"",
+      "/home/dev/puente/.venv/pyvenv.cfg": "version = 3.12.1\n"
+    },
+    "objetivo": { "ejecutado": "puente.py" },
+    "comandosPermitidos": ["help", "ls", "cd", "pwd", "cat", "clear", "python", "pip", "source"]
+  }
+}

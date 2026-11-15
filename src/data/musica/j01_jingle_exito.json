@@ -1,0 +1,12 @@
+{
+  "id": "jingle_exito",
+  "nombre": "J01 · Ticket cerrado",
+  "bpm": 140,
+  "loop": false,
+  "canales": {
+    "pulso1": "C5:2 E5:2 G5:2 C6:6 -:4",
+    "pulso2": "E4:2 G4:2 C5:2 E5:6 -:4",
+    "triangulo": "C3:8 C3:8",
+    "ruido": "-:16"
+  }
+}

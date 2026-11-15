@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.github
+.claude
+assets-src
+docs
+specs
+tests
+*.md
+.env*
+playwright-report
+test-results
+.playwright-mcp

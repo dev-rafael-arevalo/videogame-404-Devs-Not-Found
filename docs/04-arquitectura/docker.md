@@ -103,6 +103,20 @@ docker compose down
 docker build -t sysrestore:local . && docker run --rm -p 8080:8080 sysrestore:local
 ```
 
+## Publicación (spec 012)
+
+`.github/workflows/docker.yml` construye y publica la imagen en GitHub Container Registry en cada
+push a `main` y en cada tag `v*`:
+
+```bash
+docker pull ghcr.io/dev-rafael-arevalo/videogame-404-devs-not-found:latest
+docker run --rm -p 8080:8080 ghcr.io/dev-rafael-arevalo/videogame-404-devs-not-found:latest
+```
+
+Etiquetas: `latest` (rama por defecto), `sha-<commit>` y `v1.2.3` cuando se publica un tag. La CI
+(`ci.yml`) construye la misma imagen sin publicarla en cada PR, para que un `Dockerfile` roto no
+llegue a `main`. Si el paquete queda privado, hacé `docker login ghcr.io` con un token con `read:packages`.
+
 ## Verificación (criterio de la spec 001)
 
 1. `docker compose up --build` termina sin errores y el healthcheck queda en `healthy`.

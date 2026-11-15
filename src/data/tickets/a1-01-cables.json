@@ -1,0 +1,16 @@
+{
+  "id": "a1-01-cables",
+  "numero": 7,
+  "acto": 1,
+  "terminal": "terminal_15_4",
+  "titulo": "Reconectar el switch del piso 3",
+  "descripcion": "El switch del piso 3 perdió sus enlaces y la sala fría quedó aislada. Conectá cada puerto con su par del mismo color.",
+  "tipo": "cables",
+  "plazoSegundos": 90,
+  "conciencias": 1200,
+  "pistas": ["Los colores no mienten.", "Empezá por el cable que no cruza a ningún otro."],
+  "datos": {
+    "izquierda": ["rojo", "azul", "verde"],
+    "derecha": ["azul", "rojo", "verde"]
+  }
+}
