@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
-    "e2e:install": "playwright install chromium"
+    "e2e:install": "playwright install chromium",
+    "capturas": "playwright test -c playwright.capturas.config.ts --workers 1"
   },
   "engines": {
     "node": ">=22.12"

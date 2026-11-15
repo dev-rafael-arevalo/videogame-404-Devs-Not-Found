@@ -4,6 +4,8 @@ const PORT = 5173;
 
 export default defineConfig({
   testDir: 'tests/e2e',
+  // capturas.spec.ts genera las imágenes del README; solo corre con npm run capturas (playwright.capturas.config.ts).
+  testIgnore: ['**/capturas.spec.ts'],
   timeout: 30_000,
   retries: 0,
   // Cada test abre un navegador y el juego corre a 60 fps: con más workers el recorrido por el mapa se vuelve impreciso.

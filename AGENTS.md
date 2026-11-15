@@ -89,6 +89,7 @@ npm test               # Vitest (lógica pura, src/**/*.test.ts)
 npx vitest run src/logic/scale.test.ts -t "1280"   # un solo test
 npm run e2e            # Playwright (smoke; levanta el dev server solo)
 npm run e2e:install    # descarga Chromium para Playwright (una vez)
+npm run capturas       # regenera las capturas del README en docs/capturas/ (tests/e2e/capturas.spec.ts)
 # http://localhost:5173/?demo  → demo del arte (animaciones, expresiones, UI)
 node scripts/generate-maps.mjs        # regenera los mapas (planos ASCII → Tiled JSON)
 PW_CHANNEL=msedge npm run e2e          # e2e con Edge si Windows bloquea el Chromium de Playwright

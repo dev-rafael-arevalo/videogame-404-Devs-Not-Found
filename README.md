@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/capturas/02-titulo.png" alt="Pantalla de título de 404: Devs Not Found" width="800">
+
 # 404: Devs Not Found
 
 **Es tu primer día de trabajo. La humanidad acaba de desaparecer dentro de un programa.<br>Eres la única persona desarrolladora de turno.**
@@ -12,9 +14,12 @@ Videojuego 2D retro de puzzles y exploración con temática de programación · 
 ![Motor](https://img.shields.io/badge/motor-Phaser%204-8a2be2)
 ![Lenguaje](https://img.shields.io/badge/TypeScript-3178c6)
 ![Docker](https://img.shields.io/badge/deploy-Docker-2496ed)
+![Tests](https://img.shields.io/badge/tests-153%20unitarios%20%2B%2018%20e2e-success)
 ![Licencia](https://img.shields.io/badge/licencia-por%20definir-lightgrey)
 
-_Última actualización: **2026-11-13**_
+_Última actualización: **2026-11-15**_
+
+[Jugar en Docker](#primeros-pasos) · [Galería](#galería) · [Cómo se juega](#cómo-se-juega) · [Documentación](#documentación)
 
 </div>
 
@@ -23,6 +28,10 @@ _Última actualización: **2026-11-13**_
 ## Índice
 
 - [Sobre el juego](#sobre-el-juego)
+- [Galería](#galería)
+- [Cómo se juega](#cómo-se-juega)
+- [Los tres actos](#los-tres-actos)
+- [Personajes](#personajes)
 - [Características](#características)
 - [Estado del proyecto](#estado-del-proyecto)
 - [Hoja de ruta](#hoja-de-ruta)
@@ -38,27 +47,132 @@ _Última actualización: **2026-11-13**_
 
 ## Sobre el juego
 
-Un martes a las 03:14, un despliegue sin revisar activó **ARCA**, el sistema de respaldo de conciencias
-de Kernel & Co., y subió a toda la humanidad a un programa que empieza a corromperse. Solo **SaraDev**,
-que cumplía su primer turno de guardia dentro de la sala fría blindada del datacenter, quedó afuera.
+Un martes a las 06:00, un despliegue sin revisar activó **ARCA**, el Archivo de Respaldo de Conciencias
+Automatizado de Kernel & Co., y en 0,3 segundos subió a toda la humanidad a un programa que empieza a
+corromperse. Solo **SaraDev**, que cumplía su primer turno de guardia dentro de la sala fría blindada del
+datacenter, quedó afuera.
 
-Guiada por **PATO**, un pato de goma asistente, SaraDev recorre una ciudad vacía y acepta los *tickets*
-que emite **CRON**, el planificador de ARCA. Cada ticket se resuelve en primer plano y contra reloj,
-antes de que **El Recolector** haga rollback del sector. La dificultad crece con la interfaz: de
-puzzles con el mouse a escribir comandos reales de terminal para desplegar `puente.py`, la app que
-traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE**.
+Guiada por **PATO**, un pato de goma con parlante, SaraDev recorre una ciudad vacía y acepta los *tickets*
+que emite **CRON**, el planificador de ARCA. Cada ticket se resuelve en primer plano y contra reloj, antes
+de que **El Recolector** haga rollback del sector. La dificultad crece con la interfaz: de puzzles con el
+mouse a escribir comandos en una terminal para desplegar `puente.py`, la app que traerá a todos de vuelta.
+El programa de recuperación se llama **SYS://RESTORE**.
 
-> Lore completo en [docs/01-lore/lore.md](docs/01-lore/lore.md)
+Es un post-apocalipsis **silencioso**: tazas de café todavía tibias, semáforos que cambian para nadie y
+post-its de Marga, la senior ausente, con consejos pegados por toda la oficina.
+
+> Lore completo en [docs/01-lore/lore.md](docs/01-lore/lore.md) · Las 15 pantallas en [docs/01-lore/pantallas.md](docs/01-lore/pantallas.md)
+
+## Galería
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/capturas/01-boot.png" alt="BIOS de ARCA" width="400"><br><sub><b>Boot.</b> El BIOS de ARCA monta SYS://RESTORE.</sub></td>
+    <td align="center"><img src="docs/capturas/03-menu.png" alt="Menú principal" width="400"><br><sub><b>Menú.</b> Nueva partida, continuar, opciones y créditos sobre el sol synthwave.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/05-intro.png" alt="Intro en viñetas" width="400"><br><sub><b>Intro.</b> Cinco viñetas: Puerto Cero, las 06:00, los 0,3 segundos, la sala fría y el primer día.</sub></td>
+    <td align="center"><img src="docs/capturas/06-acto1-dialogo.png" alt="SaraDev despierta en la sala fría" width="400"><br><sub><b>Acto 1.</b> SaraDev despierta en la sala fría; los retratos cambian de expresión línea a línea.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/08-briefing.png" alt="Briefing de CRON" width="400"><br><sub><b>Briefing.</b> CRON emite el ticket con plazo, prioridad (crítica, todas lo son) y conciencias en juego.</sub></td>
+    <td align="center"><img src="docs/capturas/09-puzzle-cables.png" alt="Puzzle de cableado" width="400"><br><sub><b>Cableado.</b> Arrastrar cada cable hasta el puerto del mismo color, con la barra de plazo abajo.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/10-resultado.png" alt="Ticket cerrado" width="400"><br><sub><b>Resultado.</b> Tiempo, conciencias restauradas y uptime del sistema.</sub></td>
+    <td align="center"><img src="docs/capturas/13-rollback.png" alt="Rollback del sector" width="400"><br><sub><b>Rollback.</b> Si el plazo vence, El Recolector libera el sector y el reintento vale un 25% menos.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/14-acto2-ciudad.png" alt="Puerto Cero" width="400"><br><sub><b>Acto 2.</b> Las calles de Puerto Cero: asfalto agrietado, carteles con estática y hologramas de personas atrapadas.</sub></td>
+    <td align="center"><img src="docs/capturas/16-puzzle-bloques.png" alt="Puzzle de ordenar código" width="400"><br><sub><b>Código.</b> Ordenar las líneas de una función, cazar el bug o corregir la sangría de Python.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/18-acto3-nucleo.png" alt="Núcleo de ARCA" width="400"><br><sub><b>Acto 3.</b> El núcleo de ARCA: plataformas de grilla sobre el vacío y ocho mil millones de personas en racks.</sub></td>
+    <td align="center"><img src="docs/capturas/19-terminal.png" alt="Terminal simulada" width="400"><br><sub><b>Terminal.</b> Pantalla CRT verde con `ls`, `cd`, `cat`, `python` y `pip`; nunca ejecuta nada real.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/20b-final-2.png" alt="Final" width="400"><br><sub><b>Final.</b> Tres epílogos según las conciencias rescatadas, y el regreso de Marga.</sub></td>
+    <td align="center"><img src="docs/capturas/21-demo-arte.png" alt="Demo del arte" width="400"><br><sub><b>Demo del arte</b> (<code>/?demo</code>). SaraDev con 8 expresiones y 10 animaciones, PATO y el kit de UI.</sub></td>
+  </tr>
+</table>
+
+<details>
+<summary>Más capturas: opciones, pausa, binario, hologramas y el bug de la central</summary>
+<br>
+<table>
+  <tr>
+    <td align="center"><img src="docs/capturas/04-opciones.png" alt="Opciones" width="400"><br><sub>Opciones: volúmenes, modo sin presión, escalado y pantalla completa.</sub></td>
+    <td align="center"><img src="docs/capturas/11-pausa.png" alt="Pausa" width="400"><br><sub>Pausa con Esc: continuar, opciones o guardar y salir.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/12-puzzle-binario.png" alt="Puzzle binario" width="400"><br><sub>Binario: interruptores de 128 a 1 que forman la dirección del rack.</sub></td>
+    <td align="center"><img src="docs/capturas/15-acto2-holograma.png" alt="Holograma" width="400"><br><sub>Un holograma del sector metro habla al acercarse.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/17-puzzle-bug.png" alt="Cazar el bug" width="400"><br><sub>Cazar el bug: la línea con `=` en vez de `==`.</sub></td>
+    <td align="center"><img src="docs/capturas/07-acto1-oficina.png" alt="Oficina del acto 1" width="400"><br><sub>La oficina de Kernel & Co. con el HUD: uptime, conciencias y ticket activo.</sub></td>
+  </tr>
+</table>
+</details>
+
+Las capturas se regeneran con `npm run capturas` (recorre el juego entero con Playwright y las guarda en `docs/capturas/`).
+
+## Cómo se juega
+
+El bucle es siempre el mismo y crece en dificultad: **explorar → aceptar un ticket → resolverlo contra reloj → cerrar el sector**.
+
+1. **Explorá** el mapa en vista cenital, hablá con PATO y leé los post-its de Marga.
+2. **Usá una terminal** del mundo para abrir el briefing del ticket que CRON tiene en cola.
+3. **Resolvé el puzzle** en primer plano antes de que venza el plazo. PATO da pistas a cambio de un 10% de la recompensa.
+4. **Cerrá el ticket** y sumá conciencias y uptime. Si el plazo vence, El Recolector hace rollback y el reintento vale un 25% menos.
+5. Al cerrar todos los tickets del acto, CRON abre el siguiente. La partida se guarda sola en el navegador.
+
+| Tecla | Acción |
+|---|---|
+| `WASD` / flechas | Mover a SaraDev en 8 direcciones |
+| `E` | Usar: hablar, leer, abrir una terminal |
+| `E` / `Espacio` | Avanzar el diálogo |
+| `Mouse` | Resolver los puzzles de los actos 1 y 2 |
+| `H` | Pedir una pista a PATO (-10% de la recompensa) |
+| `Teclado` · `Tab` · `↑ ↓` | Terminal del acto 3: escribir, autocompletar y recorrer el historial |
+| `Esc` | Pausa, volver o abandonar un ticket |
+| `Enter` | Confirmar |
+
+**Modo sin presión:** en Opciones, los plazos dejan de correr para jugar sin reloj.
+
+## Los tres actos
+
+| Acto | Dónde | Cómo se resuelve | Tickets |
+|---|---|---|---|
+| **1 · Onboarding** | Oficinas de Kernel & Co. (sala fría, oficina abierta, sala de reuniones) | Mouse, puzzles simples | #0007 Reconectar el switch del piso 3 (cableado) · Fijar la dirección del rack 7 (binario) · Reordenar la cola del proxy (paquetes) · Reparar la lógica del portón (compuertas AND, OR, XOR, NAND) |
+| **2 · Producción** | Las calles de Puerto Cero: metro, central eléctrica y antena | Mouse con lógica de código | Reordenar el despachador del metro (ordenar líneas) · Cazar el bug de la central · Alinear la antena y su código (sangría de Python) |
+| **3 · Deploy** | El núcleo de ARCA | Terminal simulada | Encontrar el log de Marga · Preparar el entorno de `puente.py` (`venv`) · Instalar las dependencias (`pip`) · Desplegar `puente.py` (`--check`, `--fix-config`, `--restore all`) |
+
+Cada acto tiene su mapa, su tileset, su pista musical y sus diálogos de apertura y cierre. El mundo se degrada de un acto al otro: la electricidad falla, la vegetación avanza y las pantallas muestran estática.
+
+## Personajes
+
+| Personaje | Rol |
+|---|---|
+| **SaraDev** | Protagonista. Junior en su primer trabajo, con síndrome de impostor. Su arco va de "no sé nada" a "hice un deploy a producción en soledad". |
+| **PATO** | Pato de goma con parlante, viejo asistente de *rubber duck debugging*. Guía y da pistas. *"¿Ya probaste explicármelo en voz alta?"* |
+| **CRON** | El planificador de ARCA. No es malvado, es burocrático: emite tickets con plazos en texto monoespaciado. |
+| **El Recolector** | El *garbage collector* de ARCA. Libera los sectores "sin referencias": si un plazo vence, hace rollback. |
+| **Marga, la senior** | Mentora ausente, atrapada en ARCA. Dejó post-its con consejos por toda la oficina. Reencuentro en el final. |
+| **Hologramas** | Las personas atrapadas. Hablan por los parlantes al restaurarse un sector: *"¿Hola? Mi gato quedó afuera."* |
 
 ## Características
 
 - 🕹️ **Exploración cenital** de 3 actos: oficinas, ciudad abandonada y núcleo digital
-- 🧩 **Puzzles de programación** en primer plano: redes, binario, lógica booleana, orden de código y depuración
-- ⌨️ **Terminal simulada** en el acto final: `cd`, `ls`, `venv`, `pip` y `python` para levantar una app
-- ⏱️ **Tickets con plazo**, con un modo sin presión para jugar sin reloj
-- 🎨 **Pixel art de 320×180** generado por código, con paleta limitada y degradación visual del mundo
-- 🎵 **Banda sonora chiptune** de 4 canales al estilo NES, sintetizada en el navegador
+- 🧩 **7 tipos de puzzle** en primer plano: cableado, binario, paquetes, compuertas, ordenar código, cazar el bug y sangría de Python
+- ⌨️ **Terminal simulada** con `ls`, `cd`, `pwd`, `cat`, `echo`, `clear`, `help`, `python`, `pip` y `source`, historial, autocompletado y errores que imitan a los reales. Nunca ejecuta nada de verdad
+- ⏱️ **11 tickets con plazo**, pistas de PATO, rollback y un modo sin presión
+- 💾 **Guardado automático** en el navegador tras cada ticket; el menú continúa donde quedaste
+- 🎨 **Pixel art de 320×180** generado por código con la paleta Sweetie 16, escalado entero y fondos synthwave
+- 🎵 **Banda sonora chiptune** de 4 canales al estilo NES (2 pulsos, triángulo y ruido) sintetizada en el navegador: 11 pistas y 17 efectos
+- 🎬 **Intro, pausa, opciones, tres finales y créditos**
 - 🔒 **Web estática y segura**: sin backend, contenedor sin root y CSP estricta
+- ✅ **153 tests unitarios y 18 e2e** en cada PR, con imagen Docker publicada desde `main`
 
 ## Estado del proyecto
 
@@ -70,13 +184,9 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 | 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `████████░░` 80% | 🚧 SaraDev completa, PATO, hologramas, tilesets de los 3 actos, kit de UI, CRT, synthwave y demo en `/?demo` |
 | 4 · Implementación | Juego en Phaser y deploy en Docker | `██████████` 100% | ✅ **Juego completo con CI y release**: las 14 specs de la hoja de ruta están terminadas |
 
-**Hito alcanzado (2026-11-12):** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker.
+**Hitos:** 🎯 Slice vertical (2026-11-12) · 🎯 Acto 2 completo (2026-11-13) · 🎯 Release con CI e imagen en GHCR (2026-11-13).
 
-**Hito alcanzado (2026-11-13):** 🎯 **Acto 2 completo**: Puerto Cero con metro, central y antena, y tres puzzles de código.
-
-**Hito alcanzado (2026-11-13):** 🎯 **Release**: juego completo, CI en cada PR e imagen Docker publicada en GHCR desde `main`.
-
-**Lo que sigue** ya no está en la hoja de ruta: pulido de arte y música con oídos y ojos humanos, más tickets por acto y balance de plazos.
+**Lo que sigue** ya no está en la hoja de ruta: pulido de arte y música con ojos y oídos humanos, más tickets por acto y balance de plazos.
 
 **Siguiente paso:** mergear `develop` en `main` para que la CI publique la primera imagen, y jugar el juego entero a mano.
 
@@ -110,7 +220,7 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 <summary><b>Arte y audio generados por código</b> (2/2) ✅</summary>
 
 - [x] 013 · Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO y kit de UI · 2026-11-12
-- [x] 014 · Motor chiptune de 4 canales y efectos sintetizados · 2026-11-12 (pistas M01, M03, M06, M07, J01, J02; faltan M02, M04, M05, M08 y M09)
+- [x] 014 · Motor chiptune de 4 canales y efectos sintetizados · 2026-11-12 (las 11 pistas completadas en las specs 008 a 011)
 
 </details>
 
@@ -121,10 +231,11 @@ Detalle y criterios de cada etapa en [docs/00-plan.md](docs/00-plan.md).
 | Área | Tecnología |
 |---|---|
 | Motor y lenguaje | [Phaser 4](https://phaser.io) · TypeScript · Vite 8 |
-| Tests | Vitest (lógica) · Playwright (e2e) |
+| Tests | Vitest (lógica pura) · Playwright (e2e sobre `data-scene` y `window.__debug`) |
 | Arte | Generado por código (matrices de píxeles → texturas) · Tiled para mapas |
-| Música | Sintetizador chiptune propio (Web Audio, 4 canales) · efectos tipo sfxr |
-| Deploy | Docker multi-stage · nginx sin privilegios |
+| Música | Sintetizador chiptune propio (Web Audio, 4 canales) · efectos tipo sfxr · partituras en JSON |
+| Contenido | Actos, tickets, diálogos y textos en JSON (`src/data/`), validados por tests |
+| Deploy | Docker multi-stage · nginx sin privilegios · GitHub Actions y GHCR |
 | Desarrollo asistido | Claude Code · skills de proyecto · MCP Playwright y Context7 |
 
 Justificación y alternativas en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md).
@@ -137,12 +248,14 @@ Justificación y alternativas en [docs/04-arquitectura/stack-y-herramientas.md](
 # Desarrollo (recarga en caliente)
 npm install
 npm run dev                 # http://localhost:5173
+                            # http://localhost:5173/?demo → demo del arte
 
 # Calidad y tests
 npm run typecheck           # tsc --noEmit
 npm test                    # lógica (Vitest)
 npm run e2e:install         # una vez: descarga Chromium
-npm run e2e                 # smoke test (Playwright)
+npm run e2e                 # Playwright (levanta el dev server solo)
+npm run capturas            # regenera las capturas del README en docs/capturas/
 
 # Producción en Docker
 docker compose up --build   # http://localhost:8080
@@ -151,16 +264,27 @@ docker compose up --build   # http://localhost:8080
 docker run --rm -p 8080:8080 ghcr.io/dev-rafael-arevalo/videogame-404-devs-not-found:latest
 ```
 
+Si Windows bloquea el Chromium de Playwright, `PW_CHANNEL=msedge npm run e2e` usa el Edge del sistema.
+
 ## Estructura del repositorio
 
 ```
-├── docs/              Documentación por etapa (lore, música, arte, arquitectura)
-├── specs/             Desarrollo guiado por specs: constitución, plantillas y features
+├── docs/              Documentación por etapa (lore, música, arte, arquitectura) y capturas/
+├── specs/             Desarrollo guiado por specs: constitución, plantillas y una carpeta por feature
 ├── .claude/skills/    Skills para agentes de IA
 ├── assets-src/        Fuentes editables de arte, música y mapas
-├── src/               Código del juego: scenes/, logic/, art/, audio/, terminal/, puzzles/, data/
+├── src/
+│   ├── scenes/        Boot, Título, Menú, Opciones, Intro, Mundo, HUD, Diálogo, Briefing, Puzzle,
+│   │                  Terminal, Resultado, Rollback, Pausa, Final y Demo
+│   ├── logic/         Lógica pura de puzzles, plazos, progreso y guardado (testeada con Vitest)
+│   ├── terminal/      Terminal simulada: parser, sistema de archivos virtual, historial y comandos
+│   ├── puzzles/       Vistas de Phaser de cada puzzle, registradas en registry.ts
+│   ├── art/           Sprites, tilesets, retratos, UI y fondos generados por código
+│   ├── audio/         AudioManager y motor chiptune
+│   └── data/          actos.json, tickets/, textos/es.json y partituras en musica/
+├── scripts/           Generadores (mapas de los actos desde planos ASCII)
 ├── public/assets/     Assets exportados (mapas, fuentes)
-├── tests/e2e/         Smoke tests de Playwright
+├── tests/e2e/         Tests de Playwright y el generador de capturas
 ├── CONTRIBUTING.md    Guía del equipo: roles, ramas, commits y PRs
 ├── AGENTS.md          Guía para agentes de IA
 └── CLAUDE.md          Punto de entrada de Claude Code
@@ -182,14 +306,6 @@ idea ──► /nueva-spec ──► spec.md ──(aprobación)──► plan.m
 
 `main` (estable, se publica en cada hito) ← `develop` (integración) ← ramas de trabajo `spec/`, `lore/`, `musica/`, `arte/`, `docs/` y `fix/`.
 
-| Rama inicial | Para |
-|---|---|
-| `docs/cuestionario` | Lead: responder las decisiones abiertas |
-| `lore/lore-y-pantallas` | Narrativa: lore, guion y catálogo de tickets |
-| `musica/pistas-y-sfx` | Música: briefs, pistas y efectos de sonido |
-| `arte/kit-base` | Arte: paleta, SaraDev y kit de UI |
-| `spec/001-base-proyecto` · `spec/002-movimiento-personaje` | Desarrollo |
-
 👉 **Antes de contribuir:** lee [CONTRIBUTING.md](CONTRIBUTING.md) (ramas, commits y PRs) y [docs/mapa-del-proyecto.md](docs/mapa-del-proyecto.md) (qué lleva cada archivo y qué falta).
 Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 
@@ -200,7 +316,7 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 | [Guía de contribución](CONTRIBUTING.md) · [Mapa del proyecto](docs/mapa-del-proyecto.md) | Cómo trabajar, qué lleva cada archivo y qué falta |
 | [Plan](docs/00-plan.md) · [Cuestionario](docs/cuestionario.md) | Etapas, hitos y decisiones pendientes |
 | [Lore](docs/01-lore/lore.md) · [Pantallas](docs/01-lore/pantallas.md) | Historia, personajes, flujo y wireframes |
-| [Música](docs/02-musica/musica.md) | Pistas, efectos de sonido, herramientas y exportación |
+| [Música](docs/02-musica/musica.md) | Pistas, efectos de sonido, notación de las partituras y motor |
 | [Arte](docs/03-arte/guia-arte.md) | Paleta, sprites, sombras, texturas y pipeline |
 | [Arquitectura](docs/04-arquitectura/arquitectura.md) | Escenas, datos y terminal simulada |
 | [Seguridad](docs/04-arquitectura/seguridad.md) · [Docker](docs/04-arquitectura/docker.md) | CSP, hardening y despliegue |
@@ -208,6 +324,11 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-15: README con capturas
+- Galería de 23 capturas del juego en `docs/capturas/`, generadas con `npm run capturas` (un spec de Playwright que recorre Boot, menú, intro, los tres actos, puzzles, terminal, rollback, final y demo)
+- README reescrito: cómo se juega, controles, los tres actos con sus tickets, personajes y estructura detallada
+- El Título ya no dice "slice vertical en construcción"
 
 ### 2026-11-13: Opción de escalado
 - Opciones → Escalado: "Entero (nítido)" mantiene los píxeles perfectos; "Ajustar a la ventana" llena la ventana aunque el múltiplo no sea entero, para pantallas o ventanas chicas
@@ -310,3 +431,7 @@ Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spe
 - Assets de terceros: ver `assets-src/*/CREDITOS.md`
 
 Licencia: **por definir**.
+
+<div align="center">
+<sub>Hecho con Phaser, TypeScript y un pato de goma. 🦆</sub>
+</div>

@@ -16,7 +16,7 @@
 
 | Archivo | Qué debe llevar | Rol | Estado | Qué falta |
 |---|---|---|---|---|
-| `README.md` | Presentación, estado por etapa, hoja de ruta, changelog, créditos y licencia | Lead (lo actualizan todos) | ✅ | Créditos con nombres, licencia, título definitivo |
+| `README.md` | Presentación, galería de capturas (`docs/capturas/`, se regeneran con `npm run capturas`), cómo se juega, estado por etapa, hoja de ruta, changelog, créditos y licencia | Lead (lo actualizan todos) | ✅ | Créditos con nombres y licencia |
 | `CONTRIBUTING.md` | Roles, ramas, commits y PRs | Lead | ✅ | Ajustar si cambia el flujo |
 | `AGENTS.md` | Contexto e instrucciones para agentes de IA: stack, reglas y comandos | Desarrollo | ✅ | Mantener los comandos al día |
 | `CLAUDE.md` | Solo importa AGENTS.md y agrega lo específico de Claude Code | Desarrollo | 🔒 | — |
@@ -104,4 +104,4 @@
 | `src/data/tickets/*.json` | Un JSON por ticket (✅ los 11 de los 3 actos; validados por `tickets.test.ts`) y `actos.json` con mapa, música y orden por acto | Narrativa (con `/nueva-actividad`) | 004+ |
 | `src/data/textos/es.json` | Todos los textos visibles del juego (✅ boot, título, UI y diálogos del acto 1) | Narrativa | 001+ |
 | `public/assets/sprites/` · `maps/` · `audio/` · `fonts/` | Exportaciones finales | Arte y Música | 001+ |
-| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio`, `demo`, `puzzles`, `save`, `acto2`, `terminal`, `acto3`, `menu` y `helpers.ts`) | Desarrollo | 001+ |
+| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio`, `demo`, `puzzles`, `save`, `acto2`, `terminal`, `acto3`, `menu` y `helpers.ts`; `capturas.spec.ts` no corre en CI: genera `docs/capturas/` con `npm run capturas`) | Desarrollo | 001+ |
