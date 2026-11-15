@@ -6,8 +6,8 @@
 ## Resumen: lo que bloquea al proyecto hoy
 
 1. ✅ Cuestionario respondido (2026-11-12). Quedan abiertas la 7 (personajes secundarios), la 13 (comandos) y la 22 (equipo).
-2. ✅ **Actos 1 y 2 completos y terminal lista** (specs 001–009, 013 y 014). ⛔ **Siguiente:** spec 010 (tickets del acto 3) y 011 (menús, intro y final).
-3. ✅ Catálogos de los actos 1 y 2 y el primer ticket del 3 (8 tickets en `src/data/tickets/`). Faltan venv, deps, config y deploy (spec 010).
+2. ✅ **Los 3 actos completos** (specs 001–010, 013 y 014). ⛔ **Siguiente:** spec 011 (menús, pausa, opciones, intro, final y créditos) y 012 (CI y release).
+3. ✅ Catálogos de los 3 actos (11 tickets en `src/data/tickets/`).
 4. ✅ Paleta confirmada (Sweetie 16 + verde terminal, en `src/art/palette.ts`). Falta la fuente pixel (se genera por código en la 013).
 
 ---
@@ -71,7 +71,8 @@
 | `007-puzzles-acto1-guardado/` | Binario, paquetes, compuertas, guardado y cierre del acto | Desarrollo | ✅ | Terminada 2026-11-12 |
 | `008-acto2-puzzles-codigo/` | Mapa de Puerto Cero, salida al acto 2, hologramas y puzzles de código | Desarrollo | ✅ | Terminada 2026-11-13 |
 | `009-terminal-simulada/` | Motor de la terminal, `TerminalScene`, núcleo de ARCA y primer ticket | Desarrollo | ✅ | Terminada 2026-11-13 |
-| `010` … `012` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
+| `010-tickets-acto3-deploy/` | venv, dependencias y deploy de `puente.py`; cierre del acto 3 | Desarrollo y Narrativa | ✅ | Terminada 2026-11-13 |
+| `011` … `012` | Ver la hoja de ruta en [00-plan.md](00-plan.md) | Desarrollo | ⬜ | Crear cada una con `/nueva-spec` (013 arte procedural y 014 chiptune son nuevas) |
 
 ## `assets-src/`: fuentes editables (no las carga el juego)
 
@@ -99,7 +100,7 @@
 | `src/audio/` | `AudioManager`, notación, canciones, sintetizador y SFX (✅) | Desarrollo y Música | 006, 014 |
 | `src/puzzles/` | La vista de cada tipo de puzzle (✅ los 7 tipos de mouse; `terminal` vive en `scenes/TerminalScene.ts`) | Desarrollo | 004, 005, 007, 008, 009 |
 | `src/terminal/` | Parser, VFS, comandos guionados, objetivo, historial y autocompletado (✅ con tests) | Desarrollo | 009 |
-| `src/data/tickets/*.json` | Un JSON por ticket (✅ los 4 del acto 1 y los 3 del acto 2; validados por `tickets.test.ts`) y `actos.json` con mapa, música y orden por acto | Narrativa (con `/nueva-actividad`) | 004+ |
+| `src/data/tickets/*.json` | Un JSON por ticket (✅ los 11 de los 3 actos; validados por `tickets.test.ts`) y `actos.json` con mapa, música y orden por acto | Narrativa (con `/nueva-actividad`) | 004+ |
 | `src/data/textos/es.json` | Todos los textos visibles del juego (✅ boot, título, UI y diálogos del acto 1) | Narrativa | 001+ |
 | `public/assets/sprites/` · `maps/` · `audio/` · `fonts/` | Exportaciones finales | Arte y Música | 001+ |
-| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio`, `demo`, `puzzles`, `save`, `acto2`, `terminal` y `helpers.ts`) | Desarrollo | 001+ |
+| `tests/e2e/` | Tests de Playwright (✅ `smoke`, `world`, `dialog`, `tickets`, `cables`, `audio`, `demo`, `puzzles`, `save`, `acto2`, `terminal`, `acto3` y `helpers.ts`) | Desarrollo | 001+ |

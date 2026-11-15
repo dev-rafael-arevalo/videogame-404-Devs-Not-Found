@@ -77,7 +77,7 @@ Hoja de ruta de specs (cada una se crea con `nueva-spec` y se ejecuta con `imple
 | 007 | Resto de puzzles del acto 1 y guardado (localStorage) | ✅ **terminada** 2026-11-12 · acto 1 completo |
 | 008 | Puzzles del acto 2 (bloques de código, caza del bug, indentación) | ✅ **terminada** 2026-11-13 · acto 2 completo |
 | 009 | Terminal simulada (parser, FS virtual, comandos) | ✅ **terminada** 2026-11-13 · incluye el mapa del núcleo |
-| 010 | Tickets del acto 3: venv, pip y `python puente.py` | Acto 3 |
+| 010 | Tickets del acto 3: venv, pip y `python puente.py` | ✅ **terminada** 2026-11-13 · acto 3 completo |
 | 011 | Menús, pausa, opciones, final y créditos | Juego completo |
 | 012 | CI en GitHub Actions y publicación de la imagen | Release |
 | 013 | Sistema de arte procedural: SaraDev (expresiones y animaciones), PATO, kit de UI y escena de demo | ✅ **terminada** 2026-11-12 |

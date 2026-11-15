@@ -26,7 +26,8 @@ Etapa 4 en marcha: la spec [001-base-proyecto](specs/001-base-proyecto/spec.md) 
 completa, kit de UI, fondos synthwave y la demo de arte en `/?demo`; la [007](specs/007-puzzles-acto1-guardado/spec.md),
 los puzzles binario, paquetes y compuertas, el guardado y el cierre del acto; la [008](specs/008-acto2-puzzles-codigo/spec.md),
 Puerto Cero con los puzzles de código; la [009](specs/009-terminal-simulada/spec.md), la terminal simulada y el núcleo de ARCA.
-**Actos 1 y 2 completos; acto 3 con su primer ticket.** Siguiente: 010 (tickets del deploy) y 011 (menús, intro y final). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
+la [010](specs/010-tickets-acto3-deploy/spec.md), los tickets del deploy. **Los 3 actos se juegan completos.**
+Siguiente: 011 (menús, pausa, opciones, intro, final y créditos) y 012 (CI y release). Un puzzle nuevo = `logic/puzzles/<tipo>.ts` con tests + vista en `src/puzzles/` registrada en `registry.ts`. Mantén la sección
 **Comandos** sincronizada con los scripts de `package.json`.
 
 ## Stack (resumen; detalle en [docs/04-arquitectura/stack-y-herramientas.md](docs/04-arquitectura/stack-y-herramientas.md))

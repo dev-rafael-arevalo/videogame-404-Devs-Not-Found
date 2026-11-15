@@ -190,3 +190,18 @@ export async function solveIndentacion(page: Page): Promise<void> {
     for (let i = 0; i < n; i += 1) await clickGame(page, { x: rows[Number(row)]!.x + 40, y: rows[Number(row)]!.y + rows[Number(row)]!.height / 2 });
   }
 }
+
+/** Recorre una lista de puntos, eje por eje (primero x, después y), con `nudgeTo`. */
+export async function walkPath(page: Page, points: { x: number; y: number }[]): Promise<void> {
+  for (const point of points) {
+    const current = (await player(page))!;
+    if (Math.abs(point.x - current.x) > 3) {
+      await holdUntil(page, point.x > current.x ? 'ArrowRight' : 'ArrowLeft', async () => Math.abs(((await player(page))?.x ?? 0) - point.x) <= 8, 8000);
+      await nudgeTo(page, 'x', point.x);
+    }
+    if (Math.abs(point.y - (await player(page))!.y) > 3) {
+      await holdUntil(page, point.y > (await player(page))!.y ? 'ArrowDown' : 'ArrowUp', async () => Math.abs(((await player(page))?.y ?? 0) - point.y) <= 8, 8000);
+      await nudgeTo(page, 'y', point.y);
+    }
+  }
+}

@@ -29,7 +29,10 @@
       "mapa": "acto3_nucleo",
       "musica": "acto3_nucleo",
       "tickets": [
-        "a3-01-explorar"
+        "a3-01-explorar",
+        "a3-02-venv",
+        "a3-03-deps",
+        "a3-04-deploy"
       ]
     }
   ]

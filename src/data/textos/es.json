@@ -277,6 +277,30 @@
         "quien": "pato",
         "texto": "La terminal no muerde. Tab completa nombres y las flechas repiten comandos. Y si algo falla, leé el error: casi siempre te dice qué hacer."
       }
+    ],
+    "acto3_fin": [
+      {
+        "quien": "cron",
+        "texto": "puente.py: restauración completa. Conciencias en línea: 100%. Sectores: 7/7. TICKETS PENDIENTES: 0."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "sorprendida",
+        "texto": "¿Cien por ciento? ¿Están... todos? ¿Volvieron?"
+      },
+      {
+        "quien": "pato",
+        "texto": "Cuac. En el mismo instante en que se fueron. Afuera es martes a las 06:00 y alguien está entrando a la oficina con un café."
+      },
+      {
+        "quien": "saradev",
+        "expresion": "celebracion",
+        "texto": "Primer día. Primer deploy a producción. Sola. Con un pato."
+      },
+      {
+        "quien": "pato",
+        "texto": "Con un pato. Andá a saludar a Marga. (Epílogo y créditos: spec 011.)"
+      }
     ]
   },
   "terminal": {

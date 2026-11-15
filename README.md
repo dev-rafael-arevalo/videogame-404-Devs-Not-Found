@@ -64,18 +64,20 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 | Etapa | Descripción | Progreso | Estado |
 |---|---|---|---|
 | 0 · Fundaciones | AGENTS.md, skills, SDD, plan y cuestionario | `██████████` 100% | ✅ Completa |
-| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `████████░░` 80% | 📝 Actos 1 y 2 en el juego (7 tickets, hologramas, cierres de acto); falta el acto 3 |
+| 1 · Lore y pantallas | Historia, personajes, 15 pantallas y catálogo de puzzles | `█████████░` 90% | 📝 Los 3 actos en el juego (11 tickets, cierres de acto); falta el epílogo visual |
 | 2 · Musicalización | 11 pistas y unos 20 efectos de sonido 8-bit | `████████░░` 80% | 🚧 Motor chiptune propio; 9 de 11 pistas y 17 efectos sintetizados |
 | 3 · Diseño gráfico | Paleta, sprites, tilesets y kit de UI | `████████░░` 80% | 🚧 SaraDev completa, PATO, hologramas, tilesets de los 3 actos, kit de UI, CRT, synthwave y demo en `/?demo` |
-| 4 · Implementación | Juego en Phaser y deploy en Docker | `█████████░` 86% | 🚧 **Terminal simulada y núcleo de ARCA**: 8 tipos de puzzle, 3 actos recorribles (specs 001–009, 013, 014) |
+| 4 · Implementación | Juego en Phaser y deploy en Docker | `█████████░` 90% | 🎯 **Los 3 actos se juegan de punta a punta**: 11 tickets, del cableado al `python puente.py --restore all` (specs 001–010, 013, 014) |
 
 **Hito alcanzado (2026-11-12):** 🎯 **Slice vertical**: acto 1 jugable con un puzzle, plazo, música y Docker.
 
 **Hito alcanzado (2026-11-13):** 🎯 **Acto 2 completo**: Puerto Cero con metro, central y antena, y tres puzzles de código.
 
-**Próximo hito:** acto 3 completo (spec 010: venv, pip y el deploy de `puente.py`) y el final (011).
+**Hito alcanzado (2026-11-13):** 🎯 **Historia completa**: los tres actos se juegan de principio a fin.
 
-**Siguiente paso:** spec 010 (tickets del acto 3: venv, pip, config y `python puente.py --restore all`).
+**Próximo hito:** juego completo (spec 011: menú, opciones, intro, epílogo y créditos) y release (012).
+
+**Siguiente paso:** spec 011 (menús, pausa, opciones, intro, final y créditos).
 
 ## Hoja de ruta
 
@@ -92,12 +94,12 @@ traerá a todos de vuelta. El programa de recuperación se llama **SYS://RESTORE
 </details>
 
 <details>
-<summary><b>Juego completo</b> (3/6)</summary>
+<summary><b>Juego completo</b> (4/6)</summary>
 
 - [x] 007 · Puzzles del acto 1 y guardado · 2026-11-12
 - [x] 008 · Acto 2: Puerto Cero y puzzles de código · 2026-11-13
 - [x] 009 · Terminal simulada y núcleo de ARCA · 2026-11-13
-- [ ] 010 · Tickets del acto 3 (venv, pip y `puente.py`)
+- [x] 010 · Tickets del acto 3 (venv, pip y `puente.py`) · 2026-11-13
 - [ ] 011 · Menús, pausa, opciones, final y créditos
 - [ ] 012 · CI y publicación de la imagen
 
@@ -202,6 +204,10 @@ Principios no negociables en [specs/constitucion.md](specs/constitucion.md).
 ## Changelog
 
 Formato: la entrada más reciente arriba. Lo actualiza la skill `implementar-spec` al cerrar cada spec.
+
+### 2026-11-13: Spec 010, el deploy
+- Tres tickets nuevos en el núcleo: crear y activar el venv, instalar las dependencias con `pip` (que se queja si no activaste el entorno) y desplegar: `python puente.py --check`, `--fix-config` y `--restore all` con su barra de progreso
+- Cada ticket arranca donde terminó el anterior; CRON cierra el acto con las conciencias al 100%
 
 ### 2026-11-13: Spec 009, la terminal del acto 3
 - Terminal simulada en pantalla CRT verde: `ls`, `cd`, `pwd`, `cat`, `echo`, `clear`, `help`, `python`, `pip` y `source`, con historial (↑/↓), Tab que completa comandos y rutas, y errores que imitan a los reales. Nunca ejecuta nada de verdad

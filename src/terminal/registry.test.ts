@@ -95,6 +95,20 @@ describe('registry', () => {
     expect(done.state.ran).toContain('puente.py');
   });
 
+  it('CA1 (010): estadoInicial arranca con venv activo y paquetes instalados', () => {
+    const state = createTerminalState({
+      cwdInicial: '/home/dev/puente',
+      archivos: { '/home/dev/puente/puente.py': '#', '/home/dev/puente/config.ini': 'MODO=backup\n' },
+      objetivo: { ejecutado: 'puente.py' },
+      comandosPermitidos: ALL,
+      estadoInicial: { venvActivo: true, instalados: ['arca-bridge'] },
+    });
+    expect(state.venvCreated).toBe(true);
+    expect(state.venvActive).toBe(true);
+    const done = run(run(state, 'python puente.py --fix-config').state, 'python puente.py --restore all');
+    expect(checkObjective(done.state, { ejecutado: 'puente.py' })).toBe(true);
+  });
+
   it('objetivo', () => {
     const s = run(fresh(), 'cd logs', 'cat marga.log').state;
     expect(checkObjective(s, { leido: '/home/dev/logs/marga.log' })).toBe(true);
